@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Editar Producto: {{product?.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+              <ion-label>Título</ion-label>
+              <ion-input [(ngModel)]="product.title" placeholder="Título"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label>Contenido</ion-label>
+            <ion-textarea [(ngModel)]="product.content" placeholder="Contenido"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 col-sm-6 col-md-6  offset-lg-4 col-lg-4 offset-xl-6 col-xl-3>
+          <button ion-button block color="danger" (click)="removeProduct(product)">Borrar</button>          
+        </ion-col>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>
+          <button ion-button block outline color="primary" (click)="updateProduct(product)">Guardar</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card> 
+</ion-content>

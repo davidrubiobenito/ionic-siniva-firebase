@@ -1,0 +1,81 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title text-center>Sin IVA</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+  <ion-card class="content-card">
+    <ion-card-header text-center class="head-card">
+      Formulario Acceso
+    </ion-card-header>
+
+    <ion-card-content>
+      <form (ngSubmit)="logIn()" [formGroup]="loginForm">
+
+        <ion-list inset>
+
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <div>
+            <ng-container *ngFor="let validation of validationMessages.email" >         
+              <div class="message-error" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item >
+            <ion-label floating>Contraseña</ion-label>
+            <ion-input type="password" formControlName="password" maxlength="10"></ion-input>
+          </ion-item>
+
+          <div>
+            <ng-container *ngFor="let validation of validationMessages.password" >         
+              <div class="message-error" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+          
+        </ion-list>
+
+        <div padding-horizontal>
+          <div class="form-error">{{ loginError }}</div>
+
+          <button ion-button full type="submit" [disabled]="!loginForm.valid">Entrar</button>
+
+          <!--
+          <div class="login-footer">
+            <p>
+              <a href="#">¿Olvidaste la Contraseña?</a>
+              Si eres un nuevo usuario, por favor registrese.
+            </p>
+          </div>
+          -->
+
+          <ion-list margin-top>
+            <!--
+            <button ion-button icon-left block color="primary" outline (click)="loginWithGoogle()">
+              <ion-icon name="logo-google"></ion-icon>
+              Acceder con Google
+            </button>
+            -->
+
+            <button class="boton-registro" ion-button icon-left block color="secondary" outline margin-top (click)="signUp()">
+              <ion-icon name="person-add"></ion-icon>
+              Registrarte
+            </button>
+          </ion-list>
+
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

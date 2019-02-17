@@ -1,14 +1,82 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar hideBackButton="true">
+		<ion-title text-center>Lista Productos</ion-title>
+		<ion-buttons left>
+			<button ion-button icon-only (click)="showMenu()">
+			<ion-icon name="menu"></ion-icon>
+      </button>
+		</ion-buttons>
+    <ion-buttons end>
+			<button ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon name="more"></ion-icon>
+      </button>     
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-menu [content]="content1" side="left" id="filters1">
+  
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="hideMenu()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+		</ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content> 
+    
+    <ion-list>
+      <ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon [name]="p.icon" item-right></ion-icon>
+          {{ p.title }}
+      </ion-item>
+      <ion-item-group id="group-home">
+        <ion-item-divider  color="light" *ngIf="auth.getEmail()">  {{ auth.getEmail() }} </ion-item-divider>
+        <ion-item (click)="logout()" *ngIf="auth.getAuthenticated">
+          <ion-icon name="log-out" item-right></ion-icon>
+          Salir
+        </ion-item>
+        <ion-item (click)="login()" *ngIf="!auth.getAuthenticated">
+          <ion-icon name="log-in" item-right></ion-icon>
+          Log in
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content #content1>    
+  <ion-card  *ngFor="let product of productList">
+    <ion-list>   
+      <ion-item-sliding>
+        <ion-item>            
+          <ion-label >
+              {{ product.title }}
+          </ion-label>
+          <button ion-button clear icon-start item-end [navPush]="editProductPage" [navParams]="{product:product}">            
+              <ion-icon name="create"></ion-icon>
+            Editar
+          </button>
+        </ion-item>  
+
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="removeProduct(product)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button>                     
+        </ion-item-options>            
+      </ion-item-sliding>
+    </ion-list> 
+  </ion-card> 
+
+  <ion-fab right bottom>
+    <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">
+        <ion-icon [name]="p.icon"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>
