@@ -129,7 +129,7 @@ export class HomePage {
       console.log('Button pressed: ' + buttonIndex);
       switch(buttonIndex){
         case 1:
-          this.presentToast('Borrar Lista', 'short', 'bottom');
+          this.showPromptBorrarList();
         break;
         case 2:
           this.platform.exitApp();
@@ -145,7 +145,7 @@ export class HomePage {
   showPrompt(product : Product) {
     const prompt = this.alertCtrl.create({
       title: 'Borrar Producto',
-      message: "¿Desea borrar el producto " + product.title + "?",      
+      message: "¿Desea borrar el producto '" + product.title + "' ?",      
       buttons: [
         {
           text: 'Cancelar',
@@ -161,6 +161,32 @@ export class HomePage {
               this.presentToast('Producto borrado', 'short', 'bottom');
               //this.navCtrl.setRoot(HomePage);
             });  
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  showPromptBorrarList() {
+    const prompt = this.alertCtrl.create({
+      title: 'Borrar Lista',
+      message: "¿Desea BORRAR TODOS los Productos de la Lista?",      
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancelar clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: data => {
+            console.log('Aceptar clicked');
+            this.productListService.removeListProduct(this.auth.getUserUid()).then(() => {
+              this.presentToast('Lista Borrada', 'short', 'bottom');
+              //this.navCtrl.setRoot(HomePage);
+            });
           }
         }
       ]

@@ -53,4 +53,9 @@ export class ProductListService {
     return this.userListRef.remove(product.key);
   }
 
+  removeListProduct(userId: string) {
+    this.userListRef = this.db.list<User>(`product-list`);
+    return this.userListRef.remove(userId);
+  }
+
 }
