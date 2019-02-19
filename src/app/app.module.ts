@@ -25,6 +25,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ActionSheet } from '@ionic-native/action-sheet';
+import { Toast  } from '@ionic-native/toast';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ActionSheet } from '@ionic-native/action-sheet';
     StatusBar,
     SplashScreen,
     ActionSheet,
+    Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductListService, AngularFireAuth, AuthService
   ]

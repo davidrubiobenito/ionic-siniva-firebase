@@ -1,8 +1,9 @@
 import { Product } from './../../model/product/product.model';
 import { Component, ViewChild } from '@angular/core';
-import { NavController , NavParams, MenuController, AlertController, ToastController,
+import { NavController , NavParams, MenuController, AlertController,
   Platform  } from 'ionic-angular';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
+import { Toast } from '@ionic-native/toast';
 
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Observable } from 'rxjs';
@@ -31,8 +32,8 @@ export class HomePage {
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
                       private actionSheet: ActionSheet,
-                      public alertCtrl: AlertController,                      
-                      public toastCtrl: ToastController,
+                      private toast: Toast,
+                      public alertCtrl: AlertController,
                       public platform : Platform,
                       private productListService: ProductListService, 
                       public auth: AuthService) {
@@ -54,7 +55,7 @@ export class HomePage {
    
     // used for an example of ngFor and navigation
     this.pages = [
-      { icon: 'add-circle', title: 'Añadir Producto', component: AddProductPage }
+      { icon: 'add', title: 'Añadir Producto', component: AddProductPage }
     ];
 
     // Push Page
@@ -114,23 +115,27 @@ export class HomePage {
   presentActionSheet() {
     let buttonLabels = ['Salir Aplicación', 'Creditos'];
     const options: ActionSheetOptions = {
-      title: 'Opciones',
+      title: 'Opciones ...',
       subtitle: 'Elige una opción',
       buttonLabels: buttonLabels,
-      addCancelButtonWithLabel: 'Cancel',
-      addDestructiveButtonWithLabel: 'Delete',
-      androidTheme: 5,
-      destructiveButtonLast: true
+      addCancelButtonWithLabel: 'Cancelar',
+      addDestructiveButtonWithLabel: 'Borrar Lista',
+      androidTheme: 3,
+      destructiveButtonLast: false,
+      androidEnableCancelButton: true,
     };
 
     this.actionSheet.show(options).then((buttonIndex: number) => {
       console.log('Button pressed: ' + buttonIndex);
       switch(buttonIndex){
         case 1:
-          this.platform.exitApp();
+          this.presentToast('Borrar Lista', 'short', 'bottom');
         break;
         case 2:
-          this.presentToast();
+          this.platform.exitApp();
+        break;
+        case 3:
+          this.presentToast('David Rubio Benito', 'short', 'bottom');
         break;
       }
     });
@@ -153,6 +158,7 @@ export class HomePage {
           handler: data => {
             console.log('Saved clicked');
             this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
+              this.presentToast('Producto borrado', 'short', 'bottom');
               //this.navCtrl.setRoot(HomePage);
             });  
           }
@@ -163,12 +169,11 @@ export class HomePage {
   }
 
     
-  presentToast() {
-    const toast = this.toastCtrl.create({
-      message: 'David Rubio Benito',
-      duration: 3000
+  presentToast(message: string, duration: string, position: string) {
+    this.toast.show(message, duration, position).subscribe(
+      toast => {
+        console.log(toast);
     });
-    toast.present();
   }
 
   exitApp(){
