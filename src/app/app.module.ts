@@ -9,6 +9,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/da
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { FIREBASE_CONFIG } from './firebase.credentials';
 
+
 /* Sevices */
 import { ProductListService } from '../services/product-list.service';
 import { AuthService } from '../services/auth.service';
@@ -23,6 +24,7 @@ import { SignupPage } from '../pages/signup/signup';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ActionSheet } from '@ionic-native/action-sheet';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    ActionSheet,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductListService, AngularFireAuth, AuthService
   ]

@@ -2,6 +2,7 @@ import { Product } from './../../model/product/product.model';
 import { Component, ViewChild } from '@angular/core';
 import { NavController , NavParams, MenuController, AlertController, ToastController,
   Platform  } from 'ionic-angular';
+import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
 
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Observable } from 'rxjs';
@@ -29,7 +30,8 @@ export class HomePage {
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
-                      public alertCtrl: AlertController,
+                      private actionSheet: ActionSheet,
+                      public alertCtrl: AlertController,                      
                       public toastCtrl: ToastController,
                       public platform : Platform,
                       private productListService: ProductListService, 
@@ -110,6 +112,28 @@ export class HomePage {
   }
 
   presentActionSheet() {
+    let buttonLabels = ['Salir Aplicación', 'Creditos'];
+    const options: ActionSheetOptions = {
+      title: 'Opciones',
+      subtitle: 'Elige una opción',
+      buttonLabels: buttonLabels,
+      addCancelButtonWithLabel: 'Cancel',
+      addDestructiveButtonWithLabel: 'Delete',
+      androidTheme: 5,
+      destructiveButtonLast: true
+    };
+
+    this.actionSheet.show(options).then((buttonIndex: number) => {
+      console.log('Button pressed: ' + buttonIndex);
+      switch(buttonIndex){
+        case 1:
+          this.platform.exitApp();
+        break;
+        case 2:
+          this.presentToast();
+        break;
+      }
+    });
 
   }
 
@@ -129,7 +153,6 @@ export class HomePage {
           handler: data => {
             console.log('Saved clicked');
             this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
-              this.showAlert();
               //this.navCtrl.setRoot(HomePage);
             });  
           }
