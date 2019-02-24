@@ -1,26 +1,63 @@
 page-login {
-    .head-card{
-        border-bottom: 2px solid lightgray;
-        background-color: black;
-        font-weight: bold;
-        color: white;
-      }
-      .list-botons{
-        margin-top: 30px;
-      }
-      
-      .message-error{
-        color: #ff2d2d;
-        margin-top: 10px;
-      }
-      .content{
-        background-color: #f72f4e;
-      }
-      .boton-registro{
-        margin-top:25px !important;
-      }
-      .content-card {
-        //background: #f72f4e;
-      }
 
+  .list-botons{
+    margin-top: 30px;
+  }
+   
+  .btn-header{
+    background-color: $color-secondary-2-1;
+    color: $color-secondary-2-4; 
+    font-weight: normal;
+  }
+
+  .btn-header:hover{
+    background-color: $color-secondary-2-3 !important;
+    color: $color-secondary-2-1; 
+    font-weight: normal;
+  }
+
+  .active-pri{
+    background-color: $color-secondary-2-4;
+    color: $color-secondary-2-1; 
+  }
+
+  .ion-row{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
+  .logo{
+    position: absolute;
+    left: 41.5%;
+    border: 2px solid $color-primary-1;
+    height: 16vw;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-self: flex-end;
+    align-content: space-around;
+    vertical-align: middle;
+    align-items: stretch;
+    background: url(../../assets/imgs/logosiniva.png);
+    background-position: center;
+    background-size: cover;
+  }
+        
 }

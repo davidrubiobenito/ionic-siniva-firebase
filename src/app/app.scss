@@ -14,3 +14,168 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+
+// As hex codes */
+
+//$color-primary-0: #757575;
+$color-primary-0: #AA3939;
+$color-primary-1: #D2D1D1;
+$color-primary-2: #A2A2A2;
+$color-primary-3: #414141;
+$color-primary-4: #040303;
+
+/*
+$color-secondary-1-0: #757575;	
+$color-secondary-1-1: #D2D1D1;
+$color-secondary-1-2: #A2A2A2;
+$color-secondary-1-3: #414141;
+$color-secondary-1-4: #040403;
+*/
+
+$color-secondary-2-0: #5E5E5E;	
+$color-secondary-2-1: #A8A8A8;
+$color-secondary-2-2: #828282;
+$color-secondary-2-3: #343434;
+$color-secondary-2-4: #030303;
+
+$color-complement-0: #5E5E5E;	
+$color-complement-1: #A7A8A7;
+$color-complement-2: #818181;
+$color-complement-3: #343434;
+$color-complement-4: #030303;
+
+// As RGBa codes */
+
+//$rgba-primary-0: rgba(117,117,117,1);	
+$rgba-primary-0: rgba(170, 57, 57,1);
+$rgba-primary-1: rgba(210,209,209,1);
+$rgba-primary-2: rgba(162,162,162,1);
+$rgba-primary-3: rgba( 65, 65, 65,1);
+$rgba-primary-4: rgba(  4,  3,  3,1);
+
+$rgba-secondary-1-0: rgba(117,117,117,1);	
+$rgba-secondary-1-1: rgba(210,209,209,1);
+$rgba-secondary-1-2: rgba(162,162,162,1);
+$rgba-secondary-1-3: rgba( 65, 65, 65,1);
+$rgba-secondary-1-4: rgba(  4,  4,  3,1);
+
+$rgba-secondary-2-0: rgba( 94, 94, 94,1);	
+$rgba-secondary-2-1: rgba(168,168,168,1);
+$rgba-secondary-2-2: rgba(130,130,130,1);
+$rgba-secondary-2-3: rgba( 52, 52, 52,1);
+$rgba-secondary-2-4: rgba(  3,  3,  3,1);
+
+$rgba-complement-0: rgba( 94, 94, 94,1);	
+$rgba-complement-2: rgba(129,129,129,1);
+$rgba-complement-3: rgba( 52, 52, 52,1);
+$rgba-complement-4: rgba(  3,  3,  3,1);
+
+/* COLOR VARIABLES
+============================================= */
+$rgba-gradient-first: rgba(170,57,57,1);
+$rgba-gradient-second: rgba(255,38,0,1);
+
+/* GRADIENT LISTS
+============================================= */
+$list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-gradient-second 100%; 
+
+@mixin gradient($direction, $list) { 
+  background: -webkit-linear-gradient($direction, $list);
+  background: -moz-linear-gradient($direction, $list);
+  background: -o-linear-gradient($direction, $list);
+  background: linear-gradient($direction, $list);  
+}
+
+
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom-color: $color-primary-2;
+  -webkit-box-shadow: inset 0 -1px 0 0 $color-primary-2;
+  box-shadow: inset 0 -1px 0 0 $color-primary-2;
+}
+
+.list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child,
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child {
+  border-bottom-color: $color-primary-2;
+  -webkit-box-shadow: inset 0 -1px 0 0 $color-primary-2;
+  box-shadow: inset 0 -1px 0 0 $color-primary-2;
+}
+
+.list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child .item-inner,
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child .item-inner {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom-color: $color-primary-0;
+  -webkit-box-shadow: inset 0 -1px 0 0 $color-primary-0;
+  box-shadow: inset 0 -1px 0 0 $color-primary-0;
+}
+
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus):last-child {
+  border-bottom-color: $color-primary-0;
+  -webkit-box-shadow: inset 0 -1px 0 0 $color-primary-0;
+  box-shadow: inset 0 -1px 0 0 $color-primary-0;
+}
+
+
+//---------------------------------------
+
+.marg-0{
+    margin: 0;
+}
+
+.padd-0{
+    padding: 0px;
+}
+
+//---------------------------------------
+
+.background-page{
+  background-color: $color-primary-0;
+}
+
+.button-primary{
+    background-color: $color-primary-2;
+    color: $color-complement-3; 
+    border: 1px solid $color-primary-3;
+    font-weight: normal;
+}
+       
+.button-primary:hover{
+    background-color: $color-primary-1 !important;
+    color: $color-complement-3;
+}
+
+.button-secundary{
+    background-color: transparent;
+    color: $color-secondary-2-2; 
+    border: 1px solid $color-secondary-2-2;
+    font-weight: normal;
+}
+       
+.button-secundary:hover{
+    background-color: $color-primary-1 !important;
+    color: $color-secondary-2-3; 
+    border: 1px solid $color-secondary-2-3;
+}
+
+.card{
+    border-radius: 15px 15px;
+}
+
+.header-card{
+    background-color: $color-secondary-2-1;
+    color: $color-secondary-2-4;
+    border: 1px solid $color-secondary-2-3;
+    font-weight: normal;
+    //border-radius: 15px 15px 0 0;
+}
+
+.message-error-page{
+    color: $color-primary-0;
+    margin-top: 10px;
+}

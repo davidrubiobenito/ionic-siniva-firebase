@@ -1,5 +1,5 @@
 <ion-header>
-	<ion-navbar>
+	<ion-navbar color="dark">
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
@@ -7,14 +7,33 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-content class="content">
-  <ion-card class="content-card">
-    <ion-card-header text-center class="head-card">
-      Formulario Acceso
+<ion-content class="background-page">
+  <ion-card class="card" style="margin-top:100px;">
+
+    <ion-card-header text-center class="padd-0" >   
+      <ion-grid class="padd-0"> 
+        <ion-row class="padd-0 ion-row">
+          <ion-col col-5 class="padd-0">
+            <button ion-button icon-left full class="btn-header marg-0" (click)="pulsadoBotonHeader(1)" [ngClass]="{'active-pri': isVisibleFormEntrar}">
+              <ion-icon md="md-log-in"></ion-icon>
+              Entrar
+            </button>
+          </ion-col>
+          <ion-col col-2 class="logo"></ion-col>
+          <ion-col col-5 class="padd-0">
+            <button ion-button icon-left full class="btn-header marg-0" (click)="pulsadoBotonHeader(2)" [ngClass]="{'active-pri': !isVisibleFormEntrar}">
+              <ion-icon name="person-add"></ion-icon>
+                Registrate
+              </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>      
     </ion-card-header>
 
     <ion-card-content>
-      <form (ngSubmit)="logIn()" [formGroup]="loginForm">
+
+      <!-- Formulario login -->
+      <form (ngSubmit)="logIn()" [formGroup]="loginForm" *ngIf="isVisibleFormEntrar">
 
         <ion-list inset>
 
@@ -25,7 +44,7 @@
 
           <div>
             <ng-container *ngFor="let validation of validationMessages.email" >         
-              <div class="message-error" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+              <div class="message-error-page" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
                 {{ validation.message }}
               </div>
             </ng-container>
@@ -38,7 +57,7 @@
 
           <div>
             <ng-container *ngFor="let validation of validationMessages.password" >         
-              <div class="message-error" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+              <div class="message-error-page" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
                 {{ validation.message }}
               </div>
             </ng-container>
@@ -48,8 +67,10 @@
 
         <div padding-horizontal>
           <div class="form-error">{{ loginError }}</div>
-
-          <button ion-button full type="submit" [disabled]="!loginForm.valid">Entrar</button>
+          <button ion-button icon-left full type="submit" [disabled]="!loginForm.valid" class="button-primary">
+            <ion-icon md="md-log-in"></ion-icon>
+            Entrar
+          </button>
 
           <!--
           <div class="login-footer">
@@ -58,24 +79,68 @@
               Si eres un nuevo usuario, por favor registrese.
             </p>
           </div>
-          -->
-
+ 
           <ion-list margin-top>
-            <!--
+           
             <button ion-button icon-left block color="primary" outline (click)="loginWithGoogle()">
               <ion-icon name="logo-google"></ion-icon>
               Acceder con Google
             </button>
-            -->
-
-            <button class="boton-registro" ion-button icon-left block color="secondary" outline margin-top (click)="signUp()">
+            
+            
+            
+            <button ion-button icon-left block outline margin-top (click)="signUp()">
               <ion-icon name="person-add"></ion-icon>
               Registrarte
             </button>
+          
           </ion-list>
+          -->
 
         </div>
       </form>
+
+      <!-- Formulario registro -->
+      <form (ngSubmit)="signUp()" [formGroup]="loginForm" *ngIf="!isVisibleFormEntrar">
+          <ion-list inset>
+  
+            <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+  
+            <div>
+              <ng-container *ngFor="let validation of validationMessages.email" >         
+                <div class="message-error" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+  
+            <ion-item>
+              <ion-label floating>Contraseña</ion-label>
+              <ion-input type="password" formControlName="password" maxlength="10"></ion-input>
+            </ion-item>
+  
+            <div>
+              <ng-container *ngFor="let validation of validationMessages.password" >         
+                <div class="message-error" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+  
+          </ion-list>
+  
+          <div padding-horizontal>
+            <div class="form-error">{{ loginError }}</div>
+            <button ion-button icon-left full type="submit" [disabled]="!loginForm.valid" class="button-secundary">
+              <ion-icon name="person-add"></ion-icon>
+              Aceptar
+            </button>
+          </div>
+        </form>
+
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -26,6 +26,8 @@ export class LoginPage {
   public loginError: string;
   public validationMessages: any;
 
+  public isVisibleFormEntrar: boolean = true;
+  
   public constructor(public navCtrl: NavController, private auth: AuthService, private fb: FormBuilder
   ) {
 
@@ -61,8 +63,38 @@ export class LoginPage {
 
   }
 
+ 
   signUp(){
-    this.navCtrl.push(SignupPage);
+    //this.navCtrl.push(SignupPage);
+
+    let data = this.loginForm.value;
+
+    if(!data.email){
+      return;
+    }
+
+    let credentials = { 
+      email: data.email, 
+      password: data.password 
+    };
+  
+    this.auth.signUp(credentials).then( 
+      () => this.navCtrl.setRoot(HomePage),
+      error => this.loginError = error.message
+    );
+
+  }
+
+  pulsadoBotonHeader(boton: number){
+    switch (boton) {
+      case 1:
+        this.isVisibleFormEntrar = true;
+        break;
+    
+      case 2:
+        this.isVisibleFormEntrar = false;
+        break;    
+    }
   }
 
   /*
