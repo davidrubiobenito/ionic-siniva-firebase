@@ -63,12 +63,6 @@ export class HomePage {
     this.editProductPage = EditProductPage;
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.navCtrl.setRoot(page.component);
-  }
-
   showMenu() {
     this.menuCtrl.open('filters1');
   }
@@ -107,7 +101,8 @@ export class HomePage {
     const alert = this.alertCtrl.create({
       title: 'Info',
       subTitle: 'Producto borrado correctamente',
-      buttons: ['Aceptar']
+      buttons: [{text: 'Aceptar', cssClass:"button-secundary"}],
+      cssClass: 'dialogCustomCss'
     });
     alert.present();
   }
@@ -122,7 +117,7 @@ export class HomePage {
       addDestructiveButtonWithLabel: 'Borrar Lista',
       androidTheme: 3,
       destructiveButtonLast: false,
-      androidEnableCancelButton: true,
+      androidEnableCancelButton: true
     };
 
     this.actionSheet.show(options).then((buttonIndex: number) => {
@@ -144,15 +139,9 @@ export class HomePage {
 
   showPrompt(product : Product) {
     const prompt = this.alertCtrl.create({
-      title: 'Borrar Producto',
-      message: "¿Desea borrar el producto '" + product.title + "' ?",      
-      buttons: [
-        {
-          text: 'Cancelar',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
+      title: '¿Borrar Producto?',
+      message: "Producto <span class='text-prin' >' " + product.title + " '</span>",      
+      buttons: [        
         {
           text: 'Aceptar',
           handler: data => {
@@ -161,9 +150,18 @@ export class HomePage {
               this.presentToast('Producto borrado', 'short', 'bottom');
               //this.navCtrl.setRoot(HomePage);
             });  
-          }
-        }
-      ]
+          },
+          cssClass: 'button-secundary'
+        },
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          },
+          cssClass: 'button-primary'
+        },
+      ],
+      cssClass: 'dialogCustomCss'
     });
     prompt.present();
   }

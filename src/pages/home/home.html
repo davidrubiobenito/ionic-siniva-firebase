@@ -1,5 +1,5 @@
 <ion-header>
-	<ion-navbar hideBackButton="true">
+	<ion-navbar color="dark" hideBackButton="true">
 		<ion-title text-center>Lista Productos</ion-title>
 		<ion-buttons left>
 			<button ion-button icon-only (click)="showMenu()">
@@ -14,10 +14,9 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-menu [content]="content1" side="left" id="filters1">
-  
+<ion-menu [content]="content1" side="left" id="filters1">  
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="dark">
       <ion-title>Opciones</ion-title>
       <ion-buttons end>
         <button ion-button icon-only (click)="hideMenu()">
@@ -27,20 +26,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content> 
-    
+  <ion-content class="background-page">     
     <ion-list>
-      <ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+      <ion-item menuClose *ngFor="let p of pages" [navPush]="p.component" class="item-secundary">
           <ion-icon [name]="p.icon" item-right></ion-icon>
           {{ p.title }}
       </ion-item>
       <ion-item-group id="group-home">
-        <ion-item-divider  color="light" *ngIf="auth.getEmail()">  {{ auth.getEmail() }} </ion-item-divider>
-        <ion-item (click)="logout()" *ngIf="auth.getAuthenticated">
+        <ion-item-divider  class="item-secundary" *ngIf="auth.getEmail()">  {{ auth.getEmail() }} </ion-item-divider>
+        <ion-item (click)="logout()" class="button-primary" *ngIf="auth.getAuthenticated">
           <ion-icon name="log-out" item-right></ion-icon>
           Salir
         </ion-item>
-        <ion-item (click)="login()" *ngIf="!auth.getAuthenticated">
+        <ion-item (click)="login()" class="button-primary" *ngIf="!auth.getAuthenticated">
           <ion-icon name="log-in" item-right></ion-icon>
           Log in
         </ion-item>
@@ -49,7 +47,7 @@
   </ion-content>
 </ion-menu>
 
-<ion-content #content1>    
+<ion-content #content1 class="background-page">    
   <ion-card  *ngFor="let product of productList">
     <ion-list>   
       <ion-item-sliding>
@@ -57,14 +55,14 @@
           <ion-label >
               {{ product.title }}
           </ion-label>
-          <button ion-button clear icon-start item-end [navPush]="editProductPage" [navParams]="{product:product}">            
-              <ion-icon name="create"></ion-icon>
+          <button ion-button clear icon-start item-end color="secondary" [navPush]="editProductPage" [navParams]="{product:product}">            
+            <ion-icon name="create"></ion-icon>
             Editar
           </button>
         </ion-item>  
 
         <ion-item-options side="right">
-          <button ion-button color="danger" (click)="removeProduct(product)">
+          <button ion-button outline color="danger" (click)="removeProduct(product)">
             <ion-icon name="trash"></ion-icon>
             Borrar
           </button>                     

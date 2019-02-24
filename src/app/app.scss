@@ -72,7 +72,7 @@ $rgba-complement-2: rgba(129,129,129,1);
 $rgba-complement-3: rgba( 52, 52, 52,1);
 $rgba-complement-4: rgba(  3,  3,  3,1);
 
-/* COLOR VARIABLES
+/* COLOR VARIABLES GRADIENT
 ============================================= */
 $rgba-gradient-first: rgba(170,57,57,1);
 $rgba-gradient-second: rgba(255,38,0,1);
@@ -88,6 +88,8 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
   background: linear-gradient($direction, $list);  
 }
 
+
+// COLOR PRIMARY Y SECUNDARY LINKS, INPUT ....
 
 .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
@@ -121,6 +123,80 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
   box-shadow: inset 0 -1px 0 0 $color-primary-0;
 }
 
+
+// STYLES ACTIONSHET-ANDROID
+
+ .action-sheet-md {
+  text-align: center;
+}
+
+.action-sheet-md .action-sheet-wrapper {
+  margin: constant(safe-area-inset-top) auto constant(safe-area-inset-bottom);
+  margin: env(safe-area-inset-top) auto env(safe-area-inset-bottom);
+}
+
+.action-sheet-md .action-sheet-container {
+  padding: 0 10px;
+}
+
+.action-sheet-md .action-sheet-group {
+  border-radius: 13px;
+  margin-bottom: 8px;
+  background: #f9f9f9;
+}
+
+.action-sheet-md .action-sheet-group:first-child {
+  margin-top: 10px;
+}
+
+.action-sheet-md .action-sheet-group:last-child {
+  margin-bottom: 10px;
+}
+
+.action-sheet-md .action-sheet-title {
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 0;
+  border-bottom: 0.55px solid #d6d6da;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #8f8f8f;
+}
+
+.action-sheet-md .action-sheet-button {
+  margin: 0;
+  padding: 18px;
+  min-height: 5.6rem;
+  border-bottom: 0.55px solid #d6d6da;
+  font-size: 2rem;
+  color: #007aff;
+  background: transparent;
+}
+
+.action-sheet-md .action-sheet-button:last-child {
+  border-bottom-color: transparent;
+}
+
+.action-sheet-md .action-sheet-button.activated {
+  margin-top: -0.55px;
+  border-top: 0.55px solid #ebebeb;
+  border-bottom-color: #ebebeb;
+  background: #ebebeb;
+}
+
+.action-sheet-md .action-sheet-selected {
+  font-weight: bold;
+  background: #fff;
+}
+
+.action-sheet-md .action-sheet-destructive {
+  color: #f53d3d;
+}
+
+.action-sheet-md .action-sheet-cancel {
+  font-weight: 600;
+  background: #fff;
+}
 
 //---------------------------------------
 
@@ -178,4 +254,42 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
 .message-error-page{
     color: $color-primary-0;
     margin-top: 10px;
+}
+
+.dialogCustomCss .alert-wrapper{
+  border-radius: 15px 15px;
+}
+
+.dialogCustomCss .alert-head{
+  padding: 10px;
+  text-align: center;
+  background: $color-primary-4;
+  color: $color-complement-1;
+  font-size: 2rem;
+  border-radius: 15px 15px 0 0;
+}
+
+.dialogCustomCss .alert-message{
+  padding: 15px 10px;
+  text-align: justify;
+  color: $color-primary-3;
+  border-bottom: 1px solid $color-complement-1;
+}
+
+.dialogCustomCss .button-primary{
+  background-color: $color-primary-2;
+  color: $color-complement-3; 
+  border: 1px solid $color-primary-3;
+  font-weight: normal;
+}
+
+.dialogCustomCss .button-secundary{
+  background-color: transparent;
+  color: $color-primary-0; 
+  border: 1px solid $color-primary-0;
+  font-weight: normal;
+}
+
+.text-prin{
+  color: $color-primary-0;
 }

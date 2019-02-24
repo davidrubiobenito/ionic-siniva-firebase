@@ -1,28 +1,32 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title text-center>Añadir Producto</ion-title>
+  <ion-navbar color="dark">
+    <ion-title text-left>Añadir Producto</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="content">
+<ion-content class="background-page">
   <ion-card>    
     <ion-card-content>
-      <ion-grid class="item-add-product"> 
+      <ion-grid> 
         <ion-row>
           <ion-col col-12>
-            <ion-label>Título</ion-label>
-            <ion-input [(ngModel)]="product.title" placeholder="Título"></ion-input>
+            <ion-item>
+              <ion-label floating>Título</ion-label>
+              <ion-input [(ngModel)]="product.title" ></ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
-        <ion-col col-12>
-          <ion-label>Contenido</ion-label>
-          <ion-input [(ngModel)]="product.content" placeholder="Contenido"></ion-input>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Contenido</ion-label>
+              <ion-input [(ngModel)]="product.content" ></ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6>
-            <button ion-button block (click)="addProduct(product)">Guardar</button>
+          <ion-col offset-6 col-6>
+            <button ion-button full class="button-primary" (click)="addProduct(product)">Guardar</button>
           </ion-col>
         </ion-row>
 
