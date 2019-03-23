@@ -5,7 +5,7 @@ import { Product } from '../../../model/product/product.model';
 import { ProductListService } from '../../../services/product-list.service';
 import { AuthService } from '../../../services/auth.service';
 
-import { HomePage } from '../../home/home';
+import { ListProductPage } from '../list-product/list-product';
 
 @Component({
   selector: 'page-edit-product',
@@ -26,24 +26,14 @@ export class EditProductPage {
   }
 
   updateProduct(product: Product){    
-    /*
-    this.productListService.updateProduct(product).then(() =>{
-      this.navCtrl.setRoot(HomePage);
-    })
-    */
     this.productListService.updateProductToUserUid(product, this.auth.getUserUid()).then(() =>{
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(ListProductPage);
     });
   }
 
   removeProduct(product: Product) {
-    /*
-    this.productListService.removeProduct(product).then(() => {
-      this.navCtrl.setRoot(HomePage);
-    })
-    */
     this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(ListProductPage);
     });
   }
 
@@ -51,7 +41,7 @@ export class EditProductPage {
   setBackButtonAction(){
     this.navBar.backButtonClick = () => {
       //Write here wherever you wanna do
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(ListProductPage);
     }
   }
 

@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth.service';
 
 /* Pages */
 import { LoginPage } from '../../login/login';
+import { HomePage } from '../../home/home';
 import { AddProductPage } from '../../product/add-product/add-product';
 import { EditProductPage } from '../../product/edit-product/edit-product';
 
@@ -182,6 +183,10 @@ export class ListProductPage {
 
   exitApp(){
     this.platform.exitApp();
+  }
+
+  goToHome(){
+    this.navCtrl.setRoot(HomePage);
   }
 
   /************** */

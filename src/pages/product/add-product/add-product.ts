@@ -5,7 +5,7 @@ import { Product } from '../../../model/product/product.model';
 import { ProductListService } from '../../../services/product-list.service';
 import { AuthService } from '../../../services/auth.service';
 
-import { HomePage } from '../../home/home';
+import { ListProductPage } from '../list-product/list-product';
 
 @Component({
   selector: 'page-add-product',
@@ -32,7 +32,7 @@ export class AddProductPage {
     });
     */
     this.productListService.addProductToUserUid(product, this.auth.getUserUid()).then(ref => {
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(ListProductPage);
     });
   }
 
@@ -40,7 +40,7 @@ export class AddProductPage {
   setBackButtonAction(){
     this.navBar.backButtonClick = () => {
       //Write here wherever you wanna do
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(ListProductPage);
     }
   }
 

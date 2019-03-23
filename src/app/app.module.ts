@@ -20,7 +20,7 @@ import { AuthService } from '../services/auth.service';
 import { ListNotePage } from '../pages/note/list-note/list-note';
 import { AddNotePage } from '../pages/note/add-note/add-note';
 import { EditNotePage } from '../pages/note/edit-note/edit-note';
-import { ListProductPage } from '../pages/product/list-product/lis-product';
+import { ListProductPage } from '../pages/product/list-product/list-product';
 import { AddProductPage } from '../pages/product/add-product/add-product';
 import { EditProductPage } from '../pages/product/edit-product/edit-product';
 import { HomePage } from '../pages/home/home';

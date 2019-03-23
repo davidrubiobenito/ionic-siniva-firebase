@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-navbar color="dark" hideBackButton="true">
-		<ion-title text-center>Lista Productos</ion-title>
+		<ion-title text-center>Menu</ion-title>
 		<ion-buttons left>
 			<button ion-button icon-only (click)="showMenu()">
 			<ion-icon name="menu"></ion-icon>
@@ -14,7 +14,7 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-menu [content]="content1" side="left" id="filters1">  
+<ion-menu [content]="contentmenu" side="left" id="filtersmenu">  
   <ion-header>
     <ion-toolbar color="dark">
       <ion-title>Opciones</ion-title>
@@ -47,42 +47,22 @@
   </ion-content>
 </ion-menu>
 
-<ion-content #content1 class="background-page">    
-  <ion-card  *ngFor="let product of productList">
-    <ion-list>   
-      <ion-item-sliding>
-        <ion-item>            
-          <ion-label >
-              {{ product.title }}
-          </ion-label>
-          <button ion-button clear icon-start item-end color="secondary" [navPush]="editProductPage" [navParams]="{product:product}">            
-            <ion-icon name="create"></ion-icon>
-            Editar
-          </button>
-        </ion-item>  
-
-        <ion-item-options side="right">
-          <button ion-button outline color="danger" (click)="removeProduct(product)">
-            <ion-icon name="trash"></ion-icon>
-            Borrar
-          </button>                     
-        </ion-item-options>            
-      </ion-item-sliding>
-    </ion-list> 
-  </ion-card> 
+<ion-content #contentmenu class="background-page">    
+ 
+  <div class="card-background-page">
+    <ion-card class="card card-md" (click)="goToListProduct()">
+        <div class="image-backg"></div>
+        <div class="card-title">Productos</div>
+        <div class="card-subtitle">Lista Productos</div>
+    </ion-card>
+  </div>
 
   <div class="card-background-page">
     <ion-card class="card card-md" (click)="goToListNote()">
         <div class="image-backg"></div>
-        <div class="card-title">São Paulo</div>
-        <div class="card-subtitle">41 Listings</div>
+        <div class="card-title">Notas</div>
+        <div class="card-subtitle">Lista Notas</div>
     </ion-card>
   </div>
-
-  <ion-fab right bottom>
-    <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">
-        <ion-icon [name]="p.icon"></ion-icon>
-    </button>
-  </ion-fab>
 
 </ion-content>

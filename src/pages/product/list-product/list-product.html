@@ -28,6 +28,10 @@
 
   <ion-content class="background-page">     
     <ion-list>
+      <ion-item menuClose class="item-secundary" (click)="goToHome()">
+          <ion-icon name="arrow-round-back" item-right></ion-icon>
+          Pantalla Inicio
+      </ion-item>
       <ion-item menuClose *ngFor="let p of pages" [navPush]="p.component" class="item-secundary">
           <ion-icon [name]="p.icon" item-right></ion-icon>
           {{ p.title }}
