@@ -12,5 +12,42 @@ page-home {
     font-weight: normal;
     border: 1px solid $color-secondary-2-2;
   }
+
+
+  // imagenes cards
+  .card-background-page {
+
+    ion-card {
+      position: relative;
+      text-align: center;
+    }
+    
+    .image-backg {
+      background-image: url("https://source.unsplash.com/random/325x220"); /* The image used */
+      background-color: #cccccc; /* Used if the image is unavailable */
+      height: 200px; /* You must set a specified height */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
+    }
+
+    .card-title {
+      position: absolute;
+      top: 36%;
+      font-size: 2.0em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+  
+    .card-subtitle {
+      font-size: 1.0em;
+      position: absolute;
+      top: 52%;
+      width: 100%;
+      color: #fff;
+    }
+  
+  }
     
 }

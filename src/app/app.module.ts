@@ -12,12 +12,17 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
 
 /* Sevices */
 import { ProductListService } from '../services/product-list.service';
+import { NoteListService } from '../services/note-list.service';
 import { AuthService } from '../services/auth.service';
 
 
 /* Pages */
-import { AddProductPage } from '../pages/add-product/add-product';
-import { EditProductPage } from '../pages/edit-product/edit-product';
+import { ListNotePage } from '../pages/note/list-note/list-note';
+import { AddNotePage } from '../pages/note/add-note/add-note';
+import { EditNotePage } from '../pages/note/edit-note/edit-note';
+import { ListProductPage } from '../pages/product/list-product/lis-product';
+import { AddProductPage } from '../pages/product/add-product/add-product';
+import { EditProductPage } from '../pages/product/edit-product/edit-product';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
@@ -30,6 +35,10 @@ import { Toast  } from '@ionic-native/toast';
 @NgModule({
   declarations: [
     MyApp,
+    ListNotePage,
+    AddNotePage,
+    EditNotePage,
+    ListProductPage,
     AddProductPage,
     EditProductPage,
     HomePage,
@@ -46,6 +55,10 @@ import { Toast  } from '@ionic-native/toast';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ListNotePage,
+    AddNotePage,
+    EditNotePage,
+    ListProductPage,
     AddProductPage,
     EditProductPage,
     HomePage,
@@ -58,7 +71,7 @@ import { Toast  } from '@ionic-native/toast';
     ActionSheet,
     Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProductListService, AngularFireAuth, AuthService
+    ProductListService, NoteListService, AngularFireAuth, AuthService
   ]
 })
 export class AppModule {}

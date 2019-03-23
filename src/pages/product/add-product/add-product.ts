@@ -1,11 +1,11 @@
 import { Component, ViewChild} from '@angular/core';
 import { NavController, NavParams, Navbar } from 'ionic-angular';
 
-import { Product } from '../../model/product/product.model';
-import { ProductListService } from '../../services/product-list.service';
-import { AuthService } from '../../services/auth.service';
+import { Product } from '../../../model/product/product.model';
+import { ProductListService } from '../../../services/product-list.service';
+import { AuthService } from '../../../services/auth.service';
 
-import { HomePage } from '../home/home';
+import { HomePage } from '../../home/home';
 
 @Component({
   selector: 'page-add-product',

@@ -6,24 +6,21 @@ import { Toast } from '@ionic-native/toast';
 import { Observable } from 'rxjs';
 //import { map, filter, switchMap } from 'rxjs/operators';
 
-import { ProductListService } from '../../services/product-list.service';
-import { AuthService } from '../../services/auth.service';
+import { ProductListService } from '../../../services/product-list.service';
+import { AuthService } from '../../../services/auth.service';
 
 /* Pages */
-import { LoginPage } from '../login/login';
-import { AddProductPage } from '../product/add-product/add-product';
-import { EditProductPage } from '../product/edit-product/edit-product';
+import { LoginPage } from '../../login/login';
+import { AddProductPage } from '../../product/add-product/add-product';
+import { EditProductPage } from '../../product/edit-product/edit-product';
 
-import { ListNotePage } from '../note/list-note/list-note';
-
-
-import { Product } from './../../model/product/product.model';
+import { Product } from './../../../model/product/product.model';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-list-product',
+  templateUrl: 'list-product.html'
 })
-export class HomePage {
+export class ListProductPage {
 
   public pages: Array<{icon: string, title: string, component: any}>;
   public addProductPage: any;
@@ -52,11 +49,11 @@ export class HomePage {
   }
 
   showMenu() {
-    this.menuCtrl.open('filters1');
+    this.menuCtrl.open('filtersproduct');
   }
 
   hideMenu() {
-    this.menuCtrl.close('filters1');
+    this.menuCtrl.close('filtersproduct');
   }
 
   login() {
@@ -187,10 +184,6 @@ export class HomePage {
     this.platform.exitApp();
   }
 
-  goToListNote(){
-    this.navCtrl.push(ListNotePage);
-  }
-
   /************** */
   ionViewDidLoad(){
     //console.log('ionViewDidLoad LoginPage');        
@@ -209,7 +202,7 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    this.menuCtrl.enable(true, 'filters1');
+    this.menuCtrl.enable(true, 'filtersproduct');
   }
 
 }

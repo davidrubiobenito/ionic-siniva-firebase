@@ -14,7 +14,7 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-menu [content]="content1" side="left" id="filters1">  
+<ion-menu [content]="contentproduct" side="left" id="filtersproduct">  
   <ion-header>
     <ion-toolbar color="dark">
       <ion-title>Opciones</ion-title>
@@ -47,7 +47,7 @@
   </ion-content>
 </ion-menu>
 
-<ion-content #content1 class="background-page">    
+<ion-content #contentproduct class="background-page">    
   <ion-card  *ngFor="let product of productList">
     <ion-list>   
       <ion-item-sliding>
@@ -70,14 +70,6 @@
       </ion-item-sliding>
     </ion-list> 
   </ion-card> 
-
-  <div class="card-background-page">
-    <ion-card class="card card-md" (click)="goToListNote()">
-        <div class="image-backg"></div>
-        <div class="card-title">São Paulo</div>
-        <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-  </div>
 
   <ion-fab right bottom>
     <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">

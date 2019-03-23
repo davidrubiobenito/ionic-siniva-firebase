@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title text-left>Editar Nota</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background-page">
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+              <ion-label floating>Título</ion-label>
+              <ion-input [(ngModel)]="note.title"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label floating>Contenido</ion-label>
+            <ion-textarea [(ngModel)]="note.content"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 col-sm-6 col-md-6  offset-lg-4 col-lg-4 offset-xl-6 col-xl-3>
+          <button ion-button block outline icon-start color="danger" (click)="removeNote(note)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button>          
+        </ion-col>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>
+          <button ion-button block class="button-primary" (click)="updateNote(note)">Guardar</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card> 
+</ion-content>

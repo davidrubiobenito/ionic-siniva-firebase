@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-navbar color="dark" hideBackButton="true">
-		<ion-title text-center>Lista Productos</ion-title>
+		<ion-title text-center>Lista Notas</ion-title>
 		<ion-buttons left>
 			<button ion-button icon-only (click)="showMenu()">
 			<ion-icon name="menu"></ion-icon>
@@ -14,7 +14,7 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-menu [content]="content1" side="left" id="filters1">  
+<ion-menu [content]="contentnote" side="left" id="filtersnote">  
   <ion-header>
     <ion-toolbar color="dark">
       <ion-title>Opciones</ion-title>
@@ -28,6 +28,10 @@
 
   <ion-content class="background-page">     
     <ion-list>
+      <ion-item menuClose class="item-secundary" (click)="goToHome()">
+            <ion-icon name="arrow-round-back" item-right></ion-icon>
+            Pantalla Inicio
+      </ion-item>
       <ion-item menuClose *ngFor="let p of pages" [navPush]="p.component" class="item-secundary">
           <ion-icon [name]="p.icon" item-right></ion-icon>
           {{ p.title }}
@@ -47,22 +51,22 @@
   </ion-content>
 </ion-menu>
 
-<ion-content #content1 class="background-page">    
-  <ion-card  *ngFor="let product of productList">
+<ion-content #contentnote class="background-page">    
+  <ion-card  *ngFor="let note of noteList">
     <ion-list>   
       <ion-item-sliding>
         <ion-item>            
           <ion-label >
-              {{ product.title }}
+              {{ note.title }}
           </ion-label>
-          <button ion-button clear icon-start item-end color="secondary" [navPush]="editProductPage" [navParams]="{product:product}">            
+          <button ion-button clear icon-start item-end color="secondary" [navPush]="editNotePage" [navParams]="{note:note}">            
             <ion-icon name="create"></ion-icon>
             Editar
           </button>
         </ion-item>  
 
         <ion-item-options side="right">
-          <button ion-button outline color="danger" (click)="removeProduct(product)">
+          <button ion-button outline color="danger" (click)="removeNote(note)">
             <ion-icon name="trash"></ion-icon>
             Borrar
           </button>                     
@@ -70,14 +74,6 @@
       </ion-item-sliding>
     </ion-list> 
   </ion-card> 
-
-  <div class="card-background-page">
-    <ion-card class="card card-md" (click)="goToListNote()">
-        <div class="image-backg"></div>
-        <div class="card-title">São Paulo</div>
-        <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-  </div>
 
   <ion-fab right bottom>
     <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">

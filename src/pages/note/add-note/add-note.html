@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title text-left>Añadir Nota</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background-page">
+  <ion-card>    
+    <ion-card-content>
+      <ion-grid> 
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Título</ion-label>
+              <ion-input [(ngModel)]="note.title" ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label floating>Contenido</ion-label>
+              <ion-input [(ngModel)]="note.content" ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col offset-6 col-6>
+            <button ion-button full class="button-primary" (click)="addNote(note)">Guardar</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

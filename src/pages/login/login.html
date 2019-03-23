@@ -8,19 +8,26 @@
 </ion-header>
 
 <ion-content class="background-page">
-  <ion-card class="card" style="margin-top:100px;">
+
+    <div class="card-background-page" style="margin-top:25px;">
+      <ion-card class="logo">
+          <img src="../../assets/imgs/logosiniva_old.png" class="image-backg" />
+      </ion-card>
+    </div>
+
+  <ion-card class="card-login" style="margin-top:25px;">
 
     <ion-card-header text-center class="padd-0" >   
       <ion-grid class="padd-0"> 
         <ion-row class="padd-0 ion-row">
-          <ion-col col-5 class="padd-0">
+          <ion-col col-6 class="padd-0">
             <button ion-button icon-left full class="btn-header marg-0" (click)="pulsadoBotonHeader(1)" [ngClass]="{'active-pri': isVisibleFormEntrar}">
               <ion-icon md="md-log-in"></ion-icon>
               Entrar
             </button>
           </ion-col>
-          <ion-col col-2 class="logo"></ion-col>
-          <ion-col col-5 class="padd-0">
+          <!--<ion-col col-2 class="logo"></ion-col>-->
+          <ion-col col-6 class="padd-0">
             <button ion-button icon-left full class="btn-header marg-0" (click)="pulsadoBotonHeader(2)" [ngClass]="{'active-pri': !isVisibleFormEntrar}">
               <ion-icon name="person-add"></ion-icon>
                 Registrate

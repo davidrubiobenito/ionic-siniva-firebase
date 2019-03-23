@@ -6,30 +6,27 @@ import { Toast } from '@ionic-native/toast';
 import { Observable } from 'rxjs';
 //import { map, filter, switchMap } from 'rxjs/operators';
 
-import { ProductListService } from '../../services/product-list.service';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
+import { NoteListService } from '../../../services/note-list.service';
 
 /* Pages */
-import { LoginPage } from '../login/login';
-import { AddProductPage } from '../product/add-product/add-product';
-import { EditProductPage } from '../product/edit-product/edit-product';
+import { LoginPage } from '../../login/login';
+import { HomePage } from '../../home/home';
+import { AddNotePage } from '../../note/add-note/add-note';
+import { EditNotePage } from '../../note/edit-note/edit-note';
 
-import { ListNotePage } from '../note/list-note/list-note';
-
-
-import { Product } from './../../model/product/product.model';
+import { Note } from '../../../model/note/note.model';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-list-note',
+  templateUrl: 'list-note.html'
 })
-export class HomePage {
+export class ListNotePage {
 
   public pages: Array<{icon: string, title: string, component: any}>;
-  public addProductPage: any;
-  public editProductPage: any;
-  public productList: Observable<Product[]>;  
-  //public productListAux: Product[];
+  public addNotePage: any;
+  public editNotePage: any;
+  public noteList: Observable<Note[]>;  
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
@@ -37,26 +34,26 @@ export class HomePage {
                       private toast: Toast,
                       public alertCtrl: AlertController,
                       public platform : Platform,
-                      private productListService: ProductListService, 
+                      private noteListService: NoteListService, 
                       public auth: AuthService) {
     
    
     // used for an example of ngFor and navigation
-    this.pages = [
-      { icon: 'add', title: 'Añadir Producto', component: AddProductPage }
+    this.pages = [    
+      { icon: 'add', title: 'Añadir Nota', component: AddNotePage }
     ];
 
     // Push Page
-    this.addProductPage = AddProductPage;
-    this.editProductPage = EditProductPage;
+    this.addNotePage = AddNotePage;
+    this.editNotePage = EditNotePage;
   }
 
   showMenu() {
-    this.menuCtrl.open('filters1');
+    this.menuCtrl.open('filtersnote');
   }
 
   hideMenu() {
-    this.menuCtrl.close('filters1');
+    this.menuCtrl.close('filtersnote');
   }
 
   login() {
@@ -71,19 +68,19 @@ export class HomePage {
 	  this.navCtrl.setRoot(LoginPage);
   }
 
-  processData(input: any): Observable<Product[]>{     
+  processData(input: any): Observable<Note[]>{     
     let resultAux = input.map(ch => ({key: ch.key, ...ch.payload.val()}));
     return resultAux;
   }
 
-  removeProduct(product: Product) {
-    this.showPrompt(product);       
+  removeNote(note: Note) {
+    this.showPrompt(note);       
   }
 
   showAlert() {
     const alert = this.alertCtrl.create({
       title: 'Info',
-      subTitle: 'Producto borrado correctamente',
+      subTitle: 'Nota borrada correctamente',
       buttons: [{text: 'Aceptar', cssClass:"button-secundary"}],
       cssClass: 'dialogCustomCss'
     });
@@ -97,7 +94,7 @@ export class HomePage {
       subtitle: 'Elige una opción',
       buttonLabels: buttonLabels,
       addCancelButtonWithLabel: 'Cancelar',
-      addDestructiveButtonWithLabel: 'Borrar Lista',
+      addDestructiveButtonWithLabel: 'Borrar Lista Notas',
       androidTheme: 3,
       destructiveButtonLast: false,
       androidEnableCancelButton: true
@@ -120,17 +117,17 @@ export class HomePage {
 
   }
 
-  showPrompt(product : Product) {
+  showPrompt(note : Note) {
     const prompt = this.alertCtrl.create({
-      title: '¿Borrar Producto?',
-      message: "Producto <span class='text-prin' >' " + product.title + " '</span>",      
+      title: '¿Borrar Nota?',
+      message: "Nota <span class='text-prin' >' " + note.title + " '</span>",      
       buttons: [        
         {
           text: 'Aceptar',
           handler: data => {
             console.log('Saved clicked');
-            this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
-              this.presentToast('Producto borrado', 'short', 'bottom');
+            this.noteListService.removeNoteToUserUid(note, this.auth.getUserUid()).then(() => {
+              this.presentToast('Nota borrada', 'short', 'bottom');
               //this.navCtrl.setRoot(HomePage);
             });  
           },
@@ -151,8 +148,8 @@ export class HomePage {
 
   showPromptBorrarList() {
     const prompt = this.alertCtrl.create({
-      title: 'Borrar Lista',
-      message: "¿Desea BORRAR TODOS los Productos de la Lista?",      
+      title: 'Borrar Lista Notas',
+      message: "¿Desea BORRAR TODOS las Notas ?",      
       buttons: [
         {
           text: 'Cancelar',
@@ -164,7 +161,7 @@ export class HomePage {
           text: 'Aceptar',
           handler: data => {
             console.log('Aceptar clicked');
-            this.productListService.removeListProduct(this.auth.getUserUid()).then(() => {
+            this.noteListService.removeListNote(this.auth.getUserUid()).then(() => {
               this.presentToast('Lista Borrada', 'short', 'bottom');
               //this.navCtrl.setRoot(HomePage);
             });
@@ -187,19 +184,19 @@ export class HomePage {
     this.platform.exitApp();
   }
 
-  goToListNote(){
-    this.navCtrl.push(ListNotePage);
+  goToHome(){
+    this.navCtrl.setRoot(HomePage);
   }
 
   /************** */
   ionViewDidLoad(){
     //console.log('ionViewDidLoad LoginPage');        
-    this.productListService.getProductListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
+    this.noteListService.getNoteListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
-        this.productList = this.processData(result);
+        this.noteList = this.processData(result);
       },
       (err) => {
-        console.log('problema', err);
+        console.log('error get notes', err);
       },
       () => {
         console.log("completed");
@@ -209,7 +206,7 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    this.menuCtrl.enable(true, 'filters1');
+    this.menuCtrl.enable(true, 'filtersnote');
   }
 
 }
