@@ -241,6 +241,9 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
 
 .card{
     border-radius: 15px 15px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .header-card{

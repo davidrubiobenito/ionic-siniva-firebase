@@ -31,8 +31,8 @@ export class HomePage {
    
     // used for an example of ngFor and navigation
     this.pages = [
-      { icon: 'add', title: 'Lista Producto', component: ListProductPage },
-      { icon: 'add', title: 'Lista Notas', component: ListNotePage }
+      { icon: 'trending-up', title: 'Lista Producto', component: ListProductPage },
+      { icon: 'create', title: 'Lista Notas', component: ListNotePage }
     ];
 
     // Push Page
