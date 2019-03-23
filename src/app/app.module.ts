@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 
 /* Modules */
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { FIREBASE_CONFIG } from './firebase.credentials';
 

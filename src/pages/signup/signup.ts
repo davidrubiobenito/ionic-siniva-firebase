@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController , NavParams } from 'ionic-angular';
-
+import { NavController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
-
 import { VALIDATION_MESSAGES } from '../../app/form';
 
 /* Pages */
@@ -25,12 +23,15 @@ export class SignupPage {
   public signupError: string;
   public validationMessages: any;
 
-  public constructor(public navCtrl: NavController, private auth: AuthService, private fb: FormBuilder ) {
+  public constructor( public navCtrl: NavController, 
+                      private auth: AuthService, 
+                      private fb: FormBuilder ) {
+                        
     // Push page
     //this.goHomePage = HomePage;  
     this.validationMessages = VALIDATION_MESSAGES;  
 
-    this.signupForm = fb.group({
+    this.signupForm = this.fb.group({
       email:['', Validators.compose([Validators.required,  Validators.pattern("^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$")])],
       password:['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(11)])]
     });
@@ -56,13 +57,14 @@ export class SignupPage {
 
   }
 
-  /************** */
+  /*
   private ionViewDidLoad(){
-    //console.log('ionViewDidLoad SignupPage');
+    console.log('ionViewDidLoad SignupPage');
   }
 
   private ionViewWillEnter(){
-    //console.log('ionViewWillEnter SignupPage');
+    console.log('ionViewWillEnter SignupPage');
   }
+  */
 
 }

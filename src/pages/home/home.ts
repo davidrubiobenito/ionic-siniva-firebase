@@ -1,13 +1,11 @@
 import { Product } from './../../model/product/product.model';
-import { Component, ViewChild } from '@angular/core';
-import { NavController , NavParams, MenuController, AlertController,
-  Platform  } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, MenuController, AlertController, Platform  } from 'ionic-angular';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
 import { Toast } from '@ionic-native/toast';
 
-import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Observable } from 'rxjs';
-import { map, filter, switchMap } from 'rxjs/operators';
+//import { map, filter, switchMap } from 'rxjs/operators';
 
 import { ProductListService } from '../../services/product-list.service';
 import { AuthService } from '../../services/auth.service';
@@ -38,20 +36,6 @@ export class HomePage {
                       private productListService: ProductListService, 
                       public auth: AuthService) {
     
-    // lista productos
-    /*
-    let productListOther: any=[];
-    this.productListService.getProductListToUserUid(this.auth.getUserUid()).snapshotChanges()
-      .forEach( product => {
-        product.forEach( productData =>{         
-          let data = productData.payload.val();
-          let key = productData.key;
-          productListOther.push({key: key, ...data});
-        });
-        this.productListAux = productListOther;
-    });
-    */
-
    
     // used for an example of ngFor and navigation
     this.pages = [
@@ -59,7 +43,7 @@ export class HomePage {
     ];
 
     // Push Page
-    //this.addProductPage = AddProductPage;
+    this.addProductPage = AddProductPage;
     this.editProductPage = EditProductPage;
   }
 
@@ -89,11 +73,6 @@ export class HomePage {
   }
 
   removeProduct(product: Product) {
-    /*
-    this.productListService.removeProduct(product).then(() => {
-      this.navCtrl.setRoot(HomePage);
-    })
-    */
     this.showPrompt(product);       
   }
 
