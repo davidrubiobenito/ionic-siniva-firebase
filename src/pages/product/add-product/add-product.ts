@@ -15,8 +15,12 @@ export class AddProductPage {
   @ViewChild(Navbar) navBar: Navbar;
 
   public product: Product = {
-    title: '',
-    content: ''
+    name: '',
+    units: '',
+    price:'',
+    tax:'',
+    priceFinal: '',
+    amountFinal: ''
   };
   
   public constructor( public navCtrl: NavController, 
@@ -26,14 +30,21 @@ export class AddProductPage {
   }
 
   addProduct(product: Product){
-    /*
-    this.productListService.addProduct(product).then(ref => {
-      this.navCtrl.setRoot(HomePage);
-    });
-    */
     this.productListService.addProductToUserUid(product, this.auth.getUserUid()).then(ref => {
       this.navCtrl.setRoot(ListProductPage);
     });
+  }
+
+  calculate(){
+
+  }
+
+  editFields(){
+
+  }
+
+  eraseFields(){
+
   }
 
   //Method to override the default back button action

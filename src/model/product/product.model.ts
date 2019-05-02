@@ -1,5 +1,9 @@
 export interface Product {
     key?: string;
-    title: string;
-    content: string;
+    name: string;
+    units: string;
+    price: string;
+    tax: string;
+    priceFinal: string;
+    amountFinal: string;
 }

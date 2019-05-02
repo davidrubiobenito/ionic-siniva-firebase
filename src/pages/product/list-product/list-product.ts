@@ -116,7 +116,7 @@ export class ListProductPage {
   showPrompt(product : Product) {
     const prompt = this.alertCtrl.create({
       title: '¿Borrar Producto?',
-      message: "Producto <span class='text-prin' >' " + product.title + " '</span>",      
+      message: "Producto <span class='text-prin' >' " + product.name + " '</span>",      
       buttons: [        
         {
           text: 'Borrar',

@@ -11,7 +11,7 @@
         <ion-col col-12>
           <ion-item>
               <ion-label floating>Título</ion-label>
-              <ion-input [(ngModel)]="product.title" [readonly]="!isEdit"></ion-input>
+              <ion-input [(ngModel)]="product.name" [readonly]="!isEdit"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -19,7 +19,7 @@
         <ion-col col-12>
           <ion-item>
             <ion-label floating>Contenido</ion-label>
-            <ion-textarea [(ngModel)]="product.content" [readonly]="!isEdit"></ion-textarea>
+            <ion-textarea [(ngModel)]="product.units" [readonly]="!isEdit"></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>

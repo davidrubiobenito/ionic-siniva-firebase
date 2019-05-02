@@ -15,9 +15,14 @@ export class EditProductPage {
   @ViewChild(Navbar) navBar: Navbar;
 
   public product: Product = {
-    title: '',
-    content: ''
-  }
+    name: '',
+    units: '',
+    price:'',
+    tax:'',
+    priceFinal: '',
+    amountFinal: ''
+  };
+  
   public isEdit: boolean = false;
 
   public constructor(public navCtrl: NavController, 
