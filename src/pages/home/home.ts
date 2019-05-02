@@ -129,7 +129,7 @@ export class HomePage {
           text: 'Creditos',
           icon: 'information',
           handler: () => {
-            this.presentToast('David Rubio Benito', 3000, 'bottom');
+            this.presentToast('David Rubio Benito', 60000, 'bottom');
           }
         }
       ],

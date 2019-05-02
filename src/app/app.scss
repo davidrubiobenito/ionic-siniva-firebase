@@ -207,9 +207,14 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
 
 // STYLES TOAST-ANDROID
 
+.toast-md{
+  text-align: center;
+}
+
 .toast-md .toast-wrapper{
   margin: constant(safe-area-inset-top) auto constant(safe-area-inset-bottom);
   margin: env(safe-area-inset-top) auto env(safe-area-inset-bottom);
+  width: 90%;
   max-width: 400px;
   border-radius: 13px;
   margin-bottom: 8px;
