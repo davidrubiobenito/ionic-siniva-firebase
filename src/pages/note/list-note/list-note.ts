@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, AlertController, Platform  } from 'ionic-angular';
-import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
-import { Toast } from '@ionic-native/toast';
+//import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
+//import { Toast } from '@ionic-native/toast';
 
 import { Observable } from 'rxjs';
 //import { map, filter, switchMap } from 'rxjs/operators';
+
+import { ActionSheetController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { AuthService } from '../../../services/auth.service';
 import { NoteListService } from '../../../services/note-list.service';
@@ -30,12 +33,14 @@ export class ListNotePage {
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
-                      private actionSheet: ActionSheet,
-                      private toast: Toast,
+                      //private actionSheet: ActionSheet,
+                      //private toast: Toast,
                       public alertCtrl: AlertController,
                       public platform : Platform,
-                      private noteListService: NoteListService, 
-                      public auth: AuthService) {
+                      public noteListService: NoteListService, 
+                      public auth: AuthService,
+                      public actionSheetCtrl: ActionSheetController,
+                      public toastCtrl: ToastController) {
     
    
     // used for an example of ngFor and navigation
@@ -87,6 +92,7 @@ export class ListNotePage {
     alert.present();
   }
 
+  /*
   presentActionSheet() {
     let buttonLabels = ['Salir Aplicación', 'Creditos'];
     const options: ActionSheetOptions = {
@@ -116,6 +122,40 @@ export class ListNotePage {
     });
 
   }
+  */
+
+  presentActionSheet() {
+
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Opciones ...',
+      buttons: [
+        {
+          text: 'Borrar Lista Notas',
+          icon: 'trash',
+          handler: () => {
+            this.showPromptBorrarList();
+          }
+        },
+        {
+          text: 'Salir Aplicación',
+          icon: 'log-out',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        },   
+        {
+          text: 'Creditos',
+          icon: 'information',
+          handler: () => {
+            this.presentToast('David Rubio Benito', 3000, 'bottom');
+          }
+        }
+      ],
+      enableBackdropDismiss: true
+    });
+
+    actionSheet.present();
+  }
 
   showPrompt(note : Note) {
     const prompt = this.alertCtrl.create({
@@ -123,11 +163,11 @@ export class ListNotePage {
       message: "Nota <span class='text-prin' >' " + note.title + " '</span>",      
       buttons: [        
         {
-          text: 'Aceptar',
+          text: 'Borrar',
           handler: data => {
-            console.log('Saved clicked');
+            //console.log('Saved clicked');
             this.noteListService.removeNoteToUserUid(note, this.auth.getUserUid()).then(() => {
-              this.presentToast('Nota borrada', 'short', 'bottom');
+              this.presentToast('Nota borrada', 3000, 'bottom');
               //this.navCtrl.setRoot(HomePage);
             });  
           },
@@ -136,12 +176,13 @@ export class ListNotePage {
         {
           text: 'Cancelar',
           handler: data => {
-            console.log('Cancel clicked');
+            //console.log('Cancel clicked');
           },
+          role: 'cancel',
           cssClass: 'button-primary'
-        },
+        } 
       ],
-      cssClass: 'dialogCustomCss'
+      enableBackdropDismiss: true
     });
     prompt.present();
   }
@@ -149,35 +190,56 @@ export class ListNotePage {
   showPromptBorrarList() {
     const prompt = this.alertCtrl.create({
       title: 'Borrar Lista Notas',
-      message: "¿Desea BORRAR TODOS las Notas ?",      
+      message: "¿Desea BORRAR TODAS las Notas?",      
       buttons: [
+        {
+          text: 'Borrar',
+          handler: data => {
+            //console.log('Aceptar clicked');
+            this.noteListService.removeListNote(this.auth.getUserUid()).then(() => {
+              this.presentToast('Lista Borrada', 3000, 'bottom');
+              //this.navCtrl.setRoot(HomePage);
+            });
+          },
+          cssClass: 'button-secundary'
+        },
         {
           text: 'Cancelar',
           handler: data => {
-            console.log('Cancelar clicked');
-          }
+            //console.log('Cancelar clicked');
+          },
+          role: 'cancel',
+          cssClass: 'button-primary'
         },
-        {
-          text: 'Aceptar',
-          handler: data => {
-            console.log('Aceptar clicked');
-            this.noteListService.removeListNote(this.auth.getUserUid()).then(() => {
-              this.presentToast('Lista Borrada', 'short', 'bottom');
-              //this.navCtrl.setRoot(HomePage);
-            });
-          }
-        }
-      ]
+      ],
+      enableBackdropDismiss: true
     });
     prompt.present();
   }
 
-    
+  /*
   presentToast(message: string, duration: string, position: string) {
     this.toast.show(message, duration, position).subscribe(
       toast => {
         console.log(toast);
     });
+  }
+  */
+
+  presentToast(message: string, duration: number, position: string) {
+    let toast = this.toastCtrl.create({ 
+      message: message,
+      duration: duration,
+      position: position,
+      dismissOnPageChange: true,
+      cssClass: 'toast'
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
   exitApp(){

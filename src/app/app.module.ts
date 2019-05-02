@@ -32,6 +32,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ActionSheet } from '@ionic-native/action-sheet';
 import { Toast  } from '@ionic-native/toast';
 
+import { ActionSheetController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -71,7 +74,9 @@ import { Toast  } from '@ionic-native/toast';
     ActionSheet,
     Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProductListService, NoteListService, AngularFireAuth, AuthService
+    ProductListService, NoteListService, AngularFireAuth, AuthService,
+    ActionSheetController,
+    ToastController
   ]
 })
 export class AppModule {}

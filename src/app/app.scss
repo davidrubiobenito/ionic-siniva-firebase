@@ -133,6 +133,7 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
 .action-sheet-md .action-sheet-wrapper {
   margin: constant(safe-area-inset-top) auto constant(safe-area-inset-bottom);
   margin: env(safe-area-inset-top) auto env(safe-area-inset-bottom);
+  max-width: 400px;
 }
 
 .action-sheet-md .action-sheet-container {
@@ -158,9 +159,11 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
   text-align: center;
   border-radius: 0;
   border-bottom: 0.55px solid #d6d6da;
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: #8f8f8f;
+  //font-size: 1.3rem;
+  //font-weight: 400;
+  font-size: 2rem;  
+  font-weight: normal;  
+  color: $color-primary-4;
 }
 
 .action-sheet-md .action-sheet-button {
@@ -168,9 +171,11 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
   padding: 18px;
   min-height: 5.6rem;
   border-bottom: 0.55px solid #d6d6da;
-  font-size: 2rem;
-  color: #007aff;
+  //font-size: 2rem;
+  //color: #007aff;
   background: transparent;
+  color: $color-primary-3;
+  font-weight: normal;
 }
 
 .action-sheet-md .action-sheet-button:last-child {
@@ -190,12 +195,89 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
 }
 
 .action-sheet-md .action-sheet-destructive {
-  color: #f53d3d;
+  color: $color-primary-0;
 }
 
 .action-sheet-md .action-sheet-cancel {
   font-weight: 600;
   background: #fff;
+}
+
+//---------------------------------------
+
+// STYLES TOAST-ANDROID
+
+.toast-md .toast-wrapper{
+  margin: constant(safe-area-inset-top) auto constant(safe-area-inset-bottom);
+  margin: env(safe-area-inset-top) auto env(safe-area-inset-bottom);
+  max-width: 400px;
+  border-radius: 13px;
+  margin-bottom: 8px;
+  background: $color-primary-4;
+  color: #fff;
+}
+
+.toast-md .toast-container {
+  padding: 0 10px;  
+}
+
+//---------------------------------------
+
+// STYLES ALERT-ANDROID
+
+.alert-md .alert-wrapper{
+  max-width: 400px;
+  width: 400px;
+  border-radius: 13px;
+}
+
+.alert-md .alert-head{
+  text-align: center;
+}
+
+.alert-md .button-primary{
+  background-color: $color-primary-2;
+  color: $color-complement-3; 
+  border: 1px solid $color-primary-3;
+  font-weight: normal;
+  width: 45%;
+  margin: auto;
+}
+     
+.alert-md .button-primary:hover{
+  background-color: $color-primary-1 !important;
+  color: $color-complement-3;
+}
+
+.alert-md .button-secundary{
+  background-color: transparent;
+  color: $color-primary-0; 
+  border: 1px solid $color-primary-0;
+  font-weight: normal;
+  width: 45%;
+  margin: auto;
+}
+     
+.alert-md .button-secundary:hover{
+  background-color: $color-primary-1 !important;
+  color: $color-secondary-2-3; 
+  border: 1px solid $color-secondary-2-3;
+}
+
+.alert-md .alert-message, 
+.alert-md .alert-input-group{
+  color: $color-primary-3;
+}
+
+.alert-md .alert-button-group{
+  padding: 8px;
+}
+
+.alert-md .alert-button .button-inner {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 //---------------------------------------
@@ -209,6 +291,15 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
 }
 
 //---------------------------------------
+
+.header-md-dark{
+  background: $color-primary-4;
+}
+
+ion-navbar.toolbar{
+  max-width: 400px;
+  margin: auto;
+}
 
 .background-page{
   background-color: $color-primary-0;
@@ -257,40 +348,6 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
 .message-error-page{
     color: $color-primary-0;
     margin-top: 10px;
-}
-
-.dialogCustomCss .alert-wrapper{
-  border-radius: 15px 15px;
-}
-
-.dialogCustomCss .alert-head{
-  padding: 10px;
-  text-align: center;
-  background: $color-primary-4;
-  color: $color-complement-1;
-  font-size: 2rem;
-  border-radius: 15px 15px 0 0;
-}
-
-.dialogCustomCss .alert-message{
-  padding: 15px 10px;
-  text-align: justify;
-  color: $color-primary-3;
-  border-bottom: 1px solid $color-complement-1;
-}
-
-.dialogCustomCss .button-primary{
-  background-color: $color-primary-2;
-  color: $color-complement-3; 
-  border: 1px solid $color-primary-3;
-  font-weight: normal;
-}
-
-.dialogCustomCss .button-secundary{
-  background-color: transparent;
-  color: $color-primary-0; 
-  border: 1px solid $color-primary-0;
-  font-weight: normal;
 }
 
 .text-prin{

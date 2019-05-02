@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, AlertController, Platform  } from 'ionic-angular';
-import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
-import { Toast } from '@ionic-native/toast';
+//import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
+//import { Toast } from '@ionic-native/toast';
 
 import { AuthService } from '../../services/auth.service';
+
+import { ActionSheetController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 /* Pages */
 import { LoginPage } from '../login/login';
@@ -22,11 +25,13 @@ export class HomePage {
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
-                      private actionSheet: ActionSheet,
-                      private toast: Toast,
+                      //private actionSheet: ActionSheet,
+                      //private toast: Toast,
                       public alertCtrl: AlertController,
                       public platform : Platform,
-                      public auth: AuthService) {
+                      public auth: AuthService,
+                      public actionSheetCtrl: ActionSheetController,
+                      public toastCtrl: ToastController) {
     
    
     // used for an example of ngFor and navigation
@@ -60,6 +65,7 @@ export class HomePage {
 	  this.navCtrl.setRoot(LoginPage);
   }
 
+  /*
   presentActionSheet() {
     let buttonLabels = ['Lista Productos', 'Lista Notas', 'Salir Aplicación', 'Creditos'];
     const options: ActionSheetOptions = {
@@ -91,12 +97,70 @@ export class HomePage {
     });
 
   }
-    
+  */
+  
+  presentActionSheet() {
+
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Opciones ...',
+      buttons: [
+        {
+          text: 'Lista Productos',
+          icon: 'trending-up',
+          handler: () => {
+            this.goToListProduct();
+          }
+        },
+        {
+          text: 'Lista Notas',
+          icon: 'create',
+          handler: () => {
+            this.goToListNote();
+          }
+        },
+        {
+          text: 'Salir Aplicación',
+          icon: 'log-out',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        },       
+        {
+          text: 'Creditos',
+          icon: 'information',
+          handler: () => {
+            this.presentToast('David Rubio Benito', 3000, 'bottom');
+          }
+        }
+      ],
+      enableBackdropDismiss: true
+    });
+
+    actionSheet.present();
+  }
+
+  /*
   presentToast(message: string, duration: string, position: string) {
     this.toast.show(message, duration, position).subscribe(
       toast => {
         console.log(toast);
     });
+  }
+  */
+  presentToast(message: string, duration: number, position: string) {
+    let toast = this.toastCtrl.create({ 
+      message: message,
+      duration: duration,
+      position: position,
+      dismissOnPageChange: true,
+      cssClass: 'toast'
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
   exitApp(){
