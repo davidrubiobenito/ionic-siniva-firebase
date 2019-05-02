@@ -56,10 +56,10 @@
     <ion-list>   
       <ion-item-sliding>
         <ion-item>            
-          <ion-label >
+          <ion-label [navPush]="editProductPage" [navParams]="{product:product, isEdit: false}">
               {{ product.title }}
           </ion-label>
-          <button ion-button clear icon-start item-end color="secondary" [navPush]="editProductPage" [navParams]="{product:product}">            
+          <button ion-button clear icon-start item-end color="secondary" [navPush]="editProductPage" [navParams]="{product:product, isEdit: true}">            
             <ion-icon name="create"></ion-icon>
             Editar
           </button>

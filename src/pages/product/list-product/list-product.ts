@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, AlertController, Platform  } from 'ionic-angular';
-//import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
-//import { Toast } from '@ionic-native/toast';
 
 import { Observable } from 'rxjs';
 //import { map, filter, switchMap } from 'rxjs/operators';
@@ -34,8 +32,6 @@ export class ListProductPage {
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
-                      //private actionSheet: ActionSheet,
-                      //private toast: Toast,
                       public alertCtrl: AlertController,
                       public platform : Platform,
                       private productListService: ProductListService, 
@@ -82,48 +78,6 @@ export class ListProductPage {
   removeProduct(product: Product) {
     this.showPrompt(product);       
   }
-
-  showAlert() {
-    const alert = this.alertCtrl.create({
-      title: 'Info',
-      subTitle: 'Producto borrado correctamente',
-      buttons: [{text: 'Aceptar', cssClass:"button-secundary"}],
-      cssClass: 'dialogCustomCss'
-    });
-    alert.present();
-  }
-
-  /*
-  presentActionSheet() {
-    let buttonLabels = ['Salir Aplicación', 'Creditos'];
-    const options: ActionSheetOptions = {
-      title: 'Opciones ...',
-      subtitle: 'Elige una opción',
-      buttonLabels: buttonLabels,
-      addCancelButtonWithLabel: 'Cancelar',
-      addDestructiveButtonWithLabel: 'Borrar Lista',
-      androidTheme: 3,
-      destructiveButtonLast: false,
-      androidEnableCancelButton: true
-    };
-
-    this.actionSheet.show(options).then((buttonIndex: number) => {
-      console.log('Button pressed: ' + buttonIndex);
-      switch(buttonIndex){
-        case 1:
-          this.showPromptBorrarList();
-        break;
-        case 2:
-          this.platform.exitApp();
-        break;
-        case 3:
-          this.presentToast('David Rubio Benito', 'short', 'bottom');
-        break;
-      }
-    });
-
-  }
-  */
 
   presentActionSheet() {
 
@@ -214,15 +168,6 @@ export class ListProductPage {
     });
     prompt.present();
   }
-
-  /*
-  presentToast(message: string, duration: string, position: string) {
-    this.toast.show(message, duration, position).subscribe(
-      toast => {
-        console.log(toast);
-    });
-  }
-  */
 
   presentToast(message: string, duration: number, position: string) {
     let toast = this.toastCtrl.create({ 

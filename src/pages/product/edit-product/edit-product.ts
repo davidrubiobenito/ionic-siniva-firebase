@@ -18,6 +18,7 @@ export class EditProductPage {
     title: '',
     content: ''
   }
+  public isEdit: boolean = false;
 
   public constructor(public navCtrl: NavController, 
                      public navParams: NavParams, 
@@ -37,6 +38,10 @@ export class EditProductPage {
     });
   }
 
+  back(){
+    this.navCtrl.setRoot(ListProductPage);
+  }
+
   //Method to override the default back button action
   setBackButtonAction(){
     this.navBar.backButtonClick = () => {
@@ -48,6 +53,7 @@ export class EditProductPage {
   /*************** */
   ionViewDidLoad(){
     this.product = this.navParams.get('product');
+    this.isEdit = this.navParams.get('isEdit');
     this.setBackButtonAction();
   }
   ionViewWillEnter(){

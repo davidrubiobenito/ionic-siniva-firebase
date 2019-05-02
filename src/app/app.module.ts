@@ -29,9 +29,8 @@ import { SignupPage } from '../pages/signup/signup';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ActionSheet } from '@ionic-native/action-sheet';
-import { Toast  } from '@ionic-native/toast';
-
+//import { ActionSheet } from '@ionic-native/action-sheet';
+//import { Toast  } from '@ionic-native/toast';
 import { ActionSheetController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
@@ -71,8 +70,8 @@ import { ToastController } from 'ionic-angular';
   providers: [
     StatusBar,
     SplashScreen,
-    ActionSheet,
-    Toast,
+    //ActionSheet,
+    //Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductListService, NoteListService, AngularFireAuth, AuthService,
     ActionSheetController,

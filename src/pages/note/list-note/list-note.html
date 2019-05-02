@@ -55,11 +55,11 @@
   <ion-card  *ngFor="let note of noteList">
     <ion-list>   
       <ion-item-sliding>
-        <ion-item>            
-          <ion-label >
+        <ion-item>    
+          <ion-label [navPush]="editNotePage" [navParams]="{note:note, isEdit: false}">
               {{ note.title }}
-          </ion-label>
-          <button ion-button clear icon-start item-end color="secondary" [navPush]="editNotePage" [navParams]="{note:note}">            
+          </ion-label>          
+          <button ion-button clear icon-start item-end color="secondary" [navPush]="editNotePage" [navParams]="{note:note, isEdit: true}">            
             <ion-icon name="create"></ion-icon>
             Editar
           </button>

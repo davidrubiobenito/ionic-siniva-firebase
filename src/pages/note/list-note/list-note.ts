@@ -82,16 +82,6 @@ export class ListNotePage {
     this.showPrompt(note);       
   }
 
-  showAlert() {
-    const alert = this.alertCtrl.create({
-      title: 'Info',
-      subTitle: 'Nota borrada correctamente',
-      buttons: [{text: 'Aceptar', cssClass:"button-secundary"}],
-      cssClass: 'dialogCustomCss'
-    });
-    alert.present();
-  }
-
   /*
   presentActionSheet() {
     let buttonLabels = ['Salir Aplicación', 'Creditos'];

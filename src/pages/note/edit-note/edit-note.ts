@@ -20,6 +20,8 @@ export class EditNotePage {
     content: ''
   }
 
+  public isEdit: boolean = false;
+
   public constructor(public navCtrl: NavController, 
                      public navParams: NavParams, 
                      private noteListService: NoteListService, 
@@ -38,6 +40,10 @@ export class EditNotePage {
     });
   }
 
+  back(){
+    this.navCtrl.setRoot(ListNotePage);
+  }
+
   //Method to override the default back button action
   setBackButtonAction(){
     this.navBar.backButtonClick = () => {
@@ -49,6 +55,7 @@ export class EditNotePage {
   /*************** */
   ionViewDidLoad(){
     this.note = this.navParams.get('note');
+    this.isEdit = this.navParams.get('isEdit');
     this.setBackButtonAction();
   }
   ionViewWillEnter(){

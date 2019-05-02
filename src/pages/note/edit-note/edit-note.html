@@ -11,7 +11,7 @@
         <ion-col col-12>
           <ion-item>
               <ion-label floating>Título</ion-label>
-              <ion-input [(ngModel)]="note.title"></ion-input>
+              <ion-input [(ngModel)]="note.title" [readonly]="!isEdit"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -19,19 +19,22 @@
         <ion-col col-12>
           <ion-item>
             <ion-label floating>Contenido</ion-label>
-            <ion-textarea [(ngModel)]="note.content"></ion-textarea>
+            <ion-textarea [(ngModel)]="note.content" [readonly]="!isEdit"></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-12 col-sm-6 col-md-6  offset-lg-4 col-lg-4 offset-xl-6 col-xl-3>
-          <button ion-button block outline icon-start color="danger" (click)="removeNote(note)">
+        <ion-col col-12 col-sm-6 col-md-6  col-lg-6 col-xl-6>
+          <button ion-button block outline icon-start color="danger" (click)="removeNote(note)" *ngIf="isEdit==true">
             <ion-icon name="trash"></ion-icon>
             Borrar
           </button>          
         </ion-col>
-        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>
-          <button ion-button block class="button-primary" (click)="updateNote(note)">Guardar</button>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+          <button ion-button block class="button-primary" (click)="updateNote(note)" *ngIf="isEdit==true">Guardar</button>
+        </ion-col>
+        <ion-col col-12>
+            <button ion-button block class="button-primary" (click)="back()" *ngIf="isEdit==false">Aceptar</button>
         </ion-col>
       </ion-row>
     </ion-grid>
