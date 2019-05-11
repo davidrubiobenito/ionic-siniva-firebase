@@ -16,7 +16,7 @@ export class EditProductPage {
 
   public product: Product = {
     name: '',
-    units: '',
+    units: 1,
     price:'',
     tax:'',
     priceFinal: '',
