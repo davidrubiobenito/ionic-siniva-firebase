@@ -16,12 +16,17 @@ export const VALIDATION_MESSAGES = {
     'units' : [
       { type: 'required', message: 'Campo unidades es obligatorio' },
       { type: 'pattern', message: 'Formato unidades no válido'}, 
-      { type: 'min', message: 'Valor mínimo debe ser 1' }      
+      { type: 'min', message: 'Valor mínimo debe ser 0' }      
+    ],
+    'price' : [
+      { type: 'required', message: 'Campo precio es obligatorio' },
+      { type: 'pattern', message: 'Formato precio no válido'}, 
+      { type: 'min', message: 'Valor mínimo debe ser 0' }      
     ],
     'tax' : [
-      { type: 'required', message: 'Campo unidades es obligatorio' },
-      { type: 'pattern', message: 'Formato unidades no válido'}, 
-      { type: 'min', message: 'Valor mínimo debe ser 1' },
+      { type: 'required', message: 'Campo impuesto es obligatorio' },
+      { type: 'pattern', message: 'Formato impuesto no válido'}, 
+      { type: 'min', message: 'Valor mínimo debe ser 0' },
       { type: 'max', message: 'Valor máximo debe ser 100' } 
     ]
   
