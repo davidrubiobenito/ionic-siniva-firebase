@@ -15,7 +15,7 @@
               <ion-col col-12>
                 <ion-item>
                   <ion-label floating>Nombre</ion-label>
-                  <ion-input formControlName="nameproduct" [(ngModel)]="product.name" text-left></ion-input>                  
+                  <ion-input formControlName="nameproduct" [(ngModel)]="product.name" text-left ></ion-input>                  
                 </ion-item>                      
                 <ng-container *ngFor="let validation of validationMessages.nameproduct" >         
                   <div class="message-error-page" *ngIf="addProductForm.get('nameproduct').hasError(validation.type) && (addProductForm.get('nameproduct').dirty || addProductForm.get('nameproduct').touched)">
@@ -55,9 +55,8 @@
             <ion-row>
               <ion-col col-12>
                 <ion-item>
-                  <ion-label floating>Introduzca impuesto [0-100]%</ion-label>
-                  <ion-input formControlName="tax" [(ngModel)]="product.tax" type="number" min="0" max="100"
-                    text-center ></ion-input>
+                  <ion-label floating>Introduzca impuesto [0-100] %</ion-label>
+                  <ion-input formControlName="tax" [(ngModel)]="product.tax" type="number" min="0" max="100" text-center></ion-input>
                 </ion-item>
               </ion-col>
               <div>
@@ -70,18 +69,15 @@
             </ion-row>
             <ion-row>
               <ion-col col-12>
-                <ion-item>
-                  <button ion-button block color="secundary" [disabled]="checkButtonDisabled()" (click)="calculatePrice()">Calcular
-                    Precio e
-                    Importe Final</button>
-                </ion-item>
+                  <button ion-button block color="secundary" [disabled]="checkButtonDisabled() || disabledCalculate" (click)="calculatePrice()">Calcular
+                    Precio e Importe Final</button>
               </ion-col>
             </ion-row>
           </ion-grid>
         </form>
       </ion-list>
 
-      <ion-grid>
+      <ion-grid *ngIf="showFieldsFinal">
         <ion-row>
           <ion-col col-6>
             <ion-item>
@@ -99,7 +95,7 @@
       </ion-grid>
 
       <ion-grid class="item-add-product">
-        <ion-row [hidden]="true">
+        <ion-row *ngIf="showFieldsFinal">
           <ion-col col-12>
             <button ion-button block color="primary" (click)="addProduct(product)">Añadir Producto a la Lista</button>
           </ion-col>
