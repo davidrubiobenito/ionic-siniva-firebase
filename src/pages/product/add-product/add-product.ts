@@ -68,19 +68,19 @@ export class AddProductPage {
 
   calculatePrice(){
     let unidades: number = Number.parseInt(this.product.units.toString().trim());
-    let precioProducto: number = Number.parseFloat(this.product.price.toString().trim());
+    let precioProducto: number = Number.parseFloat(this.product.price.replace(",",".").toString().trim());
     let tax: number = Number.parseFloat(this.product.tax.toString().trim());
     let precioFinal: number = precioProducto/(1 + tax/100);
     let importeFinal: number = precioFinal*unidades;
     console.log(this.product.name.trim(), unidades, precioProducto, tax, this.roundTwoDecimals(precioFinal), this.roundTwoDecimals(importeFinal));
 
-    this.product.price = this.roundTwoDecimals(precioProducto).toString();
+    this.product.price = this.roundTwoDecimals(precioProducto).toString().replace(",",".");
     this.product.priceFinal = this.roundTwoDecimals(precioFinal).toString();
     this.product.amountFinal = this.roundTwoDecimals(importeFinal).toString();
 
     this.saveTempData(this.product.name.trim(), 
                       unidades,  
-                      this.roundTwoDecimals(precioProducto).toString(), 
+                      this.roundTwoDecimals(this.product.price).toString(), 
                       tax.toString(),
                       this.roundTwoDecimals(this.product.priceFinal).toString(), 
                       this.roundTwoDecimals(this.product.amountFinal).toString());
@@ -167,7 +167,7 @@ export class AddProductPage {
   
 
   /*
- onlyNumber(event:any) {
+  onlyNumber(event:any) {
     //48 - 57
     let pass = /[4][8-9]{1}/.test(event.charCode) || /[5][0-7]{1}/.test(event.charCode);
     if (!pass) {

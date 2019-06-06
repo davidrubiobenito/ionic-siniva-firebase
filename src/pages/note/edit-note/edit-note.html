@@ -1,6 +1,7 @@
 <ion-header color="dark">
   <ion-navbar color="dark">
-    <ion-title text-left>Editar Nota</ion-title>
+    <ion-title text-left *ngIf="isEdit==false">Nota</ion-title>
+    <ion-title text-left *ngIf="isEdit==true">Editar Nota</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -24,7 +25,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-12 col-sm-6 col-md-6  col-lg-6 col-xl-6>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
           <button ion-button block outline icon-start color="danger" (click)="removeNote(note)" *ngIf="isEdit==true">
             <ion-icon name="trash"></ion-icon>
             Borrar

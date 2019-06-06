@@ -94,12 +94,7 @@
         </ion-row>
       </ion-grid>
 
-      <ion-grid class="item-add-product">
-        <ion-row *ngIf="showFieldsFinal">
-          <ion-col col-12>
-            <button ion-button block color="primary" (click)="addProduct(product)">Añadir Producto a la Lista</button>
-          </ion-col>
-        </ion-row>
+      <ion-grid class="item-add-product">        
         <ion-row>
           <ion-col col-6>
             <button ion-button block outline (click)="editFields()">Editar Campos</button>
@@ -108,7 +103,11 @@
             <button ion-button block outline (click)="eraseFields()">Borrar Campos</button>
           </ion-col>
         </ion-row>
-
+        <ion-row *ngIf="showFieldsFinal">
+          <ion-col col-12>
+            <button ion-button block color="primary" (click)="addProduct(product)">Añadir Producto</button>
+          </ion-col>
+        </ion-row>
       </ion-grid>
 
     </ion-card-content>

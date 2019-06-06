@@ -1,6 +1,6 @@
 <ion-header color="dark">
 	<ion-navbar color="dark" hideBackButton="true">
-		<ion-title text-center>Lista Productos</ion-title>
+    <ion-title text-center>Lista Productos <br /> <span class="price-header">{{totalPriceFinalList}}</span> </ion-title>
 		<ion-buttons left>
 			<button ion-button icon-only (click)="showMenu()">
 			<ion-icon name="menu"></ion-icon>
@@ -72,7 +72,7 @@
           </button>                     
         </ion-item-options>            
       </ion-item-sliding>
-    </ion-list> 
+    </ion-list>     
   </ion-card> 
 
   <ion-fab center bottom>

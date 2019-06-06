@@ -29,6 +29,7 @@ export class ListProductPage {
   public editProductPage: any;
   public productList: Observable<Product[]>;  
   //public productListAux: Product[];
+  public totalPriceFinalList: number = 0;
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
@@ -73,6 +74,14 @@ export class ListProductPage {
   processData(input: any): Observable<Product[]>{     
     let resultAux = input.map(ch => ({key: ch.key, ...ch.payload.val()}));
     return resultAux;
+  }
+
+  totalPriceFinalListProduct(input: any){
+    var pricePriceFinal = 0;
+    for(var i=0; i<input.length; i++){
+      pricePriceFinal = pricePriceFinal + Number.parseFloat(input[i].priceFinal);
+    }
+    this.totalPriceFinalList = pricePriceFinal;
   }
 
   removeProduct(product: Product) {
@@ -199,6 +208,7 @@ export class ListProductPage {
     this.productListService.getProductListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
         this.productList = this.processData(result);
+        this.totalPriceFinalListProduct(this.productList);
       },
       (err) => {
         console.log('problema', err);

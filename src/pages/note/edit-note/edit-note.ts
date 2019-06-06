@@ -15,12 +15,13 @@ import { ListNotePage } from '../list-note/list-note';
 export class EditNotePage {  
 
   @ViewChild(Navbar) navBar: Navbar;
+
+  public isEdit: boolean = false;
+
   public note: Note = {
     title: '',
     content: ''
   }
-
-  public isEdit: boolean = false;
 
   public constructor(public navCtrl: NavController, 
                      public navParams: NavParams, 
