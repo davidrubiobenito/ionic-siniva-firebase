@@ -1,6 +1,12 @@
 <ion-header color="dark">
 	<ion-navbar color="dark" hideBackButton="true">
-    <ion-title text-center>Lista Productos <br /> <span class="price-header">{{totalPriceFinalList}}</span> </ion-title>
+    <ion-title text-center>Lista Productos 
+        <br>
+        <ion-chip outline="true" color="danger">
+          <ion-label class="price">{{totalPriceFinalList |  currency: "EUR":2}}</ion-label>
+        </ion-chip>
+    </ion-title>
+    
 		<ion-buttons left>
 			<button ion-button icon-only (click)="showMenu()">
 			<ion-icon name="menu"></ion-icon>
@@ -53,17 +59,80 @@
 
 <ion-content #contentproduct class="background-page">    
   <ion-card  *ngFor="let product of productList">
+    <ion-grid>
+      <ion-row >
+        <ion-col col-7 [navPush]="editProductPage" [navParams]="{product:product, isEdit: false}" class="text-cont">
+          {{ product.name }}
+        </ion-col>
+        <ion-col col-3 text-right class="text-label">
+          Impuesto:
+        </ion-col>
+        <ion-col col-2 text-right class="text-cont">
+          {{ product.tax }} %
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 class="text-label">
+          Unidades:
+        </ion-col>
+        <ion-col col-3 text-center class="text-cont price">          
+          {{ product.units }}
+        </ion-col>
+        <ion-col col-3 class="text-label">
+            Precio:
+        </ion-col>
+        <ion-col col-3 text-right class="text-cont price">            
+          {{ product.price | currency: "EUR":2 }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 class="text-label">
+          Subtotal:
+        </ion-col>
+        <ion-col col-3 text-right class="text-subtotal price">         
+          {{ product.priceFinal | currency: "EUR":2 }} 
+        </ion-col>
+        <ion-col col-3 class="text-total">
+            Total:
+          </ion-col>
+          <ion-col col-3 text-right class="text-total price">       
+            {{ product.amountFinal | currency: "EUR":2}} 
+        </ion-col>
+      </ion-row>
+      <ion-row class="padd-0 ion-row">
+        <ion-col col-6 class="padd-0">
+          <button ion-button icon-left clear block class="marg-0 button-item" color="danger" (click)="removeProduct(product)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button> 
+        </ion-col>
+        <ion-col col-6 class="padd-0">
+          <button ion-button icon-left clear block class="marg-0 button-item" color="secondary" [navPush]="editProductPage" [navParams]="{product:product, isEdit: true}">            
+            <ion-icon name="create"></ion-icon>
+              Editar
+          </button>   
+        </ion-col>        
+      </ion-row>
+    </ion-grid>
+
+    <!--
     <ion-list>   
       <ion-item-sliding>
-        <ion-item>            
+        <ion-item> 
           <ion-label [navPush]="editProductPage" [navParams]="{product:product, isEdit: false}">
               {{ product.name }}
-          </ion-label>
+          </ion-label>          
           <button ion-button clear icon-start item-end color="secondary" [navPush]="editProductPage" [navParams]="{product:product, isEdit: true}">            
             <ion-icon name="create"></ion-icon>
-            Editar
-          </button>
+              Editar
+          </button>          
         </ion-item>  
+        <ion-item>
+            <ion-label>
+              Unidades: 
+              {{ product.units }}
+            </ion-label>
+        </ion-item>
 
         <ion-item-options side="right">
           <button ion-button outline color="danger" (click)="removeProduct(product)">
@@ -72,7 +141,8 @@
           </button>                     
         </ion-item-options>            
       </ion-item-sliding>
-    </ion-list>     
+    </ion-list>    
+    --> 
   </ion-card> 
 
   <ion-fab center bottom>

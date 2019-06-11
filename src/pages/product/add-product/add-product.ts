@@ -72,18 +72,18 @@ export class AddProductPage {
     let tax: number = Number.parseFloat(this.product.tax.toString().trim());
     let precioFinal: number = precioProducto/(1 + tax/100);
     let importeFinal: number = precioFinal*unidades;
-    console.log(this.product.name.trim(), unidades, precioProducto, tax, this.roundTwoDecimals(precioFinal), this.roundTwoDecimals(importeFinal));
+    console.log(this.product.name.trim(), unidades, precioProducto.toFixed(2), tax, this.roundTwoDecimals(precioFinal).toFixed(2), this.roundTwoDecimals(importeFinal).toFixed(2));
 
-    this.product.price = this.roundTwoDecimals(precioProducto).toString().replace(",",".");
-    this.product.priceFinal = this.roundTwoDecimals(precioFinal).toString();
-    this.product.amountFinal = this.roundTwoDecimals(importeFinal).toString();
+    this.product.price = this.roundTwoDecimals(precioProducto).toFixed(2).replace(",",".");
+    this.product.priceFinal = this.roundTwoDecimals(precioFinal).toFixed(2);
+    this.product.amountFinal = this.roundTwoDecimals(importeFinal).toFixed(2);
 
     this.saveTempData(this.product.name.trim(), 
                       unidades,  
-                      this.roundTwoDecimals(this.product.price).toString(), 
+                      this.roundTwoDecimals(this.product.price).toFixed(2), 
                       tax.toString(),
-                      this.roundTwoDecimals(this.product.priceFinal).toString(), 
-                      this.roundTwoDecimals(this.product.amountFinal).toString());
+                      this.roundTwoDecimals(this.product.priceFinal).toFixed(2), 
+                      this.roundTwoDecimals(this.product.amountFinal).toFixed(2));
 
     this.showFieldsFinal = true;
     this.disableInputs();
@@ -117,7 +117,7 @@ export class AddProductPage {
 
   }
 
-  roundTwoDecimals(num: any){
+  roundTwoDecimals(num: any): number{
     return Math.round(num * 100) / 100;
   }
 
