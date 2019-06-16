@@ -23,6 +23,7 @@ import { EditNotePage } from '../pages/note/edit-note/edit-note';
 import { ListProductPage } from '../pages/product/list-product/list-product';
 import { AddProductPage } from '../pages/product/add-product/add-product';
 import { EditProductPage } from '../pages/product/edit-product/edit-product';
+import { AllProductPage } from '../pages/product/all-product/all-product';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
@@ -43,6 +44,7 @@ import { ToastController } from 'ionic-angular';
     ListProductPage,
     AddProductPage,
     EditProductPage,
+    AllProductPage,
     HomePage,
     LoginPage,
     SignupPage
@@ -63,6 +65,7 @@ import { ToastController } from 'ionic-angular';
     ListProductPage,
     AddProductPage,
     EditProductPage,
+    AllProductPage,
     HomePage,
     LoginPage,
     SignupPage

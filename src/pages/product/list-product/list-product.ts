@@ -15,6 +15,7 @@ import { LoginPage } from '../../login/login';
 import { HomePage } from '../../home/home';
 import { AddProductPage } from '../../product/add-product/add-product';
 import { EditProductPage } from '../../product/edit-product/edit-product';
+import { AllProductPage } from '../../product/all-product/all-product';
 
 import { Product } from './../../../model/product/product.model';
 
@@ -27,6 +28,7 @@ export class ListProductPage {
   public pages: Array<{icon: string, title: string, component: any}>;
   public addProductPage: any;
   public editProductPage: any;
+  public allProductPage: any;
   public productList: Observable<Product[]>;  
   //public productListAux: Product[];
   public totalPriceFinalList: number = 0;
@@ -43,12 +45,14 @@ export class ListProductPage {
    
     // used for an example of ngFor and navigation
     this.pages = [
-      { icon: 'add', title: 'Añadir Producto', component: AddProductPage }
+      //{ icon: 'add', title: 'Añadir Producto', component: AddProductPage }
+      { icon: 'add', title: 'Añadir Producto', component: AllProductPage }
     ];
 
     // Push Page
     this.addProductPage = AddProductPage;
     this.editProductPage = EditProductPage;
+    this.allProductPage = AllProductPage;
   }
 
   showMenu() {
