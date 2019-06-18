@@ -128,7 +128,7 @@
             <button ion-button block outline (click)="eraseFields()">Borrar Campos</button>
           </ion-col>
         </ion-row>
-        <ion-row *ngIf="showButtonsDeleteAndUpdate && showFieldsFinal">
+        <ion-row *ngIf="showButtonsDeleteAndUpdate">
           <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
             <button ion-button block outline icon-start color="danger" (click)="removeProduct(product)">
               <ion-icon name="trash"></ion-icon>
@@ -139,7 +139,7 @@
             <button ion-button block color="primary" (click)="updateProduct(product)">Guardar</button>
           </ion-col>
         </ion-row> 
-        <ion-row *ngIf="showButtonAdd && showFieldsFinal">
+        <ion-row *ngIf="showButtonAdd">
           <ion-col col-12>
             <button ion-button block color="primary" (click)="addProduct(product)">Añadir Producto</button>
           </ion-col>

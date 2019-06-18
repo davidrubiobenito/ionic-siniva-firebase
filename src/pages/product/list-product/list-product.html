@@ -66,7 +66,7 @@
           {{ product.name }}
         </ion-col>
         -->
-        <ion-col col-7 [navPush]="allProductPage" [navParams]="{product:product, action: 'view'}" class="text-cont">
+        <ion-col col-7 [navPush]="allProductPage" [navParams]="{product:product, action: 'view'}" class="text-cont" style="font-size: 1.7rem">
           {{ product.name }}
         </ion-col>
         <ion-col col-3 text-right class="text-label">
@@ -156,13 +156,13 @@
     --> 
   </ion-card> 
 
-  <ion-fab center bottom>
+  <ion-fab end bottom>
     <!-- 16062019
     <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">
         <ion-icon [name]="p.icon"></ion-icon>
     </button>
     -->
-    <button ion-fab color="dark" [navPush]="allProductPage" [navParams]="{action: 'add'}">
+    <button ion-fab color="dark" class="bck-pri-four" [navPush]="allProductPage" [navParams]="{action: 'add'}">
         <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

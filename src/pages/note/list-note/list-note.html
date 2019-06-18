@@ -75,7 +75,7 @@
     </ion-list> 
   </ion-card> 
 
-  <ion-fab center bottom>
+  <ion-fab end bottom>
     <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">
         <ion-icon [name]="p.icon"></ion-icon>
     </button>

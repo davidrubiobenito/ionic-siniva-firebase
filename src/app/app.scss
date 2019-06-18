@@ -21,10 +21,11 @@
 
 //$color-primary-0: #757575;
 $color-primary-0: #AA3939;
+//$color-primary-0: #bf2724;
 $color-primary-1: #D2D1D1;
 $color-primary-2: #A2A2A2;
 $color-primary-3: #414141;
-$color-primary-4: #040303;
+$color-primary-4: #313131;
 
 /*
 $color-secondary-1-0: #757575;	
@@ -306,6 +307,10 @@ ion-navbar.toolbar{
   margin: auto;
 }
 
+.toolbar-md-dark .toolbar-background-md {
+  background: $color-primary-4;
+}
+
 .background-page{
   background-color: $color-primary-0;
 }
@@ -364,4 +369,8 @@ ion-navbar.toolbar{
   padding-left: 10px;
   padding-right: 10px;
   background-color: $color-primary-1;
+}
+
+.fab-md-dark{
+  background: $color-primary-4;
 }
