@@ -3,7 +3,7 @@
     <ion-title text-center>Lista Productos 
         <br>
         <ion-chip outline="true" color="danger">
-          <ion-label class="price">{{totalPriceFinalList |  currency: "EUR":2}}</ion-label>
+          <ion-label class="price">{{totalPriceFinalList |  number: '1.2-2' | currency: "EUR":2 }} </ion-label>
         </ion-chip>
     </ion-title>
     
@@ -61,7 +61,12 @@
   <ion-card  *ngFor="let product of productList">
     <ion-grid>
       <ion-row >
+        <!-- 160612019
         <ion-col col-7 [navPush]="editProductPage" [navParams]="{product:product, isEdit: false}" class="text-cont">
+          {{ product.name }}
+        </ion-col>
+        -->
+        <ion-col col-7 [navPush]="allProductPage" [navParams]="{product:product, action: 'view'}" class="text-cont" style="font-size: 1.7rem">
           {{ product.name }}
         </ion-col>
         <ion-col col-3 text-right class="text-label">
@@ -82,7 +87,7 @@
             Precio:
         </ion-col>
         <ion-col col-3 text-right class="text-cont price">            
-          {{ product.price | currency: "EUR":2 }}
+          {{ product.price | number: '1.2-2' | currency: "EUR":2 }}
         </ion-col>
       </ion-row>
       <ion-row>
@@ -90,13 +95,13 @@
           Subtotal:
         </ion-col>
         <ion-col col-3 text-right class="text-subtotal price">         
-          {{ product.priceFinal | currency: "EUR":2 }} 
+          {{ product.priceFinal | number: '1.2-2' | currency: "EUR":2 }} 
         </ion-col>
         <ion-col col-3 class="text-total">
             Total:
           </ion-col>
           <ion-col col-3 text-right class="text-total price">       
-            {{ product.amountFinal | currency: "EUR":2}} 
+            {{ product.amountFinal | number: '1.2-2' | currency: "EUR":2}} 
         </ion-col>
       </ion-row>
       <ion-row class="padd-0 ion-row">
@@ -107,7 +112,13 @@
           </button> 
         </ion-col>
         <ion-col col-6 class="padd-0">
+          <!-- 16062019
           <button ion-button icon-left clear block class="marg-0 button-item" color="secondary" [navPush]="editProductPage" [navParams]="{product:product, isEdit: true}">            
+            <ion-icon name="create"></ion-icon>
+              Editar
+          </button>   
+          -->
+          <button ion-button icon-left clear block class="marg-0 button-item" color="secondary" [navPush]="allProductPage" [navParams]="{product:product, action: 'edit'}">            
             <ion-icon name="create"></ion-icon>
               Editar
           </button>   
@@ -145,9 +156,14 @@
     --> 
   </ion-card> 
 
-  <ion-fab center bottom>
+  <ion-fab end bottom>
+    <!-- 16062019
     <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">
         <ion-icon [name]="p.icon"></ion-icon>
+    </button>
+    -->
+    <button ion-fab color="dark" class="bck-pri-four" [navPush]="allProductPage" [navParams]="{action: 'add'}">
+        <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
 

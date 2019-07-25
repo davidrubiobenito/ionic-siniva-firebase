@@ -1,0 +1,156 @@
+<ion-header color="dark">
+  <ion-navbar color="dark">
+    <ion-title text-left>Añadir Producto</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background-page">
+  <ion-card>   
+    <ion-card-content>
+
+      <ion-list lines="none">
+        <form [formGroup]="addProductForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label floating>Nombre</ion-label>
+                  <ion-input formControlName="nameproduct" [(ngModel)]="product.name" text-left [readonly]="onlyRead"></ion-input>                  
+                </ion-item>                      
+                <ng-container *ngFor="let validation of validationMessages.nameproduct" >         
+                  <div class="message-error-page" *ngIf="addProductForm.get('nameproduct').hasError(validation.type) && (addProductForm.get('nameproduct').dirty || addProductForm.get('nameproduct').touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>
+                <ion-item>
+                  <ion-label floating>Unidades</ion-label>
+                  <ion-input formControlName="units" [(ngModel)]="product.units" type="number" text-center [readonly]="onlyRead"></ion-input>
+                </ion-item>                
+              </ion-col>
+              <ion-col col-8>
+                <ion-item>
+                  <ion-label floating>Precio Producto</ion-label>
+                  <ion-input formControlName="price" [(ngModel)]="product.price" type="number" min="0" text-right [readonly]="onlyRead"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-12>
+                <ng-container *ngFor="let validation of validationMessages.units" >         
+                  <div class="message-error-page" *ngIf="addProductForm.get('units').hasError(validation.type) && (addProductForm.get('units').dirty || addProductForm.get('units').touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </ion-col>
+              <ion-col col-12>
+                <ng-container *ngFor="let validation of validationMessages.price" >         
+                  <div class="message-error-page" *ngIf="addProductForm.get('price').hasError(validation.type) && (addProductForm.get('price').dirty || addProductForm.get('price').touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label floating>Introduzca impuesto [0-100] %</ion-label>
+                  <ion-input formControlName="tax" [(ngModel)]="product.tax" type="number" min="0" max="100" text-center [readonly]="onlyRead"></ion-input>
+                </ion-item>
+              </ion-col>
+              <div>
+                <ng-container *ngFor="let validation of validationMessages.tax" >         
+                  <div class="message-error-page" *ngIf="addProductForm.get('tax').hasError(validation.type) && (addProductForm.get('tax').dirty || addProductForm.get('tax').touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+            </ion-row>
+            <ion-row *ngIf="showButtonCalculate">
+              <ion-col col-12>
+                  <button ion-button block color="secundary" [disabled]="buttonToDisabledOrEnabled() || disabledButtonCalculate" (click)="calculatePrice()">Calcular
+                    Precio e Importe Final
+                  </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="showFieldsFinal">
+    <ion-card-content>
+      <ion-grid >
+        <ion-row>
+          <ion-col col-6 text-center class="text-comun">              
+            Subtotal
+          </ion-col>
+          <ion-col col-6 text-center class="color-pri text-comun">
+            Total
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6 text-center class="text-comun price">              
+            {{product.priceFinal | number: '1.2-2' | currency: "EUR":2 }}
+          </ion-col>
+          <ion-col col-6 text-center class="color-pri text-comun price">
+            {{product.amountFinal | number: '1.2-2' | currency: "EUR":2 }}
+          </ion-col>
+          <!--
+          <ion-col col-6>
+            <ion-item>
+              <ion-label floating>Precio Final</ion-label>
+              <ion-input [readonly]="true" text-right [value]="product.priceFinal"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label floating>Importe Final</ion-label>             
+              <ion-input [readonly]="true" text-right [value]="product.amountFinal"></ion-input>
+            </ion-item>
+          </ion-col>
+          -->
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="showFieldsFinal">
+    <ion-card-content>
+      <ion-grid class="item-add-product">        
+        <ion-row *ngIf="showButtonsEditClearFields">
+          <ion-col col-6>
+            <button ion-button block outline (click)="editFields()">Editar Campos</button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button block outline (click)="eraseFields()">Borrar Campos</button>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="showButtonsDeleteAndUpdate">
+          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+            <button ion-button block outline icon-start color="danger" (click)="removeProduct(product)">
+              <ion-icon name="trash"></ion-icon>
+              Borrar
+            </button>          
+          </ion-col>
+          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+            <button ion-button block color="primary" (click)="updateProduct(product)">Guardar</button>
+          </ion-col>
+        </ion-row> 
+        <ion-row *ngIf="showButtonAdd">
+          <ion-col col-12>
+            <button ion-button block color="primary" (click)="addProduct(product)">Añadir Producto</button>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="showButtonAccept">
+          <ion-col col-12>
+            <button ion-button block color="primary" (click)="back()">Aceptar</button>
+          </ion-col>
+        </ion-row> 
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
