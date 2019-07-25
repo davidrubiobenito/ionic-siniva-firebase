@@ -1,11 +1,13 @@
 <ion-header color="dark">
 	<ion-navbar color="dark" hideBackButton="true">
-		<ion-title text-center>Menu</ion-title>
+    <ion-title text-center>Menu</ion-title>
+    <!--
 		<ion-buttons left>
 			<button ion-button icon-only (click)="showMenu()">
 			<ion-icon name="menu"></ion-icon>
       </button>
-		</ion-buttons>
+    </ion-buttons>
+    -->
     <ion-buttons end>
 			<button ion-button icon-only (click)="presentActionSheet()">
         <ion-icon name="more"></ion-icon>
@@ -14,6 +16,7 @@
 	</ion-navbar>
 </ion-header >
 
+<!--
 <ion-menu [content]="contentmenu" side="left" id="filtersmenu">  
   <ion-header>
     <ion-toolbar color="dark">
@@ -46,6 +49,7 @@
     </ion-list>
   </ion-content>
 </ion-menu>
+-->
 
 <ion-content #contentmenu class="background-page">    
  

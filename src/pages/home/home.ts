@@ -45,13 +45,14 @@ export class HomePage {
     this.listNotePage = ListNotePage;
   }
 
+  /*
   showMenu() {
     this.menuCtrl.open('filtersmenu');
-  }
-
+  }  
   hideMenu() {
     this.menuCtrl.close('filtersmenu');
   }
+  */
 
   login() {
     this.menuCtrl.close();
@@ -104,6 +105,7 @@ export class HomePage {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opciones ...',
       buttons: [
+        /*
         {
           text: 'Lista Productos',
           icon: 'trending-up',
@@ -118,9 +120,21 @@ export class HomePage {
             this.goToListNote();
           }
         },
+        */
+       {
+          text: this.auth.getEmail(),
+          icon: 'mail'
+        }, 
+       {
+          text: 'Cerrar Sesión',
+          icon: 'log-out',
+          handler: () => {
+            this.logout();
+          }
+        },  
         {
           text: 'Salir Aplicación',
-          icon: 'log-out',
+          icon: 'power',
           handler: () => {
             this.platform.exitApp();
           }

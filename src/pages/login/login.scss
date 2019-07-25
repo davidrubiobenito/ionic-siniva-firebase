@@ -17,6 +17,11 @@ page-login {
     font-weight: normal;
   }
 
+  ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+  }
+
   .active-pri{
     background-color: $color-secondary-2-4;
     color: $color-secondary-2-1; 
