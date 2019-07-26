@@ -32,4 +32,34 @@ page-all-product {
         padding-right: 0.3em;
     }
 
+    ion-footer .toolbar-md-dark .toolbar-background-md {
+        background: $color-suplement-1;       
+    }
+
+    .buttons-footer{
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        -webkit-align-content: space-around;
+        -ms-flex-line-pack: distribute;
+        align-content: space-around;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .buttons-footer .bar-button-default-md:hover:not(.disable-hover), 
+    .buttons-footer .bar-button-clear-md-default:hover:not(.disable-hover), .buttons-footer .bar-button-md-default:hover:not(.disable-hover){
+        color: $color-primary-1;
+    }
+ 
 }

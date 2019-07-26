@@ -13,8 +13,8 @@ import { AuthService } from '../../../services/auth.service';
 import { NoteListService } from '../../../services/note-list.service';
 
 /* Pages */
-import { LoginPage } from '../../login/login';
-import { HomePage } from '../../home/home';
+//import { LoginPage } from '../../login/login';
+//import { HomePage } from '../../home/home';
 import { AddNotePage } from '../../note/add-note/add-note';
 import { EditNotePage } from '../../note/edit-note/edit-note';
 
@@ -30,6 +30,8 @@ export class ListNotePage {
   public addNotePage: any;
   public editNotePage: any;
   public noteList: Observable<Note[]>;  
+
+  public showLoading: boolean;
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
@@ -53,6 +55,7 @@ export class ListNotePage {
     this.editNotePage = EditNotePage;
   }
 
+  /*
   showMenu() {
     this.menuCtrl.open('filtersnote');
   }
@@ -60,6 +63,7 @@ export class ListNotePage {
   hideMenu() {
     this.menuCtrl.close('filtersnote');
   }
+  
 
   login() {
     this.menuCtrl.close();
@@ -72,6 +76,7 @@ export class ListNotePage {
 	  this.auth.signOut();
 	  this.navCtrl.setRoot(LoginPage);
   }
+  */
 
   processData(input: any): Observable<Note[]>{     
     let resultAux = input.map(ch => ({key: ch.key, ...ch.payload.val()}));
@@ -124,8 +129,10 @@ export class ListNotePage {
           icon: 'trash',
           handler: () => {
             this.showPromptBorrarList();
-          }
+          },
+          role: 'destructive'
         },
+        /*
         {
           text: 'Salir Aplicación',
           icon: 'log-out',
@@ -140,6 +147,7 @@ export class ListNotePage {
             this.presentToast('David Rubio Benito', 3000, 'bottom');
           }
         }
+        */
       ],
       enableBackdropDismiss: true
     });
@@ -232,6 +240,7 @@ export class ListNotePage {
     toast.present();
   }
 
+  /*
   exitApp(){
     this.platform.exitApp();
   }
@@ -239,12 +248,15 @@ export class ListNotePage {
   goToHome(){
     this.navCtrl.setRoot(HomePage);
   }
+  */
 
   /************** */
   ionViewDidLoad(){
-    //console.log('ionViewDidLoad LoginPage');        
+    //console.log('ionViewDidLoad LoginPage');     
+    this.showLoading=true;       
     this.noteListService.getNoteListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
+        this.showLoading=false;
         this.noteList = this.processData(result);
       },
       (err) => {

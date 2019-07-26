@@ -27,7 +27,8 @@ export class AddNotePage {
 
   addNote(note: Note){
     this.noteListService.addNoteToUserUid(note, this.auth.getUserUid()).then(ref => {
-      this.navCtrl.setRoot(ListNotePage);
+      //this.navCtrl.setRoot(ListNotePage);
+      this.navCtrl.popTo(ListNotePage);
     });
   }
 
@@ -35,7 +36,8 @@ export class AddNotePage {
   setBackButtonAction(){
     this.navBar.backButtonClick = () => {
       //Write here wherever you wanna do
-      this.navCtrl.setRoot(ListNotePage);
+      //this.navCtrl.setRoot(ListNotePage);
+      this.navCtrl.popTo(ListNotePage);
     }
   }
 

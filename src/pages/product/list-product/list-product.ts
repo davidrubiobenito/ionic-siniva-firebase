@@ -11,8 +11,8 @@ import { ProductListService } from '../../../services/product-list.service';
 import { AuthService } from '../../../services/auth.service';
 
 /* Pages */
-import { LoginPage } from '../../login/login';
-import { HomePage } from '../../home/home';
+//import { LoginPage } from '../../login/login';
+//import { HomePage } from '../../home/home';
 import { AddProductPage } from '../../product/add-product/add-product';
 import { EditProductPage } from '../../product/edit-product/edit-product';
 import { AllProductPage } from '../../product/all-product/all-product';
@@ -31,7 +31,9 @@ export class ListProductPage {
   public allProductPage: any;
   public productList: Observable<Product[]>;  
   //public productListAux: Product[];
-  public totalPriceFinalList: number = 0;
+  public totalAmountFinalList: number = 0;
+
+  public showLoading: boolean;
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
@@ -55,6 +57,7 @@ export class ListProductPage {
     this.allProductPage = AllProductPage;
   }
 
+  /*
   showMenu() {
     this.menuCtrl.open('filtersproduct');
   }
@@ -62,6 +65,7 @@ export class ListProductPage {
   hideMenu() {
     this.menuCtrl.close('filtersproduct');
   }
+
 
   login() {
     this.menuCtrl.close();
@@ -74,18 +78,19 @@ export class ListProductPage {
 	  this.auth.signOut();
 	  this.navCtrl.setRoot(LoginPage);
   }
+  */
 
   processData(input: any): Observable<Product[]>{     
     let resultAux = input.map(ch => ({key: ch.key, ...ch.payload.val()}));
     return resultAux;
   }
 
-  totalPriceFinalListProduct(input: any){
-    var pricePriceFinal = 0;
+  totalAmountFinalListProduct(input: any){
+    var amountFinal: number = 0;
     for(var i=0; i<input.length; i++){
-      pricePriceFinal = pricePriceFinal + Number.parseFloat(input[i].priceFinal);
+      amountFinal = amountFinal + Number.parseFloat(input[i].amountFinal);
     }
-    this.totalPriceFinalList = pricePriceFinal;
+    this.totalAmountFinalList = amountFinal;
   }
 
   removeProduct(product: Product) {
@@ -102,8 +107,10 @@ export class ListProductPage {
           icon: 'trash',
           handler: () => {
             this.showPromptBorrarList();
-          }
+          },
+          role: 'destructive'
         },
+        /*
         {
           text: 'Salir Aplicación',
           icon: 'log-out',
@@ -118,6 +125,7 @@ export class ListProductPage {
             this.presentToast('David Rubio Benito', 3000, 'bottom');
           }
         }
+        */
       ],
       enableBackdropDismiss: true
     });
@@ -198,21 +206,25 @@ export class ListProductPage {
     toast.present();
   }
 
+  /*
   exitApp(){
     this.platform.exitApp();
-  }
+  }g
 
   goToHome(){
     this.navCtrl.setRoot(HomePage);
   }
+  */
 
   /************** */
   ionViewDidLoad(){
+    this.showLoading=true;
     //console.log('ionViewDidLoad LoginPage');        
     this.productListService.getProductListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
+        this.showLoading=false;
         this.productList = this.processData(result);
-        this.totalPriceFinalListProduct(this.productList);
+        this.totalAmountFinalListProduct(this.productList);
       },
       (err) => {
         console.log('problema', err);

@@ -24,7 +24,7 @@ page-home {
     
     .image-backg {
       background-image: url("https://source.unsplash.com/random/325x220"); /* The image used */
-      background-color: #cccccc; /* Used if the image is unavailable */
+      background-color:  $color-primary-2; /* Used if the image is unavailable */
       height: 200px; /* You must set a specified height */
       background-position: center; /* Center the image */
       background-repeat: no-repeat; /* Do not repeat the image */
@@ -33,19 +33,23 @@ page-home {
 
     .card-title {
       position: absolute;
-      top: 36%;
+      top: 35%;
       font-size: 2.0em;
       width: 100%;
       font-weight: bold;
       color: #fff;
+      background: $rgba-suplement-1;
+      padding: 5px 0;
     }
   
     .card-subtitle {
       font-size: 1.0em;
       position: absolute;
-      top: 52%;
+      top: 58%;
       width: 100%;
       color: #fff;
+      background: $rgba-suplement-1;
+      padding: 5px 0;
     }
   
   }

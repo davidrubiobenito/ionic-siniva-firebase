@@ -26,7 +26,7 @@ $color-primary-1: #D2D1D1;
 $color-primary-2: #A2A2A2;
 $color-primary-3: #414141;
 /*$color-primary-4: #040303;*/
-$color-primary-4: #212121;
+$color-primary-4: #313131;
 
 /*
 $color-secondary-1-0: #757575;	
@@ -41,13 +41,15 @@ $color-secondary-2-1: #A8A8A8;
 $color-secondary-2-2: #828282;
 $color-secondary-2-3: #343434;
 /*$color-secondary-2-4: #030303;*/
-$color-secondary-2-4: #313131;
+$color-secondary-2-4: #656660;
 
 $color-complement-0: #5E5E5E;	
 $color-complement-1: #A7A8A7;
 $color-complement-2: #818181;
 $color-complement-3: #343434;
 $color-complement-4: #030303;
+
+$color-suplement-1: #435870;     
 
 // As RGBa codes */
 
@@ -75,6 +77,8 @@ $rgba-complement-0: rgba( 94, 94, 94,1);
 $rgba-complement-2: rgba(129,129,129,1);
 $rgba-complement-3: rgba( 52, 52, 52,1);
 $rgba-complement-4: rgba(  3,  3,  3,1);
+
+$rgba-suplement-1: rgba(67, 88, 112,0.8);
 
 /* COLOR VARIABLES GRADIENT
 ============================================= */
@@ -379,5 +383,71 @@ ion-navbar.toolbar{
 }
 
 .fab-md-dark{
-  background: $color-primary-4;
+  background: $color-suplement-1;
+}
+
+// ----------- Loading
+.wrapper-loading{
+  justify-content: center;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.loading{
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 10px solid $color-primary-3; //#e74c3c
+  position: relative;
+  animation: a1 2s linear infinite;
+}
+
+.loading::before, .loading::after{
+  content: '';
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 0;
+  top:-10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.loading::before{
+  border-top: 10px solid $color-primary-2; //#e67e22
+  transform: rotate(120deg);
+}
+
+.loading::after{
+  border-top: 10px solid $color-primary-1; //#3498db
+  transform: rotate(240deg);
+}
+
+.loading span{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  color: #fff;
+  text-align: center;
+  line-height: 200px;
+  animation: a2 2s linear infinite;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+@keyframes a1 {
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes a2 {
+  to{
+    transform: rotate(-360deg);
+  }
 }

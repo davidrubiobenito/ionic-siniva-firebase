@@ -22,7 +22,7 @@ export class AllProductPage {
   public showButtonCalculate: boolean;
 
   public disabledButtonCalculate: boolean = false;
-  public showFieldsFinal: boolean = false;
+  public showFieldsFinal: boolean;
 
   public showButtonsEditClearFields: boolean;
   public showButtonsDeleteAndUpdate: boolean;
@@ -71,25 +71,29 @@ export class AllProductPage {
 
   addProduct(product: Product){
     this.productListService.addProductToUserUid(product, this.auth.getUserUid()).then(ref => {
-      this.navCtrl.setRoot(ListProductPage);
+      //this.navCtrl.setRoot(ListProductPage);
+      this.navCtrl.popTo(ListProductPage);
     });
   }
 
   updateProduct(product: Product){    
     this.productListService.updateProductToUserUid(product, this.auth.getUserUid()).then(() =>{
-      this.navCtrl.setRoot(ListProductPage);
+      //this.navCtrl.setRoot(ListProductPage);
+      this.navCtrl.popTo(ListProductPage);
     });
   }
 
 
   removeProduct(product: Product) {
     this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
-      this.navCtrl.setRoot(ListProductPage);
+      //this.navCtrl.setRoot(ListProductPage);
+      this.navCtrl.popTo(ListProductPage);
     });
   }
 
   back(){
-    this.navCtrl.setRoot(ListProductPage);
+    //this.navCtrl.setRoot(ListProductPage);
+    this.navCtrl.popTo(ListProductPage);
   }
 
   calculatePrice(){
@@ -107,10 +111,11 @@ export class AllProductPage {
     // Guardamos el producto temporal
     this.productTemp = this.product;
 
-    this.showFieldsFinal = true;
+    //this.showFieldsFinal = true;
     this.disableInputs();
     this.disabledButtonCalculate = true;
-    this.showButtonsEditClearFields = true; 
+    this.showButtonsFotterByActionAndPressButton(this.action, true);
+    //this.showButtonsEditClearFields = true; 
   }
 
   disableInputs(){
@@ -138,7 +143,7 @@ export class AllProductPage {
   }
 
   eraseFields(){
-
+    // TODO
   }
 
   roundTwoDecimals(num: any): number{
@@ -197,8 +202,55 @@ export class AllProductPage {
   setBackButtonAction(){
     this.navBar.backButtonClick = () => {
       //Write here wherever you wanna do
-      this.navCtrl.setRoot(ListProductPage);
+      //this.navCtrl.setRoot(ListProductPage);
+      this.navCtrl.popTo(ListProductPage);
     }
+  }
+
+  showButtonsFotterByActionAndPressButton(action: String, pressButtonCalculate: boolean){
+      switch (action) {
+        case 'view':
+          this.disableInputs();  //this.onlyRead = true;
+            this.showButtonCalculate = false;
+          this.showFieldsFinal = true;
+            this.showButtonsEditClearFields = false; 
+            this.showButtonsDeleteAndUpdate = false;
+            this.showButtonAdd=false;
+          this.showButtonAccept = true;
+          break;
+        case 'edit':
+          if(pressButtonCalculate){
+            this.disableInputs(); 
+          }
+          else{
+            this.enableInputs(); 
+          }             
+            this.showButtonCalculate = true;
+          this.showFieldsFinal = pressButtonCalculate;
+          this.showButtonsEditClearFields = pressButtonCalculate;  
+          this.showButtonsDeleteAndUpdate = pressButtonCalculate;
+          this.showButtonAdd=false;
+          this.showButtonAccept = false;
+          break;
+        case 'add': 
+          if(pressButtonCalculate){
+            this.disableInputs(); 
+          }
+          else{
+            this.enableInputs(); 
+          }        
+            this.showButtonCalculate = true;
+          this.showFieldsFinal = pressButtonCalculate;
+          this.showButtonsEditClearFields = pressButtonCalculate; 
+          this.showButtonsDeleteAndUpdate = false;
+          this.showButtonAdd=pressButtonCalculate;
+          this.showButtonAccept = false;
+          break;
+      
+        default:
+          break;
+      }
+   
   }
 
   /*************** */
@@ -206,29 +258,31 @@ export class AllProductPage {
     this.action = this.navParams.get('action');
     console.log( this.action);
     if(undefined != this.action && '' != this.action ){
+      this.showButtonsFotterByActionAndPressButton(this.action, false);
+      /*
       switch (this.action) {
         case 'view':
-          this.onlyRead = true;
+          this.disableInputs();  //this.onlyRead = true;
           this.showButtonCalculate = false;
-          this.showFieldsFinal = true;      
+          //this.showFieldsFinal = true;      
           this.showButtonsEditClearFields = false; 
           this.showButtonsDeleteAndUpdate = false;
           this.showButtonAccept = true;
           this.showButtonAdd=false;
           break;
         case 'edit':
-          this.onlyRead = false;
-          this.showButtonCalculate = true;
-          this.showFieldsFinal = false;  
+          this.enableInputs(); //this.onlyRead = true;
+          this.showButtonCalculate = true; 
+          //this.showFieldsFinal = false;  
           this.showButtonsEditClearFields = false;  
           this.showButtonsDeleteAndUpdate = true;
           this.showButtonAccept = false;
           this.showButtonAdd=false;
           break;
         case 'add':
-          this.onlyRead = false;
+          this.enableInputs(); //this.onlyRead = true;
           this.showButtonCalculate = true;
-          this.showFieldsFinal = false;   
+          //this.showFieldsFinal = false;   
           this.showButtonsEditClearFields = false;   
           this.showButtonsDeleteAndUpdate = false;
           this.showButtonAccept = false;
@@ -238,6 +292,7 @@ export class AllProductPage {
         default:
           break;
       }
+      */
 
       if(this.action == 'edit' || this.action == 'view'){
         this.product = this.navParams.get('product');
