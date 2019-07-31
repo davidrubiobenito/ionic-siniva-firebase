@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { NavController, NavParams, Navbar } from 'ionic-angular';
+import { NavController, NavParams, Navbar, AlertController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Product } from '../../../model/product/product.model';
@@ -8,7 +8,8 @@ import { AuthService } from '../../../services/auth.service';
 
 import { ListProductPage } from '../list-product/list-product';
 
-import { VALIDATION_MESSAGES } from '../../../app/form';
+import { VALIDATION_MESSAGES } from '../../../validators/form';
+import { ProductFieldsValidator } from '../../../validators/productfields';
 
 @Component({
   selector: 'page-all-product',
@@ -55,16 +56,22 @@ export class AllProductPage {
                       public navParams: NavParams, 
                       private productListService: ProductListService, 
                       private auth: AuthService,
-                      private fb: FormBuilder) {   
+                      private fb: FormBuilder,
+                      public alertCtrl: AlertController,
+                      public toastCtrl: ToastController) {   
     
     this.validationMessages = VALIDATION_MESSAGES;   
 
     this.addProductForm = this.fb.group({
       nameproduct:['', Validators.compose([Validators.required])],
-      units:['', Validators.compose([Validators.required,  Validators.pattern("^[1-9][0-9]*$"), Validators.min(0) ])],
-      price:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))(\.[0-9]{1,2})?$)|(^(0{0,1}|([1-9][0-9]*))(\.[0-9]{1,2})?$)"), Validators.min(0) ])],
+        //units:['', Validators.compose([Validators.required,  Validators.pattern("^[1-9][0-9]*$"), Validators.min(0) ])],
+      units:['', Validators.compose([Validators.required,  ProductFieldsValidator.isValidUnits, Validators.min(0) ])],
+        //price:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))(\.[0-9]{1,2})?$)|(^(0{0,1}|([1-9][0-9]*))(\.[0-9]{1,2})?$)"), Validators.min(0) ])],
+      price:['', Validators.compose([Validators.required,  ProductFieldsValidator.isValidPrice, Validators.min(0) ])],        
+      //esta opción es de prueba
       //price:['', Validators.compose([Validators.required,  Validators.pattern("^(?!^0\.00$)(([1-9][0-9]*)|([0]))\.[0-9]{1,2}$"), Validators.min(0) ])],
-      tax:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))?$)"), Validators.min(0), Validators.max(100) ])]
+        //tax:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))?$)"), Validators.min(0), Validators.max(100) ])]
+      tax:['', Validators.compose([Validators.required, ProductFieldsValidator.isValidTax, Validators.min(0), Validators.max(100) ])]
     });
 
   }
@@ -85,10 +92,12 @@ export class AllProductPage {
 
 
   removeProduct(product: Product) {
+    this.showPromptDelete(product);
+    /*
     this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
-      //this.navCtrl.setRoot(ListProductPage);
       this.navCtrl.popTo(ListProductPage);
     });
+    */
   }
 
   back(){
@@ -160,6 +169,7 @@ export class AllProductPage {
     return true;
   }
   
+  /*
   onlyNumberWeb(evt:any){
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -183,10 +193,8 @@ export class AllProductPage {
       return false;
     }
     return true;
-  }
-  
-
-  /*
+  } 
+ 
   onlyNumber(event:any) {
     //48 - 57
     let pass = /[4][8-9]{1}/.test(event.charCode) || /[5][0-7]{1}/.test(event.charCode);
@@ -196,10 +204,52 @@ export class AllProductPage {
   }
   */
 
-   
+  showPromptDelete(product : Product) {
+    const prompt = this.alertCtrl.create({
+      title: '¿Borrar Producto?',
+      message: "Producto <span class='text-prin' >' " + product.name + " '</span>",      
+      buttons: [        
+        {
+          text: 'Borrar',
+          handler: data => {
+            //console.log('Saved clicked');
+            this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
+              //this.navCtrl.setRoot(ListProductPage);
+              this.presentToast('Producto borrado', 3000, 'bottom');
+              this.navCtrl.popTo(ListProductPage);
+            });  
+          },
+          cssClass: 'button-secundary'
+        },
+        {
+          text: 'Cancelar',
+          handler: data => {
+            //console.log('Cancel clicked');
+          },
+          cssClass: 'button-primary'
+        },
+      ]
+    });
+    prompt.present();
+  }
+
+  presentToast(message: string, duration: number, position: string) {
+      let toast = this.toastCtrl.create({ 
+        message: message,
+        duration: duration,
+        position: position,
+        dismissOnPageChange: true,
+        cssClass: 'toast'
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+    toast.present();
+  };   
 
   //Method to override the default back button action
-  setBackButtonAction(){
+  setBackButtonAction():void{
     this.navBar.backButtonClick = () => {
       //Write here wherever you wanna do
       //this.navCtrl.setRoot(ListProductPage);
@@ -254,7 +304,7 @@ export class AllProductPage {
   }
 
   /*************** */
-  ionViewDidLoad(){
+  ionViewDidLoad() : void{
     this.action = this.navParams.get('action');
     console.log( this.action);
     if(undefined != this.action && '' != this.action ){
@@ -301,7 +351,7 @@ export class AllProductPage {
     
     this.setBackButtonAction();
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() : void{
     //console.log('ionViewWillEnter LoginPage');
   }
 

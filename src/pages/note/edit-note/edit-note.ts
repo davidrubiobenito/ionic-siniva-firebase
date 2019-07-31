@@ -58,12 +58,12 @@ export class EditNotePage {
   }
 
   /*************** */
-  ionViewDidLoad(){
+  ionViewDidLoad(): void{
     this.note = this.navParams.get('note');
     this.isEdit = this.navParams.get('isEdit');
     this.setBackButtonAction();
   }
-  ionViewWillEnter(){
+  ionViewWillEnter(): void{
     //console.log('ionViewWillEnter LoginPage');
   }
 

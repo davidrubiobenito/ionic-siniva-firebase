@@ -8,7 +8,8 @@ import { AuthService } from '../../../services/auth.service';
 
 import { ListProductPage } from '../list-product/list-product';
 
-import { VALIDATION_MESSAGES } from '../../../app/form';
+import { VALIDATION_MESSAGES } from '../../../validators/form';
+import { ProductFieldsValidator } from '../../../validators/productfields';
 
 @Component({
   selector: 'page-edit-product',
@@ -53,10 +54,14 @@ export class EditProductPage {
 
     this.addProductForm = this.fb.group({
       nameproduct:['', Validators.compose([Validators.required])],
-      units:['', Validators.compose([Validators.required,  Validators.pattern("^[1-9][0-9]*$"), Validators.min(0) ])],
-      price:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))(\.[0-9]{1,2})?$)|(^(0{0,1}|([1-9][0-9]*))(\.[0-9]{1,2})?$)"), Validators.min(0) ])],
+        //units:['', Validators.compose([Validators.required,  Validators.pattern("^[1-9][0-9]*$"), Validators.min(0) ])],
+      units:['', Validators.compose([Validators.required,  ProductFieldsValidator.isValidUnits, Validators.min(0) ])],
+        //price:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))(\.[0-9]{1,2})?$)|(^(0{0,1}|([1-9][0-9]*))(\.[0-9]{1,2})?$)"), Validators.min(0) ])],
+      price:['', Validators.compose([Validators.required,  ProductFieldsValidator.isValidPrice, Validators.min(0) ])],        
+      //esta opción es de prueba
       //price:['', Validators.compose([Validators.required,  Validators.pattern("^(?!^0\.00$)(([1-9][0-9]*)|([0]))\.[0-9]{1,2}$"), Validators.min(0) ])],
-      tax:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))?$)"), Validators.min(0), Validators.max(100) ])]
+        //tax:['', Validators.compose([Validators.required,  Validators.pattern("(^(0|([1-9][0-9]*))?$)"), Validators.min(0), Validators.max(100) ])]
+      tax:['', Validators.compose([Validators.required, ProductFieldsValidator.isValidTax, Validators.min(0), Validators.max(100) ])]
     });
   }
 
@@ -162,12 +167,12 @@ export class EditProductPage {
   }
 
   /*************** */
-  ionViewDidLoad(){
+  ionViewDidLoad() : void{
     this.product = this.navParams.get('product');
     this.isEdit = this.navParams.get('isEdit');
     this.setBackButtonAction();
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() : void{
     //console.log('ionViewWillEnter LoginPage');
   }
 

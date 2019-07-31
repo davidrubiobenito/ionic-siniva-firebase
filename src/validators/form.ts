@@ -10,6 +10,11 @@ export const VALIDATION_MESSAGES = {
       { type: 'minlength', message: 'Contraseña debe tener al menos de 5 caracteres de longitud.' },
       { type: 'maxlength', message: 'Contraseña no puede tener mas de 10 caracteres de longitud.' }
     ],
+    'confirmpassword' : [
+      { type: 'required', message: 'Campo contraseña es obligatorio' },
+      { type: 'minlength', message: 'Contraseña debe tener al menos de 5 caracteres de longitud.' },
+      { type: 'maxlength', message: 'Contraseña no puede tener mas de 10 caracteres de longitud.' }
+    ],
     'nameproduct' : [
       { type: 'required', message: 'Campo nombre es obligatorio' }
     ],

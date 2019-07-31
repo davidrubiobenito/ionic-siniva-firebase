@@ -4,7 +4,7 @@ import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
-import { VALIDATION_MESSAGES } from '../../app/form';
+import { VALIDATION_MESSAGES } from '../../validators/form';
 
 /* Pages */
 import { HomePage } from '../home/home';
@@ -58,11 +58,11 @@ export class SignupPage {
   }
 
   /*
-  private ionViewDidLoad(){
+  private ionViewDidLoad():void{
     console.log('ionViewDidLoad SignupPage');
   }
 
-  private ionViewWillEnter(){
+  private ionViewWillEnter():void{
     console.log('ionViewWillEnter SignupPage');
   }
   */

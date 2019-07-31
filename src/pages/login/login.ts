@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
-import { VALIDATION_MESSAGES } from '../../app/form';
+import { VALIDATION_MESSAGES } from '../../validators/form';
+import { EmailValidator } from '../../validators/email';
 
 /* Pages */
 import { HomePage } from '../home/home';
@@ -19,6 +20,7 @@ export class LoginPage {
   //private goHomePage: any;
 
   public loginForm: FormGroup;
+  public signUpForm: FormGroup;
   public loginError: string;
   public validationMessages: any;
 
@@ -26,22 +28,33 @@ export class LoginPage {
   
   public constructor( public navCtrl: NavController, 
                       private auth: AuthService, 
-                      private fb: FormBuilder) {
+                      private fb: FormBuilder,
+                      public alertCtrl: AlertController) {
                         
     this.auth.signOut();
     this.validationMessages = VALIDATION_MESSAGES;  
 
     this.loginForm = this.fb.group({
-      email:['', Validators.compose([Validators.required,  Validators.pattern('^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$')])],
+      //email:['', Validators.compose([Validators.required,  Validators.pattern('^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$')])],
+      email:['', Validators.compose([Validators.required,  EmailValidator.isValid])],
       password:['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(11)])]
     });
+
+    this.signUpForm = this.fb.group({
+      //email:['', Validators.compose([Validators.required,  Validators.pattern('^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$')])],
+      email:['', Validators.compose([Validators.required,  EmailValidator.isValid])],
+      password:['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(11)])],
+      confirmpassword:['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(11)])]
+    });
+
   }
 
   logIn(){
-
     let data = this.loginForm.value;
 
-    if(!data.email || !data.password){
+    if(!data.email.trim() || !data.password.trim()){
+      const message_info: string= "Por favor, rellene los campos <span class='text-prin'> Email, Contraseña </span> correctamente.";
+      this.showPromptInfo(message_info);
       return;
     }
 
@@ -49,20 +62,27 @@ export class LoginPage {
       email: data.email, 
       password: data.password 
     };
-  
+      
     this.auth.signInWithEmail(credentials).then( 
-      () => this.navCtrl.push(HomePage),
-      error => this.loginError = error.message
+      () => {this.navCtrl.setRoot(HomePage); },
+      (error) => { this.loginError = error.message}
     );
-
   }
 
  
   signUp(){
+    let data = this.signUpForm.value;
+    console.log(data);
 
-    let data = this.loginForm.value;
+    if(!data.email.trim() || !data.password.trim() || !data.confirmpassword.trim()){
+      const message_info_fields: string= "Por favor, rellene los campos <span class='text-prin'> Email, Contraseña y Confirmación Contraseña </span> correctamente.";
+      this.showPromptInfo(message_info_fields);
+      return;
+    }
 
-    if(!data.email){
+    if(data.password.trim() != data.confirmpassword.trim()){
+      const message_passwords_fields: string= "Por favor, rellene los campos <span class='text-prin'> Contraseña y Confirmación Contraseña </span> correctamente.";
+      this.showPromptInfo(message_passwords_fields);
       return;
     }
 
@@ -72,10 +92,9 @@ export class LoginPage {
     };
   
     this.auth.signUp(credentials).then( 
-      () => this.navCtrl.setRoot(HomePage),
-      error => this.loginError = error.message
+      () => {this.navCtrl.setRoot(HomePage); },
+      (error) => { this.loginError = error.message}
     );
-
   }
 
   pulsadoBotonHeader(boton: number){
@@ -88,6 +107,23 @@ export class LoginPage {
         this.isVisibleFormEntrar = false;
         break;    
     }
+  }
+
+  showPromptInfo(messageInfo: string) {
+    const prompt = this.alertCtrl.create({
+      title: 'Información',
+      message: messageInfo,      
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: data => {
+            //console.log('Aceptar clicked');
+          },
+          cssClass: 'button-primary'
+        },
+      ]
+    });
+    prompt.present();
   }
 
   /*

@@ -8,7 +8,7 @@ import { AuthService } from '../../../services/auth.service';
 
 import { ListProductPage } from '../list-product/list-product';
 
-import { VALIDATION_MESSAGES } from '../../../app/form';
+import { VALIDATION_MESSAGES } from '../../../validators/form';
 
 @Component({
   selector: 'page-add-product',
@@ -140,6 +140,7 @@ export class AddProductPage {
     return true;
   }
   
+  /*
   onlyNumberWeb(evt:any){
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -165,8 +166,6 @@ export class AddProductPage {
     return true;
   }
   
-
-  /*
   onlyNumber(event:any) {
     //48 - 57
     let pass = /[4][8-9]{1}/.test(event.charCode) || /[5][0-7]{1}/.test(event.charCode);
@@ -187,11 +186,11 @@ export class AddProductPage {
   }
 
   /*************** */
-  ionViewDidLoad(){
+  ionViewDidLoad(): void{
     // console.log('ionViewDidLoad AddProductPage');
     this.setBackButtonAction();
   }
-  ionViewWillEnter(){
+  ionViewWillEnter(): void{
     //console.log('ionViewWillEnter LoginPage');
   }
 

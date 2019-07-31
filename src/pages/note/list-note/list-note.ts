@@ -1,20 +1,17 @@
-import { Component } from '@angular/core';
-import { NavController, MenuController, AlertController, Platform  } from 'ionic-angular';
+import { Component, ViewChild} from '@angular/core';
+import { NavController, MenuController, Navbar, AlertController, Platform, ActionSheetController, ToastController  } from 'ionic-angular';
 //import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
 //import { Toast } from '@ionic-native/toast';
 
 import { Observable } from 'rxjs';
 //import { map, filter, switchMap } from 'rxjs/operators';
 
-import { ActionSheetController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
-
 import { AuthService } from '../../../services/auth.service';
 import { NoteListService } from '../../../services/note-list.service';
 
 /* Pages */
 //import { LoginPage } from '../../login/login';
-//import { HomePage } from '../../home/home';
+import { HomePage } from '../../home/home';
 import { AddNotePage } from '../../note/add-note/add-note';
 import { EditNotePage } from '../../note/edit-note/edit-note';
 
@@ -24,7 +21,8 @@ import { Note } from '../../../model/note/note.model';
   selector: 'page-list-note',
   templateUrl: 'list-note.html'
 })
-export class ListNotePage {
+export class ListNotePage {  
+  @ViewChild(Navbar) navBar: Navbar;
 
   public pages: Array<{icon: string, title: string, component: any}>;
   public addNotePage: any;
@@ -32,6 +30,8 @@ export class ListNotePage {
   public noteList: Observable<Note[]>;  
 
   public showLoading: boolean;
+
+  public noteListServiceSubscribe;
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
@@ -250,26 +250,39 @@ export class ListNotePage {
   }
   */
 
+  //Method to override the default back button action
+  setBackButtonAction():void{
+    this.navBar.backButtonClick = () => {
+      //Write here wherever you wanna do
+      this.noteListServiceSubscribe.unsubscribe();
+      this.navCtrl.setRoot(HomePage);
+    }
+  }
+
   /************** */
-  ionViewDidLoad(){
-    //console.log('ionViewDidLoad LoginPage');     
+  ionViewDidLoad(): void{
+    console.log('ionViewDidLoad NoteListPage');     
     this.showLoading=true;       
-    this.noteListService.getNoteListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
+    this.noteListServiceSubscribe = this.noteListService.getNoteListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
         this.showLoading=false;
         this.noteList = this.processData(result);
       },
       (err) => {
         console.log('error get notes', err);
+        this.showLoading=false;
       },
       () => {
         console.log("completed");
+        this.showLoading=false;
       }
     );  
+
+    this.setBackButtonAction();
     
   }
 
-  ionViewDidEnter() {
+  ionViewDidEnter(): void {
     this.menuCtrl.enable(true, 'filtersnote');
   }
 

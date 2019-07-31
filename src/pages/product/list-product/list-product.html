@@ -82,10 +82,10 @@
         <ion-col col-3 text-center class="text-cont price">          
           {{ product.units }}
         </ion-col>
-        <ion-col col-3 class="text-label">
+        <ion-col col-2 class="text-label">
             Precio:
         </ion-col>
-        <ion-col col-3 text-right class="text-cont price">            
+        <ion-col col-4 text-right class="text-cont price">            
           {{ product.price | currency: "EUR":2 }}
         </ion-col>
       </ion-row>
@@ -96,10 +96,10 @@
         <ion-col col-3 text-right class="text-subtotal price">         
           {{ product.priceFinal | currency: "EUR":2 }} 
         </ion-col>
-        <ion-col col-3 class="text-total">
+        <ion-col col-2 class="text-total">
             Total:
-          </ion-col>
-          <ion-col col-3 text-right class="text-total price">       
+        </ion-col>
+        <ion-col col-4 text-right class="text-total price">       
             {{ product.amountFinal | currency: "EUR":2}} 
         </ion-col>
       </ion-row>

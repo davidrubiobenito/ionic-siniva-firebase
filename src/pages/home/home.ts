@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController, AlertController, Platform  } from 'ionic-angular';
+import { NavController, MenuController, AlertController, Platform, App  } from 'ionic-angular';
 //import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
 //import { Toast } from '@ionic-native/toast';
 
@@ -20,8 +20,10 @@ import { ListNotePage } from '../note/list-note/list-note';
 export class HomePage {
 
   public pages: Array<{icon: string, title: string, component: any}>;
+  /*
   public listProductPage: any;
   public listNotePage: any;
+  */
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
@@ -31,10 +33,12 @@ export class HomePage {
                       public platform : Platform,
                       public auth: AuthService,
                       public actionSheetCtrl: ActionSheetController,
-                      public toastCtrl: ToastController) {
+                      public toastCtrl: ToastController,
+                      public app: App) {
     
    
     // used for an example of ngFor and navigation
+    /*
     this.pages = [
       { icon: 'trending-up', title: 'Lista Producto', component: ListProductPage },
       { icon: 'create', title: 'Lista Notas', component: ListNotePage }
@@ -43,6 +47,7 @@ export class HomePage {
     // Push Page
     this.listProductPage = ListProductPage;
     this.listNotePage = ListNotePage;
+    */
   }
 
   /*
@@ -55,15 +60,20 @@ export class HomePage {
   */
 
   login() {
-    this.menuCtrl.close();
+    //this.menuCtrl.close();
 	  this.auth.signOut();
 	  this.navCtrl.setRoot(LoginPage);
   }
 
   logout() {
-	  this.menuCtrl.close();
+    //this.menuCtrl.close();
+    /*
 	  this.auth.signOut();
-	  this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot(LoginPage);
+    */
+    this.auth.signOut().then(authData => {
+      this.navCtrl.setRoot(LoginPage);
+    })
   }
 
   /*
@@ -190,12 +200,12 @@ export class HomePage {
   }
 
   /************** */
-  ionViewDidLoad(){
+  ionViewDidLoad(): void{
     //console.log('ionViewDidLoad LoginPage');            
   }
 
-  ionViewDidEnter() {
-    this.menuCtrl.enable(true, 'filtersmenu');
+  ionViewDidEnter(): void{
+    //this.menuCtrl.enable(true, 'filtersmenu');
   }
 
 }

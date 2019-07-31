@@ -1,18 +1,15 @@
-import { Component } from '@angular/core';
-import { NavController, MenuController, AlertController, Platform  } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, MenuController, Navbar, AlertController, Platform, ActionSheetController, ToastController } from 'ionic-angular';
 
 import { Observable } from 'rxjs';
 //import { map, filter, switchMap } from 'rxjs/operators';
-
-import { ActionSheetController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
 
 import { ProductListService } from '../../../services/product-list.service';
 import { AuthService } from '../../../services/auth.service';
 
 /* Pages */
 //import { LoginPage } from '../../login/login';
-//import { HomePage } from '../../home/home';
+import { HomePage } from '../../home/home';
 import { AddProductPage } from '../../product/add-product/add-product';
 import { EditProductPage } from '../../product/edit-product/edit-product';
 import { AllProductPage } from '../../product/all-product/all-product';
@@ -24,6 +21,7 @@ import { Product } from './../../../model/product/product.model';
   templateUrl: 'list-product.html'
 })
 export class ListProductPage {
+  @ViewChild(Navbar) navBar: Navbar;
 
   public pages: Array<{icon: string, title: string, component: any}>;
   public addProductPage: any;
@@ -34,6 +32,8 @@ export class ListProductPage {
   public totalAmountFinalList: number = 0;
 
   public showLoading: boolean;
+
+  public productListServiceSubscribe;
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
@@ -216,28 +216,41 @@ export class ListProductPage {
   }
   */
 
+  //Method to override the default back button action
+  setBackButtonAction():void{
+    this.navBar.backButtonClick = () => {
+      //Write here wherever you wanna do
+      this.productListServiceSubscribe.unsubscribe();
+      this.navCtrl.setRoot(HomePage);
+    }
+  }
+
   /************** */
-  ionViewDidLoad(){
+  ionViewDidLoad(): void{
+    console.log('ionViewDidLoad ListProductPage');        
     this.showLoading=true;
-    //console.log('ionViewDidLoad LoginPage');        
-    this.productListService.getProductListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
+    this.productListServiceSubscribe = this.productListService.getProductListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
         this.showLoading=false;
         this.productList = this.processData(result);
-        this.totalAmountFinalListProduct(this.productList);
+        this.totalAmountFinalListProduct(this.productList);        
       },
       (err) => {
         console.log('problema', err);
+        this.showLoading=false;
       },
       () => {
         console.log("completed");
+        this.showLoading=false;
       }
     );  
+
+    this.setBackButtonAction();
     
   }
 
-  ionViewDidEnter() {
-    this.menuCtrl.enable(true, 'filtersproduct');
+  ionViewDidEnter() : void{
+    this.menuCtrl.enable(true, 'filtersproduct');    
   }
 
 }

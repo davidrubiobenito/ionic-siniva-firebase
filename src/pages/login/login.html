@@ -112,7 +112,7 @@
           </form>
 
           <!-- Formulario registro -->
-          <form (ngSubmit)="signUp()" [formGroup]="loginForm" *ngIf="!isVisibleFormEntrar">
+          <form (ngSubmit)="signUp()" [formGroup]="signUpForm" *ngIf="!isVisibleFormEntrar">
               <ion-list inset>
       
                 <ion-item>
@@ -122,7 +122,7 @@
       
                 <div>
                   <ng-container *ngFor="let validation of validationMessages.email" >         
-                    <div class="message-error" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                    <div class="message-error" *ngIf="signUpForm.get('email').hasError(validation.type) && (signUpForm.get('email').dirty || signUpForm.get('email').touched)">
                       {{ validation.message }}
                     </div>
                   </ng-container>
@@ -135,7 +135,20 @@
       
                 <div>
                   <ng-container *ngFor="let validation of validationMessages.password" >         
-                    <div class="message-error" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                    <div class="message-error" *ngIf="signUpForm.get('password').hasError(validation.type) && (signUpForm.get('password').dirty || signUpForm.get('password').touched)">
+                      {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+
+                <ion-item>
+                  <ion-label floating>Confirmación Contraseña</ion-label>
+                  <ion-input type="password" formControlName="confirmpassword" maxlength="10"></ion-input>
+                </ion-item>
+      
+                <div>
+                  <ng-container *ngFor="let validation of validationMessages.confirmpassword" >         
+                    <div class="message-error" *ngIf="signUpForm.get('confirmpassword').hasError(validation.type) && (signUpForm.get('confirmpassword').dirty || signUpForm.get('confirmpassword').touched)">
                       {{ validation.message }}
                     </div>
                   </ng-container>
@@ -145,7 +158,7 @@
       
               <div padding-horizontal>
                 <div class="form-error">{{ loginError }}</div>
-                <button ion-button icon-left full type="submit" [disabled]="!loginForm.valid" class="button-secundary">
+                <button ion-button icon-left full type="submit" [disabled]="!signUpForm.valid" class="button-secundary">
                   <ion-icon name="person-add"></ion-icon>
                   Aceptar
                 </button>

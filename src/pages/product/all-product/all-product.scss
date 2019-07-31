@@ -49,12 +49,24 @@ page-all-product {
         -webkit-justify-content: space-around;
         -ms-flex-pack: distribute;
         justify-content: space-around;
-        -webkit-align-content: space-around;
-        -ms-flex-line-pack: distribute;
-        align-content: space-around;
+        -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+        align-content: center;
         -webkit-align-items: center;
         -ms-flex-align: center;
         align-items: center;
+    }
+
+    .buttons-footer button {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 0 1 100%;
+        -ms-flex: 0 1 100%;
+        flex: 0 1 100%;
+        -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+        align-self: auto;
     }
 
     .buttons-footer .bar-button-default-md:hover:not(.disable-hover), 

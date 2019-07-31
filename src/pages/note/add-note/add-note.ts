@@ -42,11 +42,11 @@ export class AddNotePage {
   }
 
   /*************** */
-  ionViewDidLoad(){
+  ionViewDidLoad(): void{
     // console.log('ionViewDidLoad AddNotePage');
     this.setBackButtonAction();
   }
-  ionViewWillEnter(){
+  ionViewWillEnter(): void{
     //console.log('ionViewWillEnter LoginPage');
   }
 
