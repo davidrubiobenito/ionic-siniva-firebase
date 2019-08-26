@@ -305,8 +305,12 @@ export class AllProductPage {
 
   /*************** */
   ionViewDidLoad() : void{
+    console.log('ionViewDidLoad AllProductPage'); 
+  }
+
+  ionViewWillEnter() : void{
     this.action = this.navParams.get('action');
-    console.log( this.action);
+    console.log('ionViewWillEnter AllProductPage, ', this.action);
     if(undefined != this.action && '' != this.action ){
       this.showButtonsFotterByActionAndPressButton(this.action, false);
       /*
@@ -350,9 +354,6 @@ export class AllProductPage {
     }
     
     this.setBackButtonAction();
-  }
-  ionViewWillEnter() : void{
-    //console.log('ionViewWillEnter LoginPage');
   }
 
 }

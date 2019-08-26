@@ -227,7 +227,11 @@ export class ListProductPage {
 
   /************** */
   ionViewDidLoad(): void{
-    console.log('ionViewDidLoad ListProductPage');        
+    console.log('ionViewDidLoad ListProductPage');    
+  }
+
+  ionViewWillEnter() : void {
+    console.log("ionViewWillEnter ListProductPage");
     this.showLoading=true;
     this.productListServiceSubscribe = this.productListService.getProductListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
@@ -243,13 +247,13 @@ export class ListProductPage {
         console.log("completed");
         this.showLoading=false;
       }
-    );  
+    ); 
 
     this.setBackButtonAction();
-    
   }
 
   ionViewDidEnter() : void{
+    console.log('ionViewDidEnter ListProductPage');   
     this.menuCtrl.enable(true, 'filtersproduct');    
   }
 

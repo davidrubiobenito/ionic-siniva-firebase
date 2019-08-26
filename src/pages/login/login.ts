@@ -135,14 +135,17 @@ export class LoginPage {
   }
   */
 
-  /*
-  private ionViewDidLoad(){
+  /***************/
+  ionViewDidLoad(): void{
     console.log('ionViewDidLoad LoginPage');
   }
 
-  private ionViewWillEnter(){
+  ionViewWillEnter() :void{
     console.log('ionViewWillEnter LoginPage');
   }
-  */
 
+  ionViewDidEnter(): void{
+    console.log('ionViewDidEnter LoginPage');    
+  }
+  
 }

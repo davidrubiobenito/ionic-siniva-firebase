@@ -261,7 +261,11 @@ export class ListNotePage {
 
   /************** */
   ionViewDidLoad(): void{
-    console.log('ionViewDidLoad NoteListPage');     
+    console.log('ionViewDidLoad NoteListPage');         
+  }
+
+  ionViewWillEnter() : void {
+    console.log("ionViewWillEnter NoteListPage");
     this.showLoading=true;       
     this.noteListServiceSubscribe = this.noteListService.getNoteListToUserUid(this.auth.getUserUid()).snapshotChanges().subscribe(
       (result) => {
@@ -279,10 +283,10 @@ export class ListNotePage {
     );  
 
     this.setBackButtonAction();
-    
   }
 
   ionViewDidEnter(): void {
+    console.log("ionViewDidEnter NoteListPage");
     this.menuCtrl.enable(true, 'filtersnote');
   }
 

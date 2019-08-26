@@ -57,14 +57,17 @@ export class SignupPage {
 
   }
 
-  /*
-  private ionViewDidLoad():void{
+  ionViewDidLoad():void{
     console.log('ionViewDidLoad SignupPage');
   }
 
-  private ionViewWillEnter():void{
+  ionViewWillEnter():void{
     console.log('ionViewWillEnter SignupPage');
   }
-  */
+
+  ionViewDidEnter(): void{
+    console.log('ionViewDidEnter SignupPage');    
+  }
+  
 
 }

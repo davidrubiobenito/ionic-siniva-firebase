@@ -13,8 +13,8 @@ page-list-product {
     border: 1px solid $color-secondary-2-2;
   }
 
-  .scroll-content{
-    padding-bottom: 75px;
+  .scroll-content ion-card:last-child{
+    margin-bottom: 75px;
   }    
 
   .text-cont{

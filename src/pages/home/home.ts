@@ -201,10 +201,15 @@ export class HomePage {
 
   /************** */
   ionViewDidLoad(): void{
-    //console.log('ionViewDidLoad LoginPage');            
+    console.log('ionViewDidLoad HomePage');            
+  }
+
+  ionViewWillEnter() : void {
+    console.log("ionViewWillEnter HomePage");
   }
 
   ionViewDidEnter(): void{
+    console.log('ionViewDidEnter HomePage');    
     //this.menuCtrl.enable(true, 'filtersmenu');
   }
 
