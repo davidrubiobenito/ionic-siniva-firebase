@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -29,7 +29,8 @@ export class LoginPage {
   public constructor( public navCtrl: NavController, 
                       private auth: AuthService, 
                       private fb: FormBuilder,
-                      public alertCtrl: AlertController) {
+                      public alertCtrl: AlertController,
+                      public toastCtrl: ToastController) {
                         
     this.auth.signOut();
     this.validationMessages = VALIDATION_MESSAGES;  
@@ -49,6 +50,7 @@ export class LoginPage {
 
   }
 
+   // Ingreso con email
   logIn(){
     let data = this.loginForm.value;
 
@@ -64,12 +66,24 @@ export class LoginPage {
     };
       
     this.auth.signInWithEmail(credentials).then( 
-      () => {this.navCtrl.setRoot(HomePage); },
+      () => {
+        //this.navCtrl.setRoot(HomePage); 
+        this.emailVerified();
+      },
       (error) => { this.loginError = error.message}
     );
   }
 
- 
+  emailVerified(){
+    if(this.auth.emailVerified()){
+      this.navCtrl.setRoot(HomePage); 
+    }
+    else{
+      this.presentToast('Por favor verifique su email', 3000, 'bottom');
+    }
+  }
+
+  // Registro con email
   signUp(){
     let data = this.signUpForm.value;
     console.log(data);
@@ -92,9 +106,46 @@ export class LoginPage {
     };
   
     this.auth.signUp(credentials).then( 
-      () => {this.navCtrl.setRoot(HomePage); },
+      () => {
+        //this.navCtrl.setRoot(HomePage); 
+       this.sendEmailVerification();        
+      },
       (error) => { this.loginError = error.message}
     );
+  }
+
+  sendEmailVerification(){
+    this.auth.sendEmailVerification().then(
+      () => {
+        this.presentToast('Usuario registrado. Por favor compruebe su email para su verificación', 3000, 'bottom');
+        this.signUpForm.value.email = "";
+        this.signUpForm.value.password = "";
+        this.signUpForm.value.confirmpassword = "";
+      },
+      (error) => { this.loginError = error.message}
+    )
+  }
+
+  forgotPassword(){
+    let data = this.loginForm.value;
+
+    if(!data.email.trim()){
+      const message_info: string= "Por favor, rellene el campo <span class='text-prin'> Email </span> correctamente.";
+      this.showPromptInfo(message_info);
+      return;
+    }
+
+    let credentials = { 
+      email: data.email
+    };
+
+    this.auth.sendPasswordResetEmail(credentials).then( 
+      () => {
+        this.presentToast('Contraseña enviada a su email', 3000, 'bottom');       
+      },
+      (error) => { this.loginError = error.message}
+    );
+
   }
 
   pulsadoBotonHeader(boton: number){
@@ -124,6 +175,22 @@ export class LoginPage {
       ]
     });
     prompt.present();
+  }
+
+  presentToast(message: string, duration: number, position: string) {
+    let toast = this.toastCtrl.create({ 
+      message: message,
+      duration: duration,
+      position: position,
+      dismissOnPageChange: true,
+      cssClass: 'toast'
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
   /*

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 //import AuthProvider = firebase.auth.AuthProvider;
@@ -16,21 +15,31 @@ export class AuthService {
       });
   }
 
+  // Ingreso con email
   signInWithEmail(credentials){
     console.log('Acceder con email');
     return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
   }
+  
+  // Registro con email
   signUp(credentials){
     console.log('Registrarse con email');
     return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
   }
 
+  // Finalizar sesión
   signOut(): Promise<void> {
     return this.afAuth.auth.signOut();
   }
 
+  // Obtener el estado de autenticación
   getAuthenticated(): boolean {
     return this.user !== null;
+  }
+
+  // Obtener el observador del usuario actual
+  getCurrentUser() {
+    return this.user;
   }
 
   getEmail() {
@@ -41,7 +50,28 @@ export class AuthService {
     return this.user && this.user.uid;
   }
 
+  // Verificar correo
+  sendEmailVerification(): Promise<void> {
+    return this.afAuth.auth.currentUser.sendEmailVerification();
+  }
+
+   // Verificar correo
+   emailVerified(): boolean {
+    return this.afAuth.auth.currentUser.emailVerified;
+  }
+
+  // Recuperar contraseña
+  sendPasswordResetEmail(credentials): Promise<void>{
+    return this.afAuth.auth.sendPasswordResetEmail(credentials.email);
+  }
+  
   /*
+  // Verificar correo prueba
+  onAuthStateChanged(credentials) {
+    return this.afAuth.auth.onAuthStateChanged(this.getCurrentUser);
+  }
+
+
   signInWithGoogle() {
 		console.log('Sign in with google');
 		return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());

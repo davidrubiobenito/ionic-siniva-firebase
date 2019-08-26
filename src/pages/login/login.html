@@ -108,8 +108,17 @@
               </ion-list>
               -->
 
-            </div>
+            </div>  
+
+            <div padding-horizontal style="margin-top:15px">
+              <ion-note icon-left color="secundary" (click)="forgotPassword()" style="display: block; text-align:center">
+                  <ion-icon md="md-bulb"></ion-icon>
+                  ¿Olvidaste la Contraseña?
+              </ion-note>
+            </div> 
           </form>
+
+       
 
           <!-- Formulario registro -->
           <form (ngSubmit)="signUp()" [formGroup]="signUpForm" *ngIf="!isVisibleFormEntrar">
