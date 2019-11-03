@@ -31,28 +31,23 @@ export class EditNotePage {
 
   updateNote(note: Note){    
     this.noteListService.updateNoteToUserUid(note, this.auth.getUserUid()).then(() =>{
-      //this.navCtrl.setRoot(ListNotePage);
       this.navCtrl.popTo(ListNotePage);
     });
   }
 
   removeNote(note: Note) {
     this.noteListService.removeNoteToUserUid(note, this.auth.getUserUid()).then(() => {
-      //this.navCtrl.setRoot(ListNotePage);
       this.navCtrl.popTo(ListNotePage);
     });
   }
 
   back(){
-    //this.navCtrl.setRoot(ListNotePage);
     this.navCtrl.popTo(ListNotePage);
   }
 
   //Method to override the default back button action
   setBackButtonAction(){
     this.navBar.backButtonClick = () => {
-      //Write here wherever you wanna do
-      //this.navCtrl.setRoot(ListNotePage);
       this.navCtrl.popTo(ListNotePage);
     }
   }

@@ -173,7 +173,7 @@ export class EditProductPage {
     this.setBackButtonAction();
   }
   ionViewWillEnter() : void{
-    //console.log('ionViewWillEnter LoginPage');
+    console.log('ionViewWillEnter LoginPage');
   }
 
 }

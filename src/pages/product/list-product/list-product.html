@@ -7,13 +7,6 @@
           <ion-label class="price" *ngIf="!showLoading">{{totalAmountFinalList | currency: 'EUR':2 }} </ion-label>
         </ion-chip>
     </ion-title>
-    <!--
-		<ion-buttons left>
-			<button ion-button icon-only (click)="showMenu()">
-			<ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    -->
     <ion-buttons end>
 			<button ion-button icon-only (click)="presentActionSheet()">
         <ion-icon name="more"></ion-icon>
@@ -21,44 +14,6 @@
 		</ion-buttons>
 	</ion-navbar>
 </ion-header>
-<!--
-<ion-menu [content]="contentproduct" side="left" id="filtersproduct">  
-  <ion-header>
-    <ion-toolbar color="dark">
-      <ion-title>Opciones</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="hideMenu()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-		</ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content class="background-page">     
-    <ion-list>
-      <ion-item menuClose class="item-secundary" (click)="goToHome()">
-          <ion-icon name="arrow-round-back" item-right></ion-icon>
-          Pantalla Inicio
-      </ion-item>
-      <ion-item menuClose *ngFor="let p of pages" [navPush]="p.component" class="item-secundary">
-          <ion-icon [name]="p.icon" item-right></ion-icon>
-          {{ p.title }}
-      </ion-item>
-      <ion-item-group id="group-home">
-        <ion-item-divider  class="item-secundary" *ngIf="auth.getEmail()">  {{ auth.getEmail() }} </ion-item-divider>
-        <ion-item (click)="logout()" class="button-primary" *ngIf="auth.getAuthenticated">
-          <ion-icon name="log-out" item-right></ion-icon>
-          Salir
-        </ion-item>
-        <ion-item (click)="login()" class="button-primary" *ngIf="!auth.getAuthenticated">
-          <ion-icon name="log-in" item-right></ion-icon>
-          Log in
-        </ion-item>
-      </ion-item-group>
-    </ion-list>
-  </ion-content>
-</ion-menu>
--->
 
 <ion-content #contentproduct class="background-page">    
   <ion-card  *ngFor="let product of productList">
@@ -118,35 +73,6 @@
         </ion-col>        
       </ion-row>
     </ion-grid>
-
-    <!--
-    <ion-list>   
-      <ion-item-sliding>
-        <ion-item> 
-          <ion-label [navPush]="editProductPage" [navParams]="{product:product, isEdit: false}">
-              {{ product.name }}
-          </ion-label>          
-          <button ion-button clear icon-start item-end color="secondary" [navPush]="editProductPage" [navParams]="{product:product, isEdit: true}">            
-            <ion-icon name="create"></ion-icon>
-              Editar
-          </button>          
-        </ion-item>  
-        <ion-item>
-            <ion-label>
-              Unidades: 
-              {{ product.units }}
-            </ion-label>
-        </ion-item>
-
-        <ion-item-options side="right">
-          <button ion-button outline color="danger" (click)="removeProduct(product)">
-            <ion-icon name="trash"></ion-icon>
-            Borrar
-          </button>                     
-        </ion-item-options>            
-      </ion-item-sliding>
-    </ion-list>    
-    --> 
   </ion-card> 
 
   <ion-fab end bottom>

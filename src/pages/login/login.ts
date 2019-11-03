@@ -15,10 +15,7 @@ import { HomePage } from '../home/home';
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage {
-  
-  //private goHomePage: any;
-
+export class LoginPage {  
   public loginForm: FormGroup;
   public signUpForm: FormGroup;
   public loginError: string;
@@ -53,7 +50,6 @@ export class LoginPage {
    // Ingreso con email
   logIn(){
     let data = this.loginForm.value;
-
     if(!data.email.trim() || !data.password.trim()){
       const message_info: string= "Por favor, rellene los campos <span class='text-prin'> Email, Contraseña </span> correctamente.";
       this.showPromptInfo(message_info);
@@ -107,7 +103,6 @@ export class LoginPage {
   
     this.auth.signUp(credentials).then( 
       () => {
-        //this.navCtrl.setRoot(HomePage); 
        this.sendEmailVerification();        
       },
       (error) => { this.loginError = error.message}
@@ -168,7 +163,6 @@ export class LoginPage {
         {
           text: 'Aceptar',
           handler: data => {
-            //console.log('Aceptar clicked');
           },
           cssClass: 'button-primary'
         },
@@ -187,20 +181,10 @@ export class LoginPage {
     });
 
     toast.onDidDismiss(() => {
-      //console.log('Dismissed toast');
     });
 
     toast.present();
   }
-
-  /*
-  loginWithGoogle() {
-    this.auth.signInWithGoogle().then(
-        () => this.navCtrl.setRoot(HomePage),
-        error => console.log(error.message)
-      );
-  }
-  */
 
   /***************/
   ionViewDidLoad(): void{

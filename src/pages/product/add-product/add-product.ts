@@ -187,11 +187,11 @@ export class AddProductPage {
 
   /*************** */
   ionViewDidLoad(): void{
-    // console.log('ionViewDidLoad AddProductPage');
+    console.log('ionViewDidLoad AddProductPage');
     this.setBackButtonAction();
   }
   ionViewWillEnter(): void{
-    //console.log('ionViewWillEnter LoginPage');
+    console.log('ionViewWillEnter LoginPage');
   }
 
 }

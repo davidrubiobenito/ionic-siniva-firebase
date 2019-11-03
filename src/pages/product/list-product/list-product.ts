@@ -2,13 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, MenuController, Navbar, AlertController, Platform, ActionSheetController, ToastController } from 'ionic-angular';
 
 import { Observable } from 'rxjs';
-//import { map, filter, switchMap } from 'rxjs/operators';
 
 import { ProductListService } from '../../../services/product-list.service';
 import { AuthService } from '../../../services/auth.service';
 
 /* Pages */
-//import { LoginPage } from '../../login/login';
 import { HomePage } from '../../home/home';
 import { AddProductPage } from '../../product/add-product/add-product';
 import { EditProductPage } from '../../product/edit-product/edit-product';
@@ -28,7 +26,6 @@ export class ListProductPage {
   public editProductPage: any;
   public allProductPage: any;
   public productList: Observable<Product[]>;  
-  //public productListAux: Product[];
   public totalAmountFinalList: number = 0;
 
   public showLoading: boolean;
@@ -47,7 +44,6 @@ export class ListProductPage {
    
     // used for an example of ngFor and navigation
     this.pages = [
-      //{ icon: 'add', title: 'Añadir Producto', component: AddProductPage }
       { icon: 'add', title: 'Añadir Producto', component: AllProductPage }
     ];
 
@@ -56,29 +52,6 @@ export class ListProductPage {
     this.editProductPage = EditProductPage;
     this.allProductPage = AllProductPage;
   }
-
-  /*
-  showMenu() {
-    this.menuCtrl.open('filtersproduct');
-  }
-
-  hideMenu() {
-    this.menuCtrl.close('filtersproduct');
-  }
-
-
-  login() {
-    this.menuCtrl.close();
-	  this.auth.signOut();
-	  this.navCtrl.setRoot(LoginPage);
-  }
-
-  logout() {
-	  this.menuCtrl.close();
-	  this.auth.signOut();
-	  this.navCtrl.setRoot(LoginPage);
-  }
-  */
 
   processData(input: any): Observable<Product[]>{     
     let resultAux = input.map(ch => ({key: ch.key, ...ch.payload.val()}));
@@ -109,23 +82,7 @@ export class ListProductPage {
             this.showPromptBorrarList();
           },
           role: 'destructive'
-        },
-        /*
-        {
-          text: 'Salir Aplicación',
-          icon: 'log-out',
-          handler: () => {
-            this.platform.exitApp();
-          }
-        },   
-        {
-          text: 'Creditos',
-          icon: 'information',
-          handler: () => {
-            this.presentToast('David Rubio Benito', 3000, 'bottom');
-          }
         }
-        */
       ],
       enableBackdropDismiss: true
     });
@@ -142,10 +99,8 @@ export class ListProductPage {
         {
           text: 'Borrar',
           handler: data => {
-            //console.log('Saved clicked');
             this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
               this.presentToast('Producto borrado', 3000, 'bottom');
-              //this.navCtrl.setRoot(HomePage);
             });  
           },
           cssClass: 'button-secundary'
@@ -153,7 +108,6 @@ export class ListProductPage {
         {
           text: 'Cancelar',
           handler: data => {
-            //console.log('Cancel clicked');
           },
           cssClass: 'button-primary'
         },
@@ -170,10 +124,8 @@ export class ListProductPage {
         {
           text: 'Borrar',
           handler: data => {
-            //console.log('Aceptar clicked');
             this.productListService.removeListProduct(this.auth.getUserUid()).then(() => {
               this.presentToast('Lista Borrada', 3000, 'bottom');
-              //this.navCtrl.setRoot(HomePage);
             });
           },
           cssClass: 'button-secundary'
@@ -181,7 +133,6 @@ export class ListProductPage {
         {
           text: 'Cancelar',
           handler: data => {
-            //console.log('Cancelar clicked');
           },
           cssClass: 'button-primary'
         }
@@ -200,21 +151,10 @@ export class ListProductPage {
     });
 
     toast.onDidDismiss(() => {
-      //console.log('Dismissed toast');
     });
 
     toast.present();
   }
-
-  /*
-  exitApp(){
-    this.platform.exitApp();
-  }g
-
-  goToHome(){
-    this.navCtrl.setRoot(HomePage);
-  }
-  */
 
   //Method to override the default back button action
   setBackButtonAction():void{

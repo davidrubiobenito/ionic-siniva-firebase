@@ -1,16 +1,12 @@
 import { Component, ViewChild} from '@angular/core';
 import { NavController, MenuController, Navbar, AlertController, Platform, ActionSheetController, ToastController  } from 'ionic-angular';
-//import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet'
-//import { Toast } from '@ionic-native/toast';
 
 import { Observable } from 'rxjs';
-//import { map, filter, switchMap } from 'rxjs/operators';
 
 import { AuthService } from '../../../services/auth.service';
 import { NoteListService } from '../../../services/note-list.service';
 
 /* Pages */
-//import { LoginPage } from '../../login/login';
 import { HomePage } from '../../home/home';
 import { AddNotePage } from '../../note/add-note/add-note';
 import { EditNotePage } from '../../note/edit-note/edit-note';
@@ -35,8 +31,6 @@ export class ListNotePage {
 
   public constructor( public navCtrl: NavController, 
                       public menuCtrl: MenuController, 
-                      //private actionSheet: ActionSheet,
-                      //private toast: Toast,
                       public alertCtrl: AlertController,
                       public platform : Platform,
                       public noteListService: NoteListService, 
@@ -55,29 +49,6 @@ export class ListNotePage {
     this.editNotePage = EditNotePage;
   }
 
-  /*
-  showMenu() {
-    this.menuCtrl.open('filtersnote');
-  }
-
-  hideMenu() {
-    this.menuCtrl.close('filtersnote');
-  }
-  
-
-  login() {
-    this.menuCtrl.close();
-	  this.auth.signOut();
-	  this.navCtrl.setRoot(LoginPage);
-  }
-
-  logout() {
-	  this.menuCtrl.close();
-	  this.auth.signOut();
-	  this.navCtrl.setRoot(LoginPage);
-  }
-  */
-
   processData(input: any): Observable<Note[]>{     
     let resultAux = input.map(ch => ({key: ch.key, ...ch.payload.val()}));
     return resultAux;
@@ -87,40 +58,7 @@ export class ListNotePage {
     this.showPrompt(note);       
   }
 
-  /*
   presentActionSheet() {
-    let buttonLabels = ['Salir Aplicación', 'Creditos'];
-    const options: ActionSheetOptions = {
-      title: 'Opciones ...',
-      subtitle: 'Elige una opción',
-      buttonLabels: buttonLabels,
-      addCancelButtonWithLabel: 'Cancelar',
-      addDestructiveButtonWithLabel: 'Borrar Lista Notas',
-      androidTheme: 3,
-      destructiveButtonLast: false,
-      androidEnableCancelButton: true
-    };
-
-    this.actionSheet.show(options).then((buttonIndex: number) => {
-      console.log('Button pressed: ' + buttonIndex);
-      switch(buttonIndex){
-        case 1:
-          this.showPromptBorrarList();
-        break;
-        case 2:
-          this.platform.exitApp();
-        break;
-        case 3:
-          this.presentToast('David Rubio Benito', 'short', 'bottom');
-        break;
-      }
-    });
-
-  }
-  */
-
-  presentActionSheet() {
-
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opciones ...',
       buttons: [
@@ -131,23 +69,7 @@ export class ListNotePage {
             this.showPromptBorrarList();
           },
           role: 'destructive'
-        },
-        /*
-        {
-          text: 'Salir Aplicación',
-          icon: 'log-out',
-          handler: () => {
-            this.platform.exitApp();
-          }
-        },   
-        {
-          text: 'Creditos',
-          icon: 'information',
-          handler: () => {
-            this.presentToast('David Rubio Benito', 3000, 'bottom');
-          }
         }
-        */
       ],
       enableBackdropDismiss: true
     });
@@ -163,10 +85,8 @@ export class ListNotePage {
         {
           text: 'Borrar',
           handler: data => {
-            //console.log('Saved clicked');
             this.noteListService.removeNoteToUserUid(note, this.auth.getUserUid()).then(() => {
               this.presentToast('Nota borrada', 3000, 'bottom');
-              //this.navCtrl.setRoot(HomePage);
             });  
           },
           cssClass: 'button-secundary'
@@ -174,7 +94,6 @@ export class ListNotePage {
         {
           text: 'Cancelar',
           handler: data => {
-            //console.log('Cancel clicked');
           },
           role: 'cancel',
           cssClass: 'button-primary'
@@ -193,10 +112,8 @@ export class ListNotePage {
         {
           text: 'Borrar',
           handler: data => {
-            //console.log('Aceptar clicked');
             this.noteListService.removeListNote(this.auth.getUserUid()).then(() => {
               this.presentToast('Lista Borrada', 3000, 'bottom');
-              //this.navCtrl.setRoot(HomePage);
             });
           },
           cssClass: 'button-secundary'
@@ -204,7 +121,6 @@ export class ListNotePage {
         {
           text: 'Cancelar',
           handler: data => {
-            //console.log('Cancelar clicked');
           },
           role: 'cancel',
           cssClass: 'button-primary'
@@ -214,15 +130,6 @@ export class ListNotePage {
     });
     prompt.present();
   }
-
-  /*
-  presentToast(message: string, duration: string, position: string) {
-    this.toast.show(message, duration, position).subscribe(
-      toast => {
-        console.log(toast);
-    });
-  }
-  */
 
   presentToast(message: string, duration: number, position: string) {
     let toast = this.toastCtrl.create({ 
@@ -234,26 +141,14 @@ export class ListNotePage {
     });
 
     toast.onDidDismiss(() => {
-      //console.log('Dismissed toast');
     });
 
     toast.present();
   }
 
-  /*
-  exitApp(){
-    this.platform.exitApp();
-  }
-
-  goToHome(){
-    this.navCtrl.setRoot(HomePage);
-  }
-  */
-
   //Method to override the default back button action
   setBackButtonAction():void{
     this.navBar.backButtonClick = () => {
-      //Write here wherever you wanna do
       this.noteListServiceSubscribe.unsubscribe();
       this.navCtrl.setRoot(HomePage);
     }

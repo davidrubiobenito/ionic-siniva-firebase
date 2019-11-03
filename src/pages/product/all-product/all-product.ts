@@ -78,30 +78,21 @@ export class AllProductPage {
 
   addProduct(product: Product){
     this.productListService.addProductToUserUid(product, this.auth.getUserUid()).then(ref => {
-      //this.navCtrl.setRoot(ListProductPage);
       this.navCtrl.popTo(ListProductPage);
     });
   }
 
   updateProduct(product: Product){    
     this.productListService.updateProductToUserUid(product, this.auth.getUserUid()).then(() =>{
-      //this.navCtrl.setRoot(ListProductPage);
       this.navCtrl.popTo(ListProductPage);
     });
   }
 
-
   removeProduct(product: Product) {
-    this.showPromptDelete(product);
-    /*
-    this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
-      this.navCtrl.popTo(ListProductPage);
-    });
-    */
+    this.showPromptDelete(product);   
   }
 
   back(){
-    //this.navCtrl.setRoot(ListProductPage);
     this.navCtrl.popTo(ListProductPage);
   }
 
@@ -124,7 +115,6 @@ export class AllProductPage {
     this.disableInputs();
     this.disabledButtonCalculate = true;
     this.showButtonsFotterByActionAndPressButton(this.action, true);
-    //this.showButtonsEditClearFields = true; 
   }
 
   disableInputs(){
@@ -212,9 +202,7 @@ export class AllProductPage {
         {
           text: 'Borrar',
           handler: data => {
-            //console.log('Saved clicked');
             this.productListService.removeProductToUserUid(product, this.auth.getUserUid()).then(() => {
-              //this.navCtrl.setRoot(ListProductPage);
               this.presentToast('Producto borrado', 3000, 'bottom');
               this.navCtrl.popTo(ListProductPage);
             });  
@@ -224,7 +212,6 @@ export class AllProductPage {
         {
           text: 'Cancelar',
           handler: data => {
-            //console.log('Cancel clicked');
           },
           cssClass: 'button-primary'
         },
@@ -243,7 +230,6 @@ export class AllProductPage {
     });
 
     toast.onDidDismiss(() => {
-      //console.log('Dismissed toast');
     });
     toast.present();
   };   
@@ -252,7 +238,6 @@ export class AllProductPage {
   setBackButtonAction():void{
     this.navBar.backButtonClick = () => {
       //Write here wherever you wanna do
-      //this.navCtrl.setRoot(ListProductPage);
       this.navCtrl.popTo(ListProductPage);
     }
   }
@@ -260,7 +245,7 @@ export class AllProductPage {
   showButtonsFotterByActionAndPressButton(action: String, pressButtonCalculate: boolean){
       switch (action) {
         case 'view':
-          this.disableInputs();  //this.onlyRead = true;
+          this.disableInputs();
             this.showButtonCalculate = false;
           this.showFieldsFinal = true;
             this.showButtonsEditClearFields = false; 
@@ -313,41 +298,7 @@ export class AllProductPage {
     console.log('ionViewWillEnter AllProductPage, ', this.action);
     if(undefined != this.action && '' != this.action ){
       this.showButtonsFotterByActionAndPressButton(this.action, false);
-      /*
-      switch (this.action) {
-        case 'view':
-          this.disableInputs();  //this.onlyRead = true;
-          this.showButtonCalculate = false;
-          //this.showFieldsFinal = true;      
-          this.showButtonsEditClearFields = false; 
-          this.showButtonsDeleteAndUpdate = false;
-          this.showButtonAccept = true;
-          this.showButtonAdd=false;
-          break;
-        case 'edit':
-          this.enableInputs(); //this.onlyRead = true;
-          this.showButtonCalculate = true; 
-          //this.showFieldsFinal = false;  
-          this.showButtonsEditClearFields = false;  
-          this.showButtonsDeleteAndUpdate = true;
-          this.showButtonAccept = false;
-          this.showButtonAdd=false;
-          break;
-        case 'add':
-          this.enableInputs(); //this.onlyRead = true;
-          this.showButtonCalculate = true;
-          //this.showFieldsFinal = false;   
-          this.showButtonsEditClearFields = false;   
-          this.showButtonsDeleteAndUpdate = false;
-          this.showButtonAccept = false;
-          this.showButtonAdd=true;
-          break;
-      
-        default:
-          break;
-      }
-      */
-
+     
       if(this.action == 'edit' || this.action == 'view'){
         this.product = this.navParams.get('product');
       }

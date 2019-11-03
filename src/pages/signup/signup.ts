@@ -28,7 +28,6 @@ export class SignupPage {
                       private fb: FormBuilder ) {
                         
     // Push page
-    //this.goHomePage = HomePage;  
     this.validationMessages = VALIDATION_MESSAGES;  
 
     this.signupForm = this.fb.group({

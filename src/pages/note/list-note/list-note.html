@@ -1,60 +1,15 @@
 <ion-header color="dark">
 	<ion-navbar color="dark">
     <ion-title text-center>Lista Notas</ion-title>
-    <!--
-		<ion-buttons left>
-			<button ion-button icon-only (click)="showMenu()">
-			<ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    -->
     <ion-buttons end>
 			<button ion-button icon-only (click)="presentActionSheet()">
         <ion-icon name="more"></ion-icon>
       </button>     
-		</ion-buttons>
+    </ion-buttons>
 	</ion-navbar>
 </ion-header>
 
 <!--
-<ion-menu [content]="contentnote" side="left" id="filtersnote">  
-  <ion-header>
-    <ion-toolbar color="dark">
-      <ion-title>Opciones</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="hideMenu()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-		</ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content class="background-page">     
-    <ion-list>
-      <ion-item menuClose class="item-secundary" (click)="goToHome()">
-            <ion-icon name="arrow-round-back" item-right></ion-icon>
-            Pantalla Inicio
-      </ion-item>
-      <ion-item menuClose *ngFor="let p of pages" [navPush]="p.component" class="item-secundary">
-          <ion-icon [name]="p.icon" item-right></ion-icon>
-          {{ p.title }}
-      </ion-item>
-      <ion-item-group id="group-home">
-        <ion-item-divider  class="item-secundary" *ngIf="auth.getEmail()">  {{ auth.getEmail() }} </ion-item-divider>
-        <ion-item (click)="logout()" class="button-primary" *ngIf="auth.getAuthenticated">
-          <ion-icon name="log-out" item-right></ion-icon>
-          Salir
-        </ion-item>
-        <ion-item (click)="login()" class="button-primary" *ngIf="!auth.getAuthenticated">
-          <ion-icon name="log-in" item-right></ion-icon>
-          Log in
-        </ion-item>
-      </ion-item-group>
-    </ion-list>
-  </ion-content>
-</ion-menu>
--->
-
 <ion-content #contentnote class="background-page">    
   <ion-card  *ngFor="let note of noteList">
     <ion-list>   
@@ -92,3 +47,52 @@
   </div>
 
 </ion-content>
+-->
+
+<ion-content #contentnote class="background-page">   
+   
+    <ion-card *ngFor="let note of noteList">
+      <ion-card-header>
+        <ion-card-title class="title-card">
+          {{ note.title }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content class="content-card">
+          <ion-list>   
+              <ion-item-sliding>
+                <ion-item>    
+                  <ion-label [navPush]="editNotePage" [navParams]="{note:note, isEdit: false}">
+                      {{ note.content }}
+                  </ion-label>          
+                  <button ion-button clear icon-start item-end color="secondary" [navPush]="editNotePage" [navParams]="{note:note, isEdit: true}" style="margin-right:0px;">            
+                    <ion-icon name="create"></ion-icon>
+                    Editar
+                  </button>
+                </ion-item>  
+        
+                <ion-item-options side="right">
+                  <button ion-button outline color="danger" (click)="removeNote(note)">
+                    <ion-icon name="trash"></ion-icon>
+                    Borrar
+                  </button>                     
+                </ion-item-options>            
+              </ion-item-sliding>
+            </ion-list> 
+      </ion-card-content>
+      
+    </ion-card> 
+  
+    <ion-fab end bottom>
+      <button ion-fab color="dark" *ngFor="let p of pages" [navPush]="p.component">
+          <ion-icon [name]="p.icon"></ion-icon>
+      </button>
+    </ion-fab>
+  
+    <div class="wrapper-loading" *ngIf="showLoading">
+      <div class="loading">
+        <span>Cargando ....</span>
+      </div> 
+    </div>
+  
+  </ion-content>

@@ -1,13 +1,6 @@
 <ion-header color="dark">
 	<ion-navbar color="dark" hideBackButton="true">
     <ion-title text-center>Menu</ion-title>
-    <!--
-		<ion-buttons left>
-			<button ion-button icon-only (click)="showMenu()">
-			<ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    -->
     <ion-buttons end>
 			<button ion-button icon-only (click)="presentActionSheet()">
         <ion-icon name="more"></ion-icon>
@@ -15,41 +8,6 @@
 		</ion-buttons>
 	</ion-navbar>
 </ion-header >
-
-<!--
-<ion-menu [content]="contentmenu" side="left" id="filtersmenu">  
-  <ion-header>
-    <ion-toolbar color="dark">
-      <ion-title>Opciones</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="hideMenu()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-		</ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content class="background-page">     
-    <ion-list>
-      <ion-item menuClose *ngFor="let p of pages" [navPush]="p.component" class="item-secundary">
-          <ion-icon [name]="p.icon" item-right></ion-icon>
-          {{ p.title }}
-      </ion-item>
-      <ion-item-group id="group-home">
-        <ion-item-divider  class="item-secundary" *ngIf="auth.getEmail()">  {{ auth.getEmail() }} </ion-item-divider>
-        <ion-item (click)="logout()" class="button-primary" *ngIf="auth.getAuthenticated">
-          <ion-icon name="log-out" item-right></ion-icon>
-          Salir
-        </ion-item>
-        <ion-item (click)="login()" class="button-primary" *ngIf="!auth.getAuthenticated">
-          <ion-icon name="log-in" item-right></ion-icon>
-          Log in
-        </ion-item>
-      </ion-item-group>
-    </ion-list>
-  </ion-content>
-</ion-menu>
--->
 
 <ion-content #contentmenu class="background-page">    
  

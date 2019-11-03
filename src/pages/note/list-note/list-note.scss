@@ -7,6 +7,17 @@ page-list-note {
     height: auto;
   }
 
+  .card .card-header{
+    white-space: normal;
+    padding: 0px 16px;
+    background-color: $color-secondary-2-1;
+    color: $color-secondary-2-4; 
+  }
+
+  .card .card-content{
+    padding: 8px 16px;
+  }
+
   .item-secundary{
     color: $color-secondary-2-0;
     font-weight: normal;
@@ -16,5 +27,26 @@ page-list-note {
   .scroll-content ion-card:last-child{
     margin-bottom: 75px;
   }    
+
+  .title-card{
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  .content-card .item{
+    padding-left: 0px;
+  }
+  .content-card .item-md.item-block .item-inner{
+    padding-right: 0px;
+  }
+
+  .card .card-header + .card-content {
+    padding-top: 1px;
+  }
+
+  .label{
+    white-space: normal;
+  }
+
 
 }

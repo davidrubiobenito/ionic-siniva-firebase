@@ -19,28 +19,16 @@
 
 // As hex codes */
 
-//$color-primary-0: #757575;
 $color-primary-0: #AA3939;
-//$color-primary-0: #bf2724;
 $color-primary-1: #D2D1D1;
 $color-primary-2: #A2A2A2;
 $color-primary-3: #414141;
-/*$color-primary-4: #040303;*/
 $color-primary-4: #313131;
-
-/*
-$color-secondary-1-0: #757575;	
-$color-secondary-1-1: #D2D1D1;
-$color-secondary-1-2: #A2A2A2;
-$color-secondary-1-3: #414141;
-$color-secondary-1-4: #040403;
-*/
 
 $color-secondary-2-0: #5E5E5E;	
 $color-secondary-2-1: #A8A8A8;
 $color-secondary-2-2: #828282;
 $color-secondary-2-3: #343434;
-/*$color-secondary-2-4: #030303;*/
 $color-secondary-2-4: #656660;
 
 $color-complement-0: #5E5E5E;	
@@ -53,13 +41,11 @@ $color-suplement-1: #435870;
 
 // As RGBa codes */
 
-//$rgba-primary-0: rgba(117,117,117,1);	
 $rgba-primary-0: rgba(170, 57, 57,1);
 $rgba-primary-1: rgba(210,209,209,1);
 $rgba-primary-2: rgba(162,162,162,1);
 $rgba-primary-3: rgba( 65, 65, 65,1);
 $rgba-primary-4: rgba(  33,  33,  33,1);
-/*$rgba-primary-4: rgba(  4,  3,  3,1);*/
 
 $rgba-secondary-1-0: rgba(117,117,117,1);	
 $rgba-secondary-1-1: rgba(210,209,209,1);
@@ -167,8 +153,6 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
   text-align: center;
   border-radius: 0;
   border-bottom: 0.55px solid #d6d6da;
-  //font-size: 1.3rem;
-  //font-weight: 400;
   font-size: 2rem;  
   font-weight: normal;  
   color: $color-primary-4;
@@ -179,8 +163,6 @@ $list-colors-gradient: $rgba-gradient-first 0%, $rgba-gradient-first 50%, $rgba-
   padding: 18px;
   min-height: 5.6rem;
   border-bottom: 0.55px solid #d6d6da;
-  //font-size: 2rem;
-  //color: #007aff;
   background: transparent;
   color: $color-primary-3;
   font-weight: normal;
@@ -363,7 +345,6 @@ ion-navbar.toolbar{
     color: $color-secondary-2-4;
     border: 1px solid $color-secondary-2-3;
     font-weight: normal;
-    //border-radius: 15px 15px 0 0;
 }
 
 .message-error-page{
