@@ -1,0 +1,69 @@
+page-list-month {
+    
+  #group-home{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: auto;
+  }
+
+  .item-secundary{
+    color: $color-secondary-2-0;
+    font-weight: normal;
+    border: 1px solid $color-secondary-2-2;
+  }
+
+  .scroll-content ion-card:last-child{
+    margin-bottom: 75px;
+  }    
+
+  .text-cont{
+    font-weight: bold;
+    color: $color-primary-3;
+  }
+
+  .text-subtotal{
+    color: $color-primary-4;
+  }
+
+  .text-total{
+    color: $color-primary-0;
+    font-weight: bold;
+  }
+
+  .text-label{
+    font-weight: 400;
+    color: $color-primary-3;
+  }
+
+  .price {
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  .price::first-letter {
+    padding-right: 0.3em;
+  }
+
+  .ion-row{
+    border-top: 1px solid $color-primary-2;
+    margin-top: 3px;
+    padding-top: 3px;
+  }
+  
+  .button-item{
+    font-size: 1.3rem;
+    height: 2.5rem;
+  }
+
+  .chip-md{
+    font-size: 1.7rem;
+  }
+
+  .text-cont{
+    font-weight: bold;
+    color: $color-primary-3;
+    font-size: xx-large;
+  }
+  
+}

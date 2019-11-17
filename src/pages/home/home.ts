@@ -10,6 +10,7 @@ import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { ListProductPage } from '../product/list-product/list-product';
 import { ListNotePage } from '../note/list-note/list-note';
+import { ListYearPage } from '../year/list-year/list-year';
 
 @Component({
   selector: 'page-home',
@@ -103,6 +104,10 @@ export class HomePage {
 
   goToListNote(){
     this.navCtrl.push(ListNotePage);
+  }
+
+  goToListExpense(){
+    this.navCtrl.push(ListYearPage);
   }
 
   /************** */

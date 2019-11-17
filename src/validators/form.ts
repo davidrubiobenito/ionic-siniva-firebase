@@ -18,6 +18,9 @@ export const VALIDATION_MESSAGES = {
     'nameproduct' : [
       { type: 'required', message: 'Campo nombre es obligatorio' }
     ],
+    'nameexpense' : [
+      { type: 'required', message: 'Campo nombre es obligatorio' }
+    ],
     'units' : [
       { type: 'required', message: 'Campo unidades es obligatorio' },
       { type: 'pattern', message: 'Formato unidades no válido'}, 

@@ -1,0 +1,78 @@
+page-all-expense {
+
+    .scroll-content ion-card:last-child {
+        margin-bottom: 75px !important;
+    }
+
+    .card-h100{
+        height: calc(100% - 20px);
+        padding-bottom:0px !important;
+    }
+  
+    .card-h100 .card-content{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .text-comun{
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+
+    .color-pri{
+        color: $color-primary-0;
+    }
+
+    .price {
+        display: inline-block;
+    }
+
+    .price::first-letter {
+        padding-right: 0.3em;
+    }
+
+    ion-footer .toolbar-md-dark .toolbar-background-md {
+        background: $color-suplement-1;       
+    }
+
+    .buttons-footer{
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+        align-content: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .buttons-footer button {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 0 1 100%;
+        -ms-flex: 0 1 100%;
+        flex: 0 1 100%;
+        -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+        align-self: auto;
+    }
+
+    .buttons-footer .bar-button-default-md:hover:not(.disable-hover), 
+    .buttons-footer .bar-button-clear-md-default:hover:not(.disable-hover), .buttons-footer .bar-button-md-default:hover:not(.disable-hover){
+        color: $color-primary-1;
+    }
+ 
+}

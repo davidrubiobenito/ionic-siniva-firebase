@@ -1,0 +1,83 @@
+<ion-header color="dark">
+	<ion-navbar color="dark">
+    <ion-title text-center>Lista Gastos 
+        <br>        
+        <ion-chip outline="true" color="danger">
+          <ion-spinner name="dots" *ngIf="showLoading"></ion-spinner>
+          <ion-label class="price" *ngIf="!showLoading">{{totalAmountFinalList | currency: 'EUR':2 }} </ion-label>
+        </ion-chip>
+    </ion-title>
+    <ion-buttons end>
+			<button ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon name="more"></ion-icon>
+      </button>     
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content #contentexpense class="background-page">    
+  <ion-card  *ngFor="let expense of expenseList">
+    <ion-grid>
+      <ion-row >
+        <ion-col col-12 [navPush]="allExpensePage" [navParams]="{yearMonthModel:yearMonthModel, expense:expense, action: 'view'}" class="text-cont" style="font-size: 1.7rem">
+          {{ expense.name }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 class="text-label">
+          Unidades:
+        </ion-col>
+        <ion-col col-3 text-center class="text-cont price">          
+          {{ expense.units }}
+        </ion-col>
+        <ion-col col-2 class="text-label">
+            Precio:
+        </ion-col>
+        <ion-col col-4 text-right class="text-cont price">            
+          {{ expense.price | currency: "EUR":2 }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 class="text-label">
+          Subtotal:
+        </ion-col>
+        <ion-col col-3 text-right class="text-subtotal price">         
+          {{ expense.priceFinal | currency: "EUR":2 }} 
+        </ion-col>
+        <ion-col col-2 class="text-total">
+            Total:
+        </ion-col>
+        <ion-col col-4 text-right class="text-total price">       
+            {{ expense.amountFinal | currency: "EUR":2}} 
+        </ion-col>
+      </ion-row>
+      <ion-row class="padd-0 ion-row">
+        <ion-col col-6 class="padd-0">
+          <button ion-button icon-left clear block class="marg-0 button-item" color="danger" (click)="removeExpense(expense)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button> 
+        </ion-col>
+        <ion-col col-6 class="padd-0">
+          <button ion-button icon-left clear block class="marg-0 button-item" color="secondary" [navPush]="allExpensePage" [navParams]="{yearMonthModel:yearMonthModel, expense:expense, action: 'edit'}">            
+            <ion-icon name="create"></ion-icon>
+              Editar
+          </button>   
+        </ion-col>        
+      </ion-row>
+    </ion-grid>
+  </ion-card> 
+
+  <ion-fab end bottom>
+    <button ion-fab color="dark" class="bck-pri-four" [navPush]="allExpensePage" [navParams]="{yearMonthModel:yearMonthModel, action: 'add'}">
+        <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <div class="wrapper-loading" *ngIf="showLoading">
+    <div class="loading">
+      <span>Cargando ....</span>
+    </div> 
+  </div>
+ 
+</ion-content>

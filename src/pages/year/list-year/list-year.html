@@ -1,0 +1,50 @@
+<ion-header color="dark">
+	<ion-navbar color="dark">
+    <ion-title text-center>Lista Años </ion-title>
+    <ion-buttons end>
+			<button ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon name="more"></ion-icon>
+      </button>     
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content #contentyear class="background-page">    
+  <ion-card  *ngFor="let year of yearList">
+    <ion-card-content class="content-card">
+      <ion-list>   
+          <ion-item-sliding>
+            <ion-item>    
+              <ion-label [navPush]="listMonthPage" [navParams]="{year:year}" text-center class="text-cont">
+                  {{ year.number }}
+              </ion-label>          
+              <button ion-button clear icon-start item-end color="secondary" style="margin-right:0px;" (click)="showPromptEditYear(year)">            
+                <ion-icon name="create"></ion-icon>
+                Editar
+              </button>
+            </ion-item>  
+    
+            <ion-item-options side="right">
+              <button ion-button outline color="danger" (click)="removeYear(year)">
+                <ion-icon name="trash"></ion-icon>
+                Borrar
+              </button>                     
+            </ion-item-options>            
+          </ion-item-sliding>
+        </ion-list> 
+  </ion-card-content>
+  </ion-card> 
+
+  <ion-fab end bottom>
+    <button ion-fab color="dark" class="bck-pri-four" (click)="showPromptAddYear()">
+        <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <div class="wrapper-loading" *ngIf="showLoading">
+    <div class="loading">
+      <span>Cargando ....</span>
+    </div> 
+  </div>
+ 
+</ion-content>

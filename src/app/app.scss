@@ -432,3 +432,10 @@ ion-navbar.toolbar{
     transform: rotate(-360deg);
   }
 }
+
+// alertas de la página de gastos
+.alertTextCenter .alert-input,
+.alertTextCenter .alert-message{
+  text-align: center;
+}
+

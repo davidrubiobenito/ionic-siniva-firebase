@@ -1,0 +1,26 @@
+<ion-header color="dark">
+	<ion-navbar color="dark">
+    <ion-title text-center>Lista Meses </ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content #contentyear class="background-page">    
+  <ion-card  *ngFor="let month of monthList">
+    <ion-card-content class="content-card">
+      <ion-list>
+        <ion-item>    
+          <ion-label [navPush]="listExpensePage" [navParams]="{month:month, year:year}" text-center class="text-cont">
+              {{ month.name }}
+          </ion-label>          
+        </ion-item>  
+      </ion-list> 
+    </ion-card-content>
+  </ion-card> 
+
+  <div class="wrapper-loading" *ngIf="showLoading">
+    <div class="loading">
+      <span>Cargando ....</span>
+    </div> 
+  </div>
+ 
+</ion-content>
