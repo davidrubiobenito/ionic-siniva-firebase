@@ -1,4 +1,4 @@
-#IONIC +  FIREBASE
+IONIC +  FIREBASE
 Es una aplicación de uso personal y no está subida a GooglePlay.
 
 Como podrás observar está implementado un login con Firebase Authentication.
