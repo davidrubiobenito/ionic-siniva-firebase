@@ -40,7 +40,7 @@
     "firebase": "^5.8.3",
     "ionic-angular": "3.9.3",
     "ionicons": "3.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
     "sw-toolbox": "3.6.0",
